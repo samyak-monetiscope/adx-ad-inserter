@@ -1,0 +1,107 @@
+<?php
+defined('ABSPATH') || exit;
+
+/* -------------------------------------------------- */
+/* 1 – Register Settings                              */
+/* -------------------------------------------------- */
+function adx_v4_register_settings() {
+    $settings = [
+        'adx_enabled',
+        'global_head_script',                    // ← NEW global toggle
+        'popup_enabled',
+        'popup_network_code',
+        'ad2_enabled',
+        'ad2_network_code',
+        'ad2_keywords',
+        'flying_enabled',
+        'flying_network_code',
+        'anchor_enabled',
+        'anchor_network_code',
+        'anchor_position',
+        'bottom_sticky_enabled',
+        'bottom_sticky_network_code',
+        'side_floater_enabled',
+        'side_floater_network_code',
+        'reward_on_scroll_enabled',
+        'reward_on_scroll_network_code',
+        'offerwall_onscroll_enabled',
+        'offerwall_onscroll_network_code',
+        'offerwall_onscroll_logo_url',
+        'coupon_rewarded_enabled',
+        'coupon_rewarded_network_code',
+        'coupon_rewarded_code',
+        'interstitial_enabled',
+        'interstitial_network_code',
+        'custom_enabled',
+        'custom_header_code',
+        'custom_footer_code',
+    ];
+
+    foreach ( $settings as $opt ) {
+        register_setting( 'adx_v4_settings', $opt );
+    }
+
+    // Ensure boolean options default to "false"
+    $booleans = [
+        'adx_enabled',
+        'popup_enabled',
+        'ad2_enabled',
+        'flying_enabled',
+        'anchor_enabled',
+        'bottom_sticky_enabled',
+        'side_floater_enabled',
+        'reward_on_scroll_enabled',
+        'offerwall_onscroll_enabled',
+        'coupon_rewarded_enabled',
+        'interstitial_enabled',
+        'custom_enabled',
+    ];
+    foreach ( $booleans as $b ) {
+        if ( get_option( $b ) === false ) {
+            update_option( $b, 'false' );
+        }
+    }
+}
+add_action( 'admin_init', 'adx_v4_register_settings' );
+
+/* -------------------------------------------------- */
+/* 2 – Add Settings Page                              */
+/* -------------------------------------------------- */
+function adx_v4_add_settings_page() {
+    add_options_page(
+        'AdX Ad Inserter', // page title
+        'AdX Ad Inserter', // settings->menu title
+        'manage_options',
+        'adx-ad-inserter', // slug or ?page=adx-ad-inserter
+        'adx_v4_settings_page'
+    );
+}
+add_action( 'admin_menu', 'adx_v4_add_settings_page' );
+
+/* -------------------------------------------------- */
+/* 3 – Enqueue Admin CSS & JS                         */
+/* -------------------------------------------------- */
+add_action( 'admin_enqueue_scripts', function( $hook ) {
+    if ( $hook !== 'settings_page_adx-ad-inserter' ) {
+        return;
+    }
+    
+    // wp_enqueue_style(
+    //     'monetiscope-admin-css',
+    //     plugin_dir_url( __FILE__ ) . './css/index.css',
+    //     [],
+    //     '1.2.0'
+    // );
+    wp_enqueue_script(
+        'monetiscope-admin-js',
+        plugin_dir_url( __FILE__ ) . './js/admin-scripts.js',
+        [],
+        '1.2.0',
+        true
+    );
+});
+
+/* -------------------------------------------------- */
+/* 4 – Load Settings Template                         */
+/* -------------------------------------------------- */
+require_once plugin_dir_path( __FILE__ ) . './views/settings-template.php';
