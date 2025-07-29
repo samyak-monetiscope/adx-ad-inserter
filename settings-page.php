@@ -2,9 +2,10 @@
 defined('ABSPATH') || exit;
 
 /* -------------------------------------------------- */
-/* 1 – Register Settings                              */
+/* 1 – Register All Plugin Settings                   */
 /* -------------------------------------------------- */
 function adx_v4_register_settings() {
+    // Main slot/plugin-wide settings
     $settings = [
         'adx_enabled',
         'global_head_script',
@@ -35,14 +36,27 @@ function adx_v4_register_settings() {
         'custom_enabled',
         'custom_header_code',
         'custom_footer_code',
+        'display_slot_enabled',
     ];
 
-    foreach ( $settings as $opt ) {
-        register_setting( 'adx_v4_settings', $opt, [
+    foreach ($settings as $opt) {
+        register_setting('adx_v4_settings', $opt, [
             'sanitize_callback' => 'adx_v4_sanitize_option'
         ]);
     }
 
+    // Subslot (Display Slot) settings — register for all 10 subslots
+    for ($i = 1; $i <= 10; $i++) {
+        register_setting('adx_v4_settings', "display_slot_{$i}_enabled",      ['sanitize_callback' => 'adx_v4_sanitize_option']);
+        register_setting('adx_v4_settings', "display_slot_{$i}_network_code", ['sanitize_callback' => 'sanitize_text_field']);
+        register_setting('adx_v4_settings', "display_slot_{$i}_pages",        ['sanitize_callback' => 'adx_v4_sanitize_option']);
+        register_setting('adx_v4_settings', "display_slot_{$i}_insertion",    ['sanitize_callback' => 'sanitize_text_field']);
+        register_setting('adx_v4_settings', "display_slot_{$i}_alignment",    ['sanitize_callback' => 'sanitize_text_field']);
+        register_setting('adx_v4_settings', "display_slot_{$i}_text",         ['sanitize_callback' => 'sanitize_text_field']);
+        register_setting('adx_v4_settings', "display_slot_{$i}_offset",       ['sanitize_callback' => 'absint']);
+    }
+
+    // Set default values for booleans if not already present (first install)
     $booleans = [
         'adx_enabled',
         'popup_enabled',
@@ -56,35 +70,45 @@ function adx_v4_register_settings() {
         'coupon_rewarded_enabled',
         'interstitial_enabled',
         'custom_enabled',
+        'display_slot_enabled',
     ];
-    foreach ( $booleans as $b ) {
-        if ( get_option( $b ) === false ) {
-            update_option( $b, 'false' );
+    foreach ($booleans as $b) {
+        if (get_option($b) === false) {
+            update_option($b, 'false');
+        }
+    }
+    // Defaults for all subslot enable toggles
+    for ($i = 1; $i <= 10; $i++) {
+        $opt = "display_slot_{$i}_enabled";
+        if (get_option($opt) === false) {
+            update_option($opt, 'false');
         }
     }
 }
-add_action( 'admin_init', 'adx_v4_register_settings' );
+add_action('admin_init', 'adx_v4_register_settings');
 
 /**
  * Sanitizer callback for all plugin options
  */
-function adx_v4_sanitize_option( $value ) {
-    // If it's a script block or ad code, keep safe HTML tags
-    if ( is_string( $value ) && strpos( $value, '<script' ) !== false ) {
-        return wp_kses_post( $value );
+function adx_v4_sanitize_option($value) {
+    // Arrays: sanitize recursively (for checkboxes)
+    if (is_array($value)) {
+        return array_map('sanitize_text_field', $value);
     }
-
-    // Handle booleans as 'true' / 'false' strings
-    if ( $value === 'true' || $value === 'false' ) {
+    // Allow <script> etc only in ad code
+    if (is_string($value) && strpos($value, '<script') !== false) {
+        return wp_kses_post($value);
+    }
+    // Handle booleans as 'true'/'false'
+    if ($value === 'true' || $value === 'false') {
         return $value;
     }
-
     // Safe default: plain text
-    return sanitize_text_field( $value );
+    return sanitize_text_field($value);
 }
 
 /* -------------------------------------------------- */
-/* 2 – Add Settings Page                              */
+/* 2 – Add Settings Page to WordPress Admin           */
 /* -------------------------------------------------- */
 function adx_v4_add_settings_page() {
     add_options_page(
@@ -92,28 +116,28 @@ function adx_v4_add_settings_page() {
         'AdX Ad Inserter',
         'manage_options',
         'adx-ad-inserter',
-        'adx_v4_settings_page'
+        'adx_v4_settings_page' // this function will be called to render the page
     );
 }
-add_action( 'admin_menu', 'adx_v4_add_settings_page' );
+add_action('admin_menu', 'adx_v4_add_settings_page');
 
 /* -------------------------------------------------- */
-/* 3 – Enqueue Admin CSS & JS                         */
+/* 3 – Enqueue Admin Scripts/CSS                      */
 /* -------------------------------------------------- */
-add_action( 'admin_enqueue_scripts', function( $hook ) {
-    if ( $hook !== 'settings_page_adx-ad-inserter' ) {
+add_action('admin_enqueue_scripts', function($hook) {
+    if ($hook !== 'settings_page_adx-ad-inserter') {
         return;
     }
-
+    // Uncomment if you have admin CSS:
     // wp_enqueue_style(
     //     'monetiscope-admin-css',
-    //     plugin_dir_url( __FILE__ ) . './css/index.css',
+    //     plugin_dir_url(__FILE__) . './css/index.css',
     //     [],
     //     '1.2.0'
     // );
     wp_enqueue_script(
         'monetiscope-admin-js',
-        plugin_dir_url( __FILE__ ) . './js/admin-scripts.js',
+        plugin_dir_url(__FILE__) . './js/admin-scripts.js',
         [],
         '1.2.0',
         true
@@ -121,6 +145,6 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
 });
 
 /* -------------------------------------------------- */
-/* 4 – Load Settings Template                         */
+/* 4 – Load Main Settings Template (UI)               */
 /* -------------------------------------------------- */
-require_once plugin_dir_path( __FILE__ ) . './views/settings-template.php';
+require_once plugin_dir_path(__FILE__) . './views/settings-template.php';

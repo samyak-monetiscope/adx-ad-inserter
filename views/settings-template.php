@@ -5,6 +5,7 @@ if ( ! function_exists( 'adx_v4_settings_page' ) ) {
 
 function adx_v4_settings_page() {
     $slots = [
+      'Display Slot'          => ['enabled'=>'display_slot_enabled','code'=>null],
         'Popup'                 => ['enabled'=>'popup_enabled','code'=>'popup_network_code'],
         'Button Rewarded'       => ['enabled'=>'ad2_enabled','code'=>'ad2_network_code'],
         'Flying Carpet'         => ['enabled'=>'flying_enabled','code'=>'flying_network_code'],
@@ -14,10 +15,10 @@ function adx_v4_settings_page() {
         'Coupon Rewarded'       => ['enabled'=>'coupon_rewarded_enabled','code'=>'coupon_rewarded_network_code'],
         'Interstitial'          => ['enabled'=>'interstitial_enabled','code'=>'interstitial_network_code'],
         'Custom'                => ['enabled'=>'custom_enabled','code'=>null],
-        // 'Display Slot'          => ['enabled'=>'display_slot_enabled','code'=>null],
     ];
 
     $tabs = [
+      'tab-display-slot'       => 'Display Ad Slot',
         'tab-popup'              => 'Popup Ad',
         'tab-button-rewarded'    => 'Button Rewarded Ad',
         'tab-flying'             => 'Flying Carpet Ad',
@@ -27,10 +28,10 @@ function adx_v4_settings_page() {
         'tab-coupon-rewarded'    => 'Coupon Rewarded Ad',
         'tab-interstitial'       => 'Interstitial Ad',
         'tab-custom'             => 'Custom',
-        // 'tab-display-slot'       => 'Display Ad Slot',
     ];
 
     $panels = [
+      'settings-display.php',
         'settings-popup.php',
         'settings-button-rewarded.php',
         'settings-flying-carpet.php',
@@ -40,7 +41,6 @@ function adx_v4_settings_page() {
         'settings-coupon-rewarded.php',
         'settings-interstitial.php',
         'settings-custom.php',
-        // 'settings-display.php',
     ];
 ?>
 <div class="wrap">

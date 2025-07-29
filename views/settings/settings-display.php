@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
       $offset    = get_option("display_slot_{$i}_offset", 0);
     ?>
       <div class="display-content">
-        <div class="sub-slot-block">
+        <!-- <div class="sub-slot-block"> -->
           <h3 style="margin-top : 0;"><strong><?php printf('Block %s', esc_html($i)); ?></strong></h3>
 
           <!-- Enable Toggle -->
@@ -173,55 +173,10 @@ document.addEventListener('DOMContentLoaded', function () {
           </div>
 
           <!-- Insertion & Alignment -->
-          <div class="form-inline">
-            <div class="insertion">
-              <label for="display_slot_<?php echo esc_attr($i); ?>_insertion"><strong>Insertion</strong></label>
-              <select name="display_slot_<?php echo esc_attr($i); ?>_insertion" id="display_slot_<?php echo esc_attr($i); ?>_insertion">
-                <?php
-                  $insert_options = [
-                    'before_post'      => 'Before Post',
-                    'after_post'       => 'After Post',
-                    'before_paragraph' => 'Before Paragraph',
-                    'after_paragraph'  => 'After Paragraph',
-                    'before_image'     => 'Before Image',
-                    'after_image'      => 'After Image',
-                  ];
-                  foreach ($insert_options as $val => $label) {
-                ?>
-                  <option value="<?php echo esc_attr($val); ?>" <?php selected($insertion, $val); ?>>
-                    <?php echo esc_html($label); ?>
-                  </option>
-                <?php } ?>
-              </select>
-            </div>
-
-            <!-- Offset (Count) only for specific insertions -->
-            <div class="offset">
-              <?php $showOffset = in_array($insertion, ['before_paragraph','after_paragraph','before_image','after_image']); ?>
-              <span class="offset-wrapper" style="<?php echo $showOffset ? '' : 'display:none;'; ?>">
-                <label for="display_slot_<?php echo esc_attr($i); ?>_offset"><strong>Count</strong></label>
-                <input type="number"
-                  name="display_slot_<?php echo esc_attr($i); ?>_offset"
-                  id="display_slot_<?php echo esc_attr($i); ?>_offset"
-                  value="<?php echo esc_attr($offset); ?>"
-                  min="1"
-                  style="width:10em; margin-left:.5em;">
-              </span>
-            </div>
-
-            <!-- Alignment -->
-            <div class="alignment">
-              <label for="display_slot_<?php echo esc_attr($i); ?>_alignment"><strong>Alignment</strong></label>
-              <select name="display_slot_<?php echo esc_attr($i); ?>_alignment" id="display_slot_<?php echo esc_attr($i); ?>_alignment">
-                <option value="start" <?php selected($alignment, 'start'); ?>>Start (Left)</option>
-                <option value="center" <?php selected($alignment, 'center'); ?>>Center</option>
-                <option value="end" <?php selected($alignment, 'end'); ?>>End (Right)</option>
-              </select>
-            </div>
-          </div>
+          
 
           <!-- Custom Message -->
-          <div style="margin-top:12px;">
+          <!-- <div style="margin-top:12px;">
             <label for="display_slot_<?php echo esc_attr($i); ?>_text"><strong>Custom Message (TEMP)</strong></label>
             <input type="text"
               name="display_slot_<?php echo esc_attr($i); ?>_text"
@@ -229,8 +184,8 @@ document.addEventListener('DOMContentLoaded', function () {
               value="<?php echo esc_attr($text); ?>"
               style="width:100%;margin-top:5px;"
               placeholder="Enter text to show on page">
-          </div>
-        </div>
+          </div> -->
+        <!-- </div> -->
       </div>
     <?php endfor; ?>
   </div>

@@ -33,6 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize: show first tab (Popup)
     hideAllTabs();
-    document.querySelector('.nav-tab[data-target="tab-popup"]').classList.add('nav-tab-active');
-    document.getElementById('tab-popup').style.display = 'block';
+    document.querySelector('.nav-tab[data-target="tab-display-slot"]').classList.add('nav-tab-active');
+    document.getElementById('tab-display-slot').style.display = 'block';
 });
