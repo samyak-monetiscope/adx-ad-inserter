@@ -49,6 +49,7 @@ function adx_v4_register_settings() {
     for ($i = 1; $i <= 10; $i++) {
         register_setting('adx_v4_settings', "display_slot_{$i}_enabled",      ['sanitize_callback' => 'adx_v4_sanitize_option']);
         register_setting('adx_v4_settings', "display_slot_{$i}_network_code", ['sanitize_callback' => 'sanitize_text_field']);
+        register_setting('adx_v4_settings', "display_slot_{$i}_sizes",        ['sanitize_callback' => 'adx_v4_sanitize_option']);
         register_setting('adx_v4_settings', "display_slot_{$i}_pages",        ['sanitize_callback' => 'adx_v4_sanitize_option']);
         register_setting('adx_v4_settings', "display_slot_{$i}_insertion",    ['sanitize_callback' => 'sanitize_text_field']);
         register_setting('adx_v4_settings', "display_slot_{$i}_alignment",    ['sanitize_callback' => 'sanitize_text_field']);

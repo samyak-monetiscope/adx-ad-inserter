@@ -31,7 +31,7 @@
      border: 1px solid #ccc;
     position: relative;
     padding: 0;
-    top: -1px;
+    top: -2px;
     z-index: 0;
   }
 
@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <?php for ($i = 1; $i <= 10; $i++):
       $enabled   = get_option("display_slot_{$i}_enabled") === 'true';
       $code      = get_option("display_slot_{$i}_network_code", '');
+      $sizes     = get_option("display_slot_{$i}_sizes", []);
       $pages     = get_option("display_slot_{$i}_pages", []);
       $insertion = get_option("display_slot_{$i}_insertion", '');
       $alignment = get_option("display_slot_{$i}_alignment", '');
@@ -148,6 +149,28 @@ document.addEventListener('DOMContentLoaded', function () {
               value="<?php echo esc_attr($code); ?>"
               style="width:100%; margin-top:5px;">
           </div>
+
+          <!-- Ad sizes -->
+          <div class="form-grid border-2 px-6 py-3 rounded-lg border-slate-200">
+            <strong>Ad Sizes</strong>
+            <?php
+              $size_options = [
+                '300x250', '336x280', 'fluid', '300x600', '250x250',
+                '320x50', '320x75', '300x100', '330x200', '200x200'
+              ];
+              $selected_sizes = get_option("display_slot_{$i}_sizes", []);
+              foreach ($size_options as $sz) {
+            ?>
+              <label>
+                <input type="checkbox"
+                  name="display_slot_<?php echo esc_attr($i); ?>_sizes[]"
+                  value="<?php echo esc_attr($sz); ?>"
+                  <?php checked(in_array($sz, (array)$selected_sizes), true); ?>>
+                <?php echo esc_html($sz); ?>
+              </label>
+            <?php } ?>
+          </div>
+
 
           <!-- Page Types -->
           <div class="form-grid border-2 px-6 py-3 rounded-lg border-slate-200">
