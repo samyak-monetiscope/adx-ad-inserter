@@ -59,7 +59,9 @@
     align-items: center;
     justify-content: space-between;
   }
-
+  h2 {
+    margin-top : 0;
+  }
   .sub-slot-block {
     padding: 5px 0 25px;
   }
@@ -170,6 +172,46 @@ document.addEventListener('DOMContentLoaded', function () {
               </label>
             <?php } ?>
           </div>
+
+          <!-- Insertion Selector -->
+          <div style="margin-top:12px;">
+            <label for="display_slot_<?php echo esc_attr($i); ?>_insertion"><strong>Insertion</strong></label>
+            <select name="display_slot_<?php echo esc_attr($i); ?>_insertion"
+                    id="display_slot_<?php echo esc_attr($i); ?>_insertion"
+                    style="width:100%;margin-top:5px;">
+              <option value="before_post"      <?php selected($insertion, 'before_post'); ?>>Before Post</option>
+              <option value="after_post"       <?php selected($insertion, 'after_post'); ?>>After Post</option>
+              <option value="before_paragraph" <?php selected($insertion, 'before_paragraph'); ?>>Before Paragraph</option>
+              <option value="after_paragraph"  <?php selected($insertion, 'after_paragraph'); ?>>After Paragraph</option>
+              <option value="before_image"     <?php selected($insertion, 'before_image'); ?>>Before Image</option>
+              <option value="after_image"      <?php selected($insertion, 'after_image'); ?>>After Image</option>
+            </select>
+          </div>
+
+          <!-- Offset Input (Conditional) -->
+          <div class="offset-wrapper" style="<?php echo in_array($insertion, ['before_paragraph','after_paragraph','before_image','after_image']) ? '' : 'display:none;'; ?>">
+            <label for="display_slot_<?php echo esc_attr($i); ?>_offset"><strong>Offset</strong></label>
+            <input
+              type="number"
+              
+              name="display_slot_<?php echo esc_attr($i); ?>_offset"
+              id="display_slot_<?php echo esc_attr($i); ?>_offset"
+              value="<?php echo esc_attr($offset); ?>"
+              style="width:80px; margin-top:5px;">
+          </div>
+
+          <!-- Alignment Selector -->
+          <div style="margin-top:12px;">
+            <label for="display_slot_<?php echo esc_attr($i); ?>_alignment"><strong>Alignment</strong></label>
+            <select name="display_slot_<?php echo esc_attr($i); ?>_alignment"
+                    id="display_slot_<?php echo esc_attr($i); ?>_alignment"
+                    style="width:100%;margin-top:5px;">
+              <option value="left"   <?php selected($alignment, 'left'); ?>>Left</option>
+              <option value="center" <?php selected($alignment, 'center'); ?>>Center</option>
+              <option value="right"  <?php selected($alignment, 'right'); ?>>Right</option>
+            </select>
+          </div>
+
 
 
           <!-- Page Types -->
