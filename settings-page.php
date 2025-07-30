@@ -35,6 +35,7 @@ function adx_v4_register_settings() {
         'custom_enabled',
         'custom_header_code',
         'custom_footer_code',
+        'display_slot_enabled'
     ];
 
     foreach ( $settings as $opt ) {
@@ -56,6 +57,7 @@ function adx_v4_register_settings() {
         'coupon_rewarded_enabled',
         'interstitial_enabled',
         'custom_enabled',
+        'display_slot_enabled'
     ];
     foreach ( $booleans as $b ) {
         if ( get_option( $b ) === false ) {
