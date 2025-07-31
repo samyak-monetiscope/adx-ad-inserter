@@ -55,7 +55,8 @@ function adx_v4_register_settings() {
         register_setting('adx_v4_settings', "display_slot_{$i}_alignment",    ['sanitize_callback' => 'sanitize_text_field']);
         register_setting('adx_v4_settings', "display_slot_{$i}_text",         ['sanitize_callback' => 'sanitize_text_field']);
         register_setting('adx_v4_settings', "display_slot_{$i}_offset",       ['sanitize_callback' => 'absint']);
-    }
+        register_setting('adx_v4_settings',  "display_slot_{$i}_devices",     ['sanitize_callback' => 'adx_v4_sanitize_option']);
+}
 
     // Set default values for booleans if not already present (first install)
     $booleans = [
@@ -85,6 +86,14 @@ function adx_v4_register_settings() {
             update_option($opt, 'false');
         }
     }
+    // Defaults for all subslot device toggles
+    for ($i = 1; $i <= 10; $i++) {
+        $opt = "display_slot_{$i}_devices";
+        if (get_option($opt) === false) {
+            update_option($opt, ['desktop', 'tablet', 'mobile']);
+        }
+    }
+
 }
 add_action('admin_init', 'adx_v4_register_settings');
 

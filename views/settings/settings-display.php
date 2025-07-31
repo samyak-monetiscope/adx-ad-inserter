@@ -154,8 +154,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
           <!-- Ad sizes -->
           <div class="form-grid border-2 px-6 py-3 rounded-lg border-slate-200">
-            <strong>Ad Sizes</strong>
-            <br>
+
+
             <?php $size_options = [
                 '300x250', '336x280', 'fluid', '300x600', '250x250',
                 '320x50', '320x75', '300x100', '330x200', '200x200'
@@ -174,8 +174,10 @@ document.addEventListener('DOMContentLoaded', function () {
             <?php } ?>
           </div>
 
+
+        <div class='flex justify-between w-full gap-10'>
           <!-- Insertion Selector -->
-          <div style="margin-top:12px;">
+          <div style="width: -webkit-fill-available;">
             <label for="display_slot_<?php echo esc_attr($i); ?>_insertion"><strong>Insertion</strong></label>
             <select name="display_slot_<?php echo esc_attr($i); ?>_insertion"
                     id="display_slot_<?php echo esc_attr($i); ?>_insertion"
@@ -191,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
           <!-- Offset Input (Conditional) -->
           <div class="offset-wrapper" style="<?php echo in_array($insertion, ['before_paragraph','after_paragraph','before_image','after_image']) ? '' : 'display:none;'; ?>">
-            <label for="display_slot_<?php echo esc_attr($i); ?>_offset"><strong>Offset</strong></label>
+            <label for="display_slot_<?php echo esc_attr($i); ?>_offset"><strong>Number</strong></label>
             <input
               type="number"
               name="display_slot_<?php echo esc_attr($i); ?>_offset"
@@ -201,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
           </div>
 
           <!-- Alignment Selector -->
-          <div style="margin-top:12px;">
+          <div style="width: -webkit-fill-available;">
             <label for="display_slot_<?php echo esc_attr($i); ?>_alignment"><strong>Alignment</strong></label>
             <select name="display_slot_<?php echo esc_attr($i); ?>_alignment"
                     id="display_slot_<?php echo esc_attr($i); ?>_alignment"
@@ -211,6 +213,7 @@ document.addEventListener('DOMContentLoaded', function () {
               <option value="right"  <?php selected($alignment, 'right'); ?>>Right</option>
             </select>
           </div>
+        </div>
 
 
 
@@ -236,21 +239,24 @@ document.addEventListener('DOMContentLoaded', function () {
               </label>
             <?php } ?>
           </div>
+          <div class="form-grid border-2 px-6 py-3 rounded-lg border-slate-200">
 
-          <!-- Insertion & Alignment -->
-          
+            <?php
+              $devices = ['desktop'=>'Desktop','tablet'=>'Tablet','mobile'=>'Mobile'];
+              $selected = get_option("display_slot_{$i}_devices", ['desktop','tablet','mobile']);
+              foreach ($devices as $key => $label):
+            ?>
+              <label style="margin-right:1em;">
+                <input type="checkbox"
+                       name="display_slot_<?php echo $i; ?>_devices[]"
+                       value="<?php echo $key; ?>"
+                       <?php checked(in_array($key, (array)$selected), true); ?>>
+                <?php echo $label; ?>
+              </label>
+            <?php endforeach; ?>
+          </div>
 
-          <!-- Custom Message -->
-          <!-- <div style="margin-top:12px;">
-            <label for="display_slot_<?php echo esc_attr($i); ?>_text"><strong>Custom Message (TEMP)</strong></label>
-            <input type="text"
-              name="display_slot_<?php echo esc_attr($i); ?>_text"
-              id="display_slot_<?php echo esc_attr($i); ?>_text"
-              value="<?php echo esc_attr($text); ?>"
-              style="width:100%;margin-top:5px;"
-              placeholder="Enter text to show on page">
-          </div> -->
-        <!-- </div> -->
+
       </div>
     <?php endfor; ?>
   </div>
