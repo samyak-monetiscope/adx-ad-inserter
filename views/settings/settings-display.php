@@ -155,14 +155,15 @@ document.addEventListener('DOMContentLoaded', function () {
           <!-- Ad sizes -->
           <div class="form-grid border-2 px-6 py-3 rounded-lg border-slate-200">
             <strong>Ad Sizes</strong>
-            <?php
-              $size_options = [
+            <br>
+            <?php $size_options = [
                 '300x250', '336x280', 'fluid', '300x600', '250x250',
                 '320x50', '320x75', '300x100', '330x200', '200x200'
               ];
               $selected_sizes = get_option("display_slot_{$i}_sizes", []);
               foreach ($size_options as $sz) {
             ?>
+            
               <label>
                 <input type="checkbox"
                   name="display_slot_<?php echo esc_attr($i); ?>_sizes[]"
@@ -191,7 +192,6 @@ document.addEventListener('DOMContentLoaded', function () {
           <!-- Offset Input (Conditional) -->
           <div class="offset-wrapper" style="<?php echo in_array($insertion, ['before_paragraph','after_paragraph','before_image','after_image']) ? '' : 'display:none;'; ?>">
             <label for="display_slot_<?php echo esc_attr($i); ?>_offset"><strong>Offset</strong></label>
-            // min = 1 was making problem - removed now
             <input
               type="number"
               name="display_slot_<?php echo esc_attr($i); ?>_offset"
