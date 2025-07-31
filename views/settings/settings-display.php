@@ -191,9 +191,9 @@ document.addEventListener('DOMContentLoaded', function () {
           <!-- Offset Input (Conditional) -->
           <div class="offset-wrapper" style="<?php echo in_array($insertion, ['before_paragraph','after_paragraph','before_image','after_image']) ? '' : 'display:none;'; ?>">
             <label for="display_slot_<?php echo esc_attr($i); ?>_offset"><strong>Offset</strong></label>
+            // min = 1 was making problem - removed now
             <input
               type="number"
-              
               name="display_slot_<?php echo esc_attr($i); ?>_offset"
               id="display_slot_<?php echo esc_attr($i); ?>_offset"
               value="<?php echo esc_attr($offset); ?>"
