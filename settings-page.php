@@ -38,10 +38,23 @@ function adx_v4_register_settings() {
     ];
 
     foreach ( $settings as $opt ) {
+        // Skip custom header/footer code for special handling below
+        if ($opt === 'custom_header_code' || $opt === 'custom_footer_code') {
+            continue;
+        }
         register_setting( 'adx_v4_settings', $opt, [
             'sanitize_callback' => 'adx_v4_sanitize_option'
         ]);
     }
+
+    // Now register these 2 options with custom/no sanitization
+    register_setting('adx_v4_settings', 'custom_header_code', [
+        'sanitize_callback' => null // or your custom callback
+    ]);
+    register_setting('adx_v4_settings', 'custom_footer_code', [
+        'sanitize_callback' => null // or your custom callback
+    ]);
+
 
     $booleans = [
         'adx_enabled',
