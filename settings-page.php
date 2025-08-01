@@ -35,11 +35,12 @@ function adx_v4_register_settings() {
         'custom_enabled',
         'custom_header_code',
         'custom_footer_code',
+        'custom_ads_txt'
     ];
 
     foreach ( $settings as $opt ) {
         // Skip custom header/footer code for special handling below
-        if ($opt === 'custom_header_code' || $opt === 'custom_footer_code') {
+        if ($opt === 'custom_header_code' || $opt === 'custom_footer_code' || $opt === 'custom_ads_txt') {
             continue;
         }
         register_setting( 'adx_v4_settings', $opt, [
@@ -54,6 +55,10 @@ function adx_v4_register_settings() {
     register_setting('adx_v4_settings', 'custom_footer_code', [
         'sanitize_callback' => null // or your custom callback
     ]);
+    register_setting('adx_v4_settings', 'custom_ads_txt', [
+        'sanitize_callback' => null // or your custom callback
+    ]);
+
 
 
     $booleans = [
