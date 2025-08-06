@@ -1,4 +1,5 @@
-<?php defined('ABSPATH') || exit; ?>
+<!-- settings-display -->
+ <?php defined('ABSPATH') || exit; ?>
 
 <style>
   .display-tabs {
@@ -65,8 +66,8 @@
   .sub-slot-block {
     padding: 5px 0 25px;
   }
-  .tab-green { color: green !important; border: 3px solid green; }
-  .tab-red   { color: red !important; border: 3px solid red; }
+  .tab-green { color: green !important;  }
+  .tab-red   { color: red !important; }
   .tab-grey  { color: #595959ff !important; }
 </style>
 
