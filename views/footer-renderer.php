@@ -10,6 +10,8 @@ require_once __DIR__ . '/slots/reward-on-scroll.php';
 require_once __DIR__ . '/slots/offerwall-onscroll.php';
 require_once __DIR__ . '/slots/interstitial.php';  
 require_once __DIR__ . '/slots/coupon-rewarded.php';
+require_once __DIR__ . '/slots/display.php';
+require_once __DIR__ . '/slots/custom.php';
 
 /**
  * Fire all footer‐going ad slots
@@ -27,4 +29,4 @@ function adx_v4_render_footer_ads() {
         adx_render_custom_footer_slot();
     }
 }
-add_action('wp_footer','adx_v4_render_footer_ads');
+// add_action('wp_footer','adx_v4_render_footer_ads');

@@ -32,7 +32,7 @@
      border: 1px solid #ccc;
     position: relative;
     padding: 0;
-    top: -2px;
+    top: -1px;
     z-index: 0;
   }
 
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             <?php $size_options = [
                 '300x250', '336x280', 'fluid', '300x600', '250x250',
-                '320x50', '320x75', '300x100', '330x200', '200x200'
+                '320x50', '320x75', '300x100', '330x200', '200x200', '728x90'
               ];
               $selected_sizes = get_option("display_slot_{$i}_sizes", []);
               foreach ($size_options as $sz) {
