@@ -12,7 +12,6 @@ function adxbymonetiscope_render_display_slot_footer() {
     adxbymonetiscope_render_display_slot_by_insertion(['before_paragraph', 'after_paragraph', 'before_image', 'after_image']);
 }
 
-// Core rendering function shared by head and footer
 function adxbymonetiscope_render_display_slot_by_insertion($allowed_insertions = []) {
     if (is_admin()) return;
     if (get_option('display_slot_enabled') !== 'true') return;
@@ -23,8 +22,9 @@ function adxbymonetiscope_render_display_slot_by_insertion($allowed_insertions =
         $sizes      = get_option("display_slot_{$i}_sizes", []);
         $insertion  = get_option("display_slot_{$i}_insertion", '');
         $pages      = get_option("display_slot_{$i}_pages", []);
+        $devices    = get_option("display_slot_{$i}_devices", []); // Device filter
 
-        // Only output if enabled, network code set, correct insertion, and sizes selected
+        // Basic checks
         if (
             !$enabled ||
             !$network ||
@@ -33,22 +33,21 @@ function adxbymonetiscope_render_display_slot_by_insertion($allowed_insertions =
             empty($pages)
         ) continue;
 
-        // Page filter: skip if not matching any selected page type
+        // 1. PAGE FILTER
         if (!adxbymonetiscope_page_type_matches($pages)) continue;
 
-        // 1. Get div ID from network code
+        // 2. DEVICE FILTER
+        if (!adxbymonetiscope_device_type_matches($devices)) continue;
+
+        // 3. Build dynamic ad code
         $div_id = adxbymonetiscope_extract_div_id($network);
-
-        // 2. Convert sizes for JS array
         $js_sizes_str = adxbymonetiscope_sizes_js_array($sizes);
-
-        // 3. Get website host for page_url
         $site_url = parse_url(get_site_url(), PHP_URL_HOST);
 
-        // Output
-        echo "<p>I'm here from plugin Display slot. Thats' all, don't look at me too much. Do your work.</p>";
-        
+        // Output dynamic ad code
         echo "<!-- AdX Display Slot #$i -->\n";
+        echo "<p>I'm here from plugin Display slot. Thats' all, don't look at me too much. Do your work.</p>";
+
         echo "<script async src=\"https://securepubads.g.doubleclick.net/tag/js/gpt.js\"></script>\n";
         echo "<div id=\"" . esc_attr($div_id) . "\">\n";
         echo "<script>\n";
@@ -91,7 +90,29 @@ function adxbymonetiscope_page_type_matches($pages) {
     return false;
 }
 
-// Helper: Extract div ID from network code (/account/slotid → slotid)
+// Helper: Device-type matching
+function adxbymonetiscope_device_type_matches($devices) {
+    if (empty($devices) || count($devices) === 3) {
+        // If none or all are selected, allow everywhere
+        return true;
+    }
+
+    $has_mobile  = in_array('mobile', $devices) || in_array('tablet', $devices);
+    $has_desktop = in_array('desktop', $devices);
+
+    if ($has_mobile && !$has_desktop) {
+        // Only mobile/tablet selected
+        return wp_is_mobile();
+    }
+    if (!$has_mobile && $has_desktop) {
+        // Only desktop selected
+        return !wp_is_mobile();
+    }
+    // If both mobile/tablet and desktop, or something unexpected: allow everywhere
+    return true;
+}
+
+// Helper: Extract div ID from network code
 function adxbymonetiscope_extract_div_id($network) {
     $parts = explode('/', $network);
     return count($parts) >= 3 ? $parts[2] : preg_replace('/[^a-zA-Z0-9_]/', '', end($parts));
