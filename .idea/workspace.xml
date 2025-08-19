@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d8e811ca-6076-49c6-90de-64f6b37cbfbb" name="Changes" comment="ads.txt working. saving file in publi_html/" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;samyak-monetiscope&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/samyak-monetiscope/adx-ad-inserter.git&quot;,
+    &quot;accountId&quot;: &quot;f6d0e541-4019-4fb7-8de5-72832d2bbd2f&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="30d6NTj9NrukNa9gVuD1Uo7WS4l" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "display/base",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-WS-251.27812.50" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d8e811ca-6076-49c6-90de-64f6b37cbfbb" name="Changes" comment="" />
+      <created>1753945063452</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1753945063452</updated>
+      <workItem from="1753947149206" duration="7258000" />
+      <workItem from="1754028960139" duration="12106000" />
+      <workItem from="1754461569756" duration="1232000" />
+      <workItem from="1754465830156" duration="4623000" />
+    </task>
+    <task id="LOCAL-00001" summary="It'll be merged in display/base">
+      <option name="closed" value="true" />
+      <created>1753945905445</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1753945905445</updated>
+    </task>
+    <task id="LOCAL-00002" summary="It'll be merged in display/base">
+      <option name="closed" value="true" />
+      <created>1753947370505</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1753947370505</updated>
+    </task>
+    <task id="LOCAL-00003" summary="devices added. alignment better. frontend done">
+      <option name="closed" value="true" />
+      <created>1753949192270</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1753949192270</updated>
+    </task>
+    <task id="LOCAL-00004" summary="no sanitization in custom. custom code will be same. might create issue later.">
+      <option name="closed" value="true" />
+      <created>1753959426189</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1753959426189</updated>
+    </task>
+    <task id="LOCAL-00005" summary="ads.txt working. saving file in publi_html/">
+      <option name="closed" value="true" />
+      <created>1754032340444</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1754032340444</updated>
+    </task>
+    <task id="LOCAL-00006" summary="ads.txt working. saving file in publi_html/">
+      <option name="closed" value="true" />
+      <created>1754462624906</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1754462624906</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="display/v002" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="display/base" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ID_WIDTH">
+                <map>
+                  <entry key="Table.Default.Author.ColumnIdWidth" value="77" />
+                  <entry key="Table.Default.Date.ColumnIdWidth" value="87" />
+                  <entry key="Table.GitHub.CommitStatus.ColumnIdWidth" value="86" />
+                </map>
+              </option>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="display/base" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="It'll be merged in display/base" />
+    <MESSAGE value="devices added. alignment better. frontend done" />
+    <MESSAGE value="no sanitization in custom. custom code will be same. might create issue later." />
+    <MESSAGE value="ads.txt working. saving file in publi_html/" />
+    <option name="LAST_COMMIT_MESSAGE" value="ads.txt working. saving file in publi_html/" />
+  </component>
+</project>

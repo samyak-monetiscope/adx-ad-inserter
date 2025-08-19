@@ -78,18 +78,9 @@ function adx_v4_settings_page() {
           </label>
         </div>
 
-        <div class="form-script-input">
-          <label for="global_head_script"><strong>Global Head Script</strong></label>
-          <div class="script-input">
-            <textarea
-              name="global_head_script"
-              id="global_head_script"
-              rows="1"
-              style="width:100%;font-family:monospace;"
-              placeholder="<script>…</script>"
-            ><?php echo esc_textarea( get_option('global_head_script','') ); ?></textarea>
-            <button type="submit" name="set_global_head" class="button">Set</button>
-          </div>
+        <div class="head banner">
+          <!-- <img src="../img/banner.png" alt="banner"> -->
+          <img src="https://i.ibb.co/8n5BQsnY/banner.png" alt="banner">
         </div>
 
         <?php submit_button( 'Save Changes', 'primary', 'submit', false, [ 'id'=>'adx_save_top' ] ); ?>
