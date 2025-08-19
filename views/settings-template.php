@@ -49,7 +49,7 @@ function adx_v4_settings_page() {
   </style>
 
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link rel="stylesheet" href="<?php echo esc_url( plugin_dir_url(__FILE__) . 'index.css' ); ?>">
+  
 
   <form method="post" action="options.php">
     <?php
@@ -78,7 +78,7 @@ function adx_v4_settings_page() {
           </label>
         </div>
 
-        <div class="head banner">
+        <div class="head banner" style="position: relative; left: -20px;">
           <!-- <img src="../img/banner.png" alt="banner"> -->
           <img src="https://i.ibb.co/8n5BQsnY/banner.png" alt="banner">
         </div>

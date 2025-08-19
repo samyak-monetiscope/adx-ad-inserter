@@ -123,12 +123,12 @@ add_action( 'admin_enqueue_scripts', function( $hook ) {
         return;
     }
 
-    // wp_enqueue_style(
-    //     'monetiscope-admin-css',
-    //     plugin_dir_url( __FILE__ ) . './css/index.css',
-    //     [],
-    //     '1.2.0'
-    // );
+    wp_enqueue_style(
+        'monetiscope-admin-css',
+        plugin_dir_url( __FILE__ ) . './css/index.css',
+        [],
+        '1.2.0'
+    );
     wp_enqueue_script(
         'monetiscope-admin-js',
         plugin_dir_url( __FILE__ ) . './js/admin-scripts.js',
