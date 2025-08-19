@@ -199,7 +199,9 @@ document.addEventListener('DOMContentLoaded', function () {
               type="number"
               name="display_slot_<?php echo esc_attr($i); ?>_offset"
               id="display_slot_<?php echo esc_attr($i); ?>_offset"
-              value="<?php echo esc_attr($offset); ?>"
+              value="<?php echo esc_attr(max(1, $offset)); ?>"
+              min="1"
+              max="10"
               style="width:80px; margin-top:5px;">
           </div>
 

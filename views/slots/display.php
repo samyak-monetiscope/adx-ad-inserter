@@ -60,7 +60,10 @@ function adxbymonetiscope_insert_display_ads($content) {
         // 4) Apply insertion logic
         switch ($insertion) {
             case 'before_post':
-                $content = $ad_html . $content;
+                
+                $content = adxbymonetiscope_insert_ad_before_first_h1($content, $ad_html);
+
+                // $content = $ad_html . $content;
                 break;
 
             case 'after_post':
@@ -114,9 +117,8 @@ function adxbymonetiscope_build_ad_html($network, $sizes) {
 
     ob_start();
     ?>
-    <!-- AdX Display Slot -->
     <div id="<?php echo esc_attr($div_id); ?>" class="adxbymonetiscope-display-slot" style="margin:12px 0;">
-        
+        <p style="background-color: yellow;">I'm here from plugin Display slot. Thats' all, don't look at me too much. Do your work.</p>
         <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
         <script>
         window.googletag = window.googletag || {cmd: []};
@@ -218,6 +220,22 @@ function adxbymonetiscope_sizes_js_array($sizes) {
     }
     if (count($out) === 1) return $out[0];
     return "[" . implode(",", $out) . "]";
+}
+
+/**
+ * Insert ad before the first <h1> in content.
+ * Fallback (no <h1> found): prepend at the start of content.
+ */
+function adxbymonetiscope_insert_ad_before_first_h1($content, $ad_html) {
+    $pattern = '/(<h1\b[^>]*>)/i';
+
+    if (preg_match($pattern, $content, $m, PREG_OFFSET_CAPTURE)) {
+        $pos = $m[1][1]; // byte offset of the opening <h1>
+        return substr($content, 0, $pos) . $ad_html . substr($content, $pos);
+    }
+
+    // Fallback: no <h1> inside content → prepend
+    return $ad_html . $content;
 }
 
 /**
