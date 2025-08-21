@@ -118,7 +118,7 @@ function adxbymonetiscope_build_ad_html($network, $sizes) {
     ob_start();
     ?>
     <div id="<?php echo esc_attr($div_id); ?>" class="adxbymonetiscope-display-slot" style="margin:12px 0;">
-        <p style="background-color: yellow;">I'm here from plugin Display slot. Thats' all, don't look at me too much. Do your work.</p>
+        <p style="background-color: yellow;">This is a sample text from Display Ad slot</p>
         <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
         <script>
         window.googletag = window.googletag || {cmd: []};
@@ -227,7 +227,7 @@ function adxbymonetiscope_sizes_js_array($sizes) {
  * Fallback (no <h1> found): prepend at the start of content.
  */
 function adxbymonetiscope_insert_ad_before_first_h1($content, $ad_html) {
-    $pattern = '/(<h1\b[^>]*>)/i';
+    $pattern = '/(<h1\b[^>]l*>)/i';
 
     if (preg_match($pattern, $content, $m, PREG_OFFSET_CAPTURE)) {// preg_match is taking 3 args i.e. preg_match($pattern, $content, $m). pattern is for finding <h1>, $m is for storing the position of <h1>, preg_offset_capture is for storing the position of <h1>
         $pos = $m[1][1]; // byte offset of the opening <h1>
