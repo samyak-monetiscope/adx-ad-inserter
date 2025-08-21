@@ -229,7 +229,7 @@ function adxbymonetiscope_sizes_js_array($sizes) {
 function adxbymonetiscope_insert_ad_before_first_h1($content, $ad_html) {
     $pattern = '/(<h1\b[^>]*>)/i';
 
-    if (preg_match($pattern, $content, $m, PREG_OFFSET_CAPTURE)) {
+    if (preg_match($pattern, $content, $m, PREG_OFFSET_CAPTURE)) {// preg_match is taking 3 args i.e. preg_match($pattern, $content, $m). pattern is for finding <h1>, $m is for storing the position of <h1>, preg_offset_capture is for storing the position of <h1>
         $pos = $m[1][1]; // byte offset of the opening <h1>
         return substr($content, 0, $pos) . $ad_html . substr($content, $pos);
     }
@@ -250,6 +250,51 @@ function adxbymonetiscope_insert_ad_around_nth_tag($content, $tag, $offset, $pos
         return $content . $ad_html;
     }
 
+    // Special handling for paragraphs: skip empty <p>...</p>
+    if ($tag === 'p') {
+        // Match full paragraph blocks and capture inner HTML
+        if (!preg_match_all('/<p\b[^>]*>(.*?)<\/p>/is', $content, $matches, PREG_OFFSET_CAPTURE)) {
+            // No <p> blocks → fallback append
+            return $content . $ad_html;
+        }
+
+        // Build a list of non-empty paragraph matches with offsets
+        $valid = [];
+        foreach ($matches[0] as $idx => $fullMatch) {
+            $fullHtml  = $fullMatch[0];       // entire <p>...</p>
+            $fullPos   = $fullMatch[1];       // offset of <p>
+            $innerHtml = $matches[1][$idx][0]; // inner content inside <p>...</p>
+
+            // Normalize & test emptiness
+            $decoded   = html_entity_decode($innerHtml, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $normalized = trim(preg_replace('/\x{00A0}/u', ' ', str_replace('&nbsp;', ' ', strip_tags($decoded)))); // replace NBSP + strip tags
+            if ($normalized === '') {
+                continue; // skip empty paragraph
+            }
+
+            $valid[] = [
+                'full_html' => $fullHtml,
+                'pos'       => $fullPos,
+                'len'       => strlen($fullHtml),
+            ];
+        }
+
+        if (count($valid) < $offset) {
+            // Not enough non-empty paragraphs → fallback append
+            return $content . $ad_html;
+        }
+
+        $target = $valid[$offset - 1];
+
+        if ($position === 'before') {
+            return substr($content, 0, $target['pos']) . $ad_html . substr($content, $target['pos']);
+        } else {
+            $after_pos = $target['pos'] + $target['len'];
+            return substr($content, 0, $after_pos) . $ad_html . substr($content, $after_pos);
+        }
+    }
+
+    // Original logic for non-<p> tags (unchanged)
     $pattern = ($tag === 'img')
         ? '/(<img[^>]*>)/i'
         : '/(<\/?' . preg_quote($tag, '/') . '[^>]*>)/i';
