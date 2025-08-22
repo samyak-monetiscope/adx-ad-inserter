@@ -10,7 +10,7 @@
   /* display: flex; */
   align-items: center;
   /* justify-content: space-between; */
-  margin-bottom: 24px;
+  /* margin-bottom: 24px; */
 }
 .settings-title {
   margin: 0;
@@ -21,10 +21,11 @@
   color: #111827;
 }
 .form-actions {
+  margin : 2px 0;
   display: flex;
-  align-items: end;
+  align-items: center;
   justify-content: space-between;
-  gap : 4rem;
+  gap : 2rem;
 }
 .form-toggle{
   display: flex;

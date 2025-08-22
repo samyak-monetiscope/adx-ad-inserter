@@ -36,14 +36,32 @@ function adx_v4_register_settings() {
         'custom_enabled',
         'custom_header_code',
         'custom_footer_code',
+        'custom_ads_txt'
         'display_slot_enabled',
     ];
 
     foreach ($settings as $opt) {
+        // Skip custom header/footer code for special handling below
+        if ($opt === 'custom_header_code' || $opt === 'custom_footer_code' || $opt === 'custom_ads_txt') {
+            continue;
+        }
         register_setting('adx_v4_settings', $opt, [
             'sanitize_callback' => 'adx_v4_sanitize_option'
         ]);
     }
+
+    // Now register these 2 options with custom/no sanitization
+    register_setting('adx_v4_settings', 'custom_header_code', [
+        'sanitize_callback' => null // or your custom callback
+    ]);
+    register_setting('adx_v4_settings', 'custom_footer_code', [
+        'sanitize_callback' => null // or your custom callback
+    ]);
+    register_setting('adx_v4_settings', 'custom_ads_txt', [
+        'sanitize_callback' => null // or your custom callback
+    ]);
+
+
 
     // Subslot (Display Slot) settings — register for all 10 subslots
     for ($i = 1; $i <= 10; $i++) {
@@ -138,6 +156,13 @@ add_action('admin_enqueue_scripts', function($hook) {
     if ($hook !== 'settings_page_adx-ad-inserter') {
         return;
     }
+
+    wp_enqueue_style(
+        'monetiscope-admin-css',
+        plugin_dir_url( __FILE__ ) . './css/index.css',
+        [],
+        '1.2.0'
+    );
     // Uncomment if you have admin CSS:
     // wp_enqueue_style(
     //     'monetiscope-admin-css',
