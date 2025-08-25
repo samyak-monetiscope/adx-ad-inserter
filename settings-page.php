@@ -36,7 +36,7 @@ function adx_v4_register_settings() {
         'custom_enabled',
         'custom_header_code',
         'custom_footer_code',
-        'custom_ads_txt'
+        'custom_ads_txt',
         'display_slot_enabled',
     ];
 
