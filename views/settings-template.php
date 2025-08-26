@@ -80,7 +80,7 @@ function adx_v4_settings_page() {
 
         <div class="head banner" style="position: relative; left: -20px;">
           <a href="https://monetiscope.com/contact/" target="_blank" rel="noopener noreferrer">
-            <img src="https://i.ibb.co/8n5BQsnY/banner.png" alt="banner">
+            <img src="https://i.postimg.cc/GpsGRqZt/Ad-X-Ad-Insertor-Banner-Ad.jpg" alt="banner" class="rounded-md hover:rounded-none hover:shadow-lg duration-200">
           </a>
         </div>
 
