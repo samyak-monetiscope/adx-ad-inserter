@@ -10,9 +10,9 @@ function adx_v4_settings_page() {
         'Button Rewarded'       => ['enabled'=>'ad2_enabled','code'=>'ad2_network_code'],
         'Flying Carpet'         => ['enabled'=>'flying_enabled','code'=>'flying_network_code'],
         'Anchor'                => ['enabled'=>'anchor_enabled','code'=>'anchor_network_code'],
-        'Side Floater'          => ['enabled'=>'side_floater_enabled','code'=>'side_floater_network_code'],
+        // 'Side Floater'          => ['enabled'=>'side_floater_enabled','code'=>'side_floater_network_code'],
         'Offerwall (on Scroll)' => ['enabled'=>'offerwall_onscroll_enabled','code'=>'offerwall_onscroll_network_code'],
-        'Coupon Rewarded'       => ['enabled'=>'coupon_rewarded_enabled','code'=>'coupon_rewarded_network_code'],
+        // 'Coupon Rewarded'       => ['enabled'=>'coupon_rewarded_enabled','code'=>'coupon_rewarded_network_code'],
         'Interstitial'          => ['enabled'=>'interstitial_enabled','code'=>'interstitial_network_code'],
         'Custom'                => ['enabled'=>'custom_enabled','code'=>null],
     ];
@@ -23,9 +23,9 @@ function adx_v4_settings_page() {
         'tab-button-rewarded'    => 'Button Rewarded Ad',
         'tab-flying'             => 'Flying Carpet Ad',
         'tab-anchor'             => 'Anchor Ad',
-        'tab-side-floater'       => 'Side Floater Ad',
+        // 'tab-side-floater'       => 'Side Floater Ad',
         'tab-offerwall-onscroll' => 'Offerwall (on Scroll) Ad',
-        'tab-coupon-rewarded'    => 'Coupon Rewarded Ad',
+        // 'tab-coupon-rewarded'    => 'Coupon Rewarded Ad',
         'tab-interstitial'       => 'Interstitial Ad',
         'tab-custom'             => 'Custom',
     ];
@@ -36,9 +36,9 @@ function adx_v4_settings_page() {
         'settings-button-rewarded.php',
         'settings-flying-carpet.php',
         'settings-anchor.php',
-        'settings-side-floater.php',
+        // 'settings-side-floater.php',
         'settings-offerwall-onscroll.php',
-        'settings-coupon-rewarded.php',
+        // 'settings-coupon-rewarded.php',
         'settings-interstitial.php',
         'settings-custom.php',
     ];
@@ -79,8 +79,9 @@ function adx_v4_settings_page() {
         </div>
 
         <div class="head banner" style="position: relative; left: -20px;">
-          <!-- <img src="../img/banner.png" alt="banner"> -->
-          <img src="https://i.ibb.co/8n5BQsnY/banner.png" alt="banner">
+          <a href="https://monetiscope.com/contact/" target="_blank" rel="noopener noreferrer">
+            <img src="https://i.postimg.cc/GpsGRqZt/Ad-X-Ad-Insertor-Banner-Ad.jpg" alt="banner" class="rounded-md hover:rounded-none hover:shadow-lg duration-200">
+          </a>
         </div>
 
         <?php submit_button( 'Save Changes', 'primary', 'submit', false, [ 'id'=>'adx_save_top' ] ); ?>
@@ -159,8 +160,22 @@ function adx_v4_settings_page() {
             </li>
           <?php endforeach; ?>
         </ul>
+        <hr>
         <div class="links">
-          <a href="https://monetiscope.com/adx-ad-inserter-plugin/" target="_blank" rel="noopener noreferrer"><img></a>
+          <h3 class="mb-0" style="margin-bottom: 0;">Connect to Us</h3>
+          <div class="social-icons grid grid-cols-3 gap-4">
+            <a href="https://monetiscope.com/adx-ad-inserter-plugin/" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-4 hover:shadow-xl ">
+              <img src="https://cdn-icons-png.flaticon.com/512/74/74842.png" alt="Website">
+            </a>
+
+            <a href="https://www.linkedin.com/company/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-4 hover:shadow-xl ">
+              <img src="https://cdn-icons-png.flaticon.com/512/3128/3128219.png" alt="LinkedIn">
+            </a>
+
+            <a href="https://x.com/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-4 hover:shadow-xl ">
+              <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="Twitter">
+            </a>
+          </div>
         </div>
       </aside>
     </div>
