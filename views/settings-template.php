@@ -79,8 +79,9 @@ function adx_v4_settings_page() {
         </div>
 
         <div class="head banner" style="position: relative; left: -20px;">
-          <!-- <img src="../img/banner.png" alt="banner"> -->
-          <img src="https://i.ibb.co/8n5BQsnY/banner.png" alt="banner">
+          <a href="https://monetiscope.com/contact/" target="_blank" rel="noopener noreferrer">
+            <img src="https://i.ibb.co/8n5BQsnY/banner.png" alt="banner">
+          </a>
         </div>
 
         <?php submit_button( 'Save Changes', 'primary', 'submit', false, [ 'id'=>'adx_save_top' ] ); ?>
