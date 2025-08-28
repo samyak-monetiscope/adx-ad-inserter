@@ -10,6 +10,7 @@ function adx_v4_register_settings() {
         'global_head_script',
         'popup_enabled',
         'popup_network_code',
+        'code_style',
         'ad2_enabled',
         'ad2_network_code',
         'ad2_keywords',

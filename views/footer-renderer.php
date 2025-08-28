@@ -27,4 +27,4 @@ function adx_v4_render_footer_ads() {
         adx_render_custom_footer_slot();
     }
 }
-add_action('wp_footer','adx_v4_render_footer_ads');
+// add_action('wp_footer','adx_v4_render_footer_ads');
