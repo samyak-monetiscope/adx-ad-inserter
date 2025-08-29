@@ -58,8 +58,8 @@ function adx_v4_settings_page() {
     ?>
 
     <div class="form-header">
-      <h1 class="settings-title">AdX Ad Inserter (Powered by Monetiscope)</h1>
-      <hr class="settings-separator">
+      <h1 class="settings-title ">AdX Ad Inserter - Monetiscope</h1>
+      <hr class="settings-separator my-5">
       <div class="form-actions">
         <div class="form-toggle">
           <?php $is_active = get_option('adx_enabled') === 'true'; ?>

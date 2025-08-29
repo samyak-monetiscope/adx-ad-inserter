@@ -23,6 +23,14 @@ defined('ABSPATH') || exit;
                value="<?php echo esc_attr(get_option('popup_network_code')); ?>"
                class="regular-text" />
     </p>
+    <p>
+        <label for="popup_option"><strong>Code Style</strong></label><br>
+        <select id="popup_option" name="popup_option">
+            <option value="ONCE_PER_SESSION" <?php selected(get_option('popup_option'), 'ONCE_PER_SESSION'); ?>>Once Per Session</option>
+            <option value="ONCE_PER_PAGE" <?php selected(get_option('popup_option'), 'ONCE_PER_PAGE'); ?>>Once Per Page</option>
+        </select>
+    </p>
+
 
     <p class="description">
         This slot uses a pre-defined code template and does not support editing.

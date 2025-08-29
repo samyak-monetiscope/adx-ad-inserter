@@ -11,6 +11,7 @@ function adx_v4_register_settings() {
         'global_head_script',
         'popup_enabled',
         'popup_network_code',
+        'popup_option',
         'ad2_enabled',
         'ad2_network_code',
         'ad2_keywords',
@@ -159,7 +160,7 @@ add_action('admin_enqueue_scripts', function($hook) {
 
     wp_enqueue_style(
         'monetiscope-admin-css',
-        plugin_dir_url( __FILE__ ) . './css/index.css',
+        plugin_dir_url( __FILE__ ) . './views/index.css',
         [],
         '1.2.0'
     );
