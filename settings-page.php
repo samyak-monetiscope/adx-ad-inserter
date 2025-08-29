@@ -109,7 +109,7 @@ function adx_v4_register_settings() {
     for ($i = 1; $i <= 10; $i++) {
         $opt = "display_slot_{$i}_devices";
         if (get_option($opt) === false) {
-            update_option($opt, ['desktop', 'tablet', 'mobile']);
+            update_option($opt, ['desktop', 'mobile']);
         }
     }
 

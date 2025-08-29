@@ -55,7 +55,7 @@ function adxbymonetiscope_insert_display_ads($content) {
         }
 
         // 3) Build dynamic ad HTML (network, sizes, div id, site host)
-        $ad_html = adxbymonetiscope_build_ad_html($network, $sizes);
+        $ad_html = adxbymonetiscope_build_ad_html($network, $sizes, $i);
 
         // 4) Apply insertion logic
         switch ($insertion) {
@@ -110,7 +110,7 @@ function adxbymonetiscope_insert_display_ads($content) {
  * - Div ID: last segment of the network code
  * - page_url: current site host
  */
-function adxbymonetiscope_build_ad_html($network, $sizes) {
+function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null) {
     $div_id       = adxbymonetiscope_extract_div_id($network);
     $js_sizes_str = adxbymonetiscope_sizes_js_array($sizes);
     $site_host    = parse_url(get_site_url(), PHP_URL_HOST);
@@ -118,7 +118,7 @@ function adxbymonetiscope_build_ad_html($network, $sizes) {
     ob_start();
     ?>
     <div id="<?php echo esc_attr($div_id); ?>" class="adxbymonetiscope-display-slot" style="margin:12px 0;">
-        <p style="background-color: yellow;">This is a sample text from Display Ad slot</p>
+        <p style="background-color: yellow;">This is a sample text from Display Ad slot  <?php echo esc_html($slot_index !== null ? (int)$slot_index : '-'); ?></p>
         <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
         <script>
         window.googletag = window.googletag || {cmd: []};
@@ -174,22 +174,37 @@ function adxbymonetiscope_page_type_matches($pages) {
  * - Only desktop selected: allow only wp_is_mobile() === false
  */
 function adxbymonetiscope_device_type_matches($devices) {
-    if (empty($devices) || count($devices) === 3) {
+    // Normalize incoming array and map 'tablet' to 'mobile' so we have exactly two groups.
+    $norm = [];
+    foreach ((array)$devices as $d) {
+        $d = strtolower(trim($d));
+        if ($d === 'tablet') $d = 'mobile';
+        if (in_array($d, ['desktop', 'mobile'], true)) {
+            $norm[$d] = true; // use keys to dedupe
+        }
+    }
+    $has_desktop = isset($norm['desktop']);
+    $has_mobile  = isset($norm['mobile']);
+
+    // None or both selected → allow everywhere
+    if ((!$has_desktop && !$has_mobile) || ($has_desktop && $has_mobile)) {
         return true;
     }
 
-    $has_mobile  = in_array('mobile', $devices, true) || in_array('tablet', $devices, true);
-    $has_desktop = in_array('desktop', $devices, true);
-
+    // Only mobile/tablet selected
     if ($has_mobile && !$has_desktop) {
         return wp_is_mobile();
     }
-    if (!$has_mobile && $has_desktop) {
+
+    // Only desktop selected
+    if ($has_desktop && !$has_mobile) {
         return !wp_is_mobile();
     }
-    // If both sets or unexpected input → allow
+
+    // Safety fallback
     return true;
 }
+
 
 /**
  * Extract the DIV id from network code: /account/slotid → slotid

@@ -245,8 +245,9 @@ document.addEventListener('DOMContentLoaded', function () {
           <div class="form-grid border-2 px-6 py-3 rounded-lg border-slate-200">
 
             <?php
-              $devices = ['desktop'=>'Desktop','tablet'=>'Tablet','mobile'=>'Mobile'];
-              $selected = get_option("display_slot_{$i}_devices", ['desktop','tablet','mobile']);
+             $devices = ['desktop' => 'Desktop', 'mobile' => 'Mobile/Tablet'];
+              $selected = get_option("display_slot_{$i}_devices", ['desktop','mobile']);
+
               foreach ($devices as $key => $label):
             ?>
               <label style="margin-right:1em;">
