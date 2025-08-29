@@ -24,10 +24,10 @@ defined('ABSPATH') || exit;
                class="regular-text" />
     </p>
     <p>
-        <label for="code_style"><strong>Code Style</strong></label><br>
-        <select id="code_style" name="code_style">
-            <option value="NEW_CODE" <?php selected(get_option('code_style'), 'NEW_CODE'); ?>>New Code</option>
-            <option value="OLD_CODE" <?php selected(get_option('code_style'), 'OLD_CODE'); ?>>Old Code</option>
+        <label for="popup_option"><strong>Code Style</strong></label><br>
+        <select id="popup_option" name="popup_option">
+            <option value="ONCE_PER_SESSION" <?php selected(get_option('popup_option'), 'ONCE_PER_SESSION'); ?>>Once Per Session</option>
+            <option value="ONCE_PER_PAGE" <?php selected(get_option('popup_option'), 'ONCE_PER_PAGE'); ?>>Once Per Page</option>
         </select>
     </p>
 
