@@ -40,7 +40,7 @@ function adx_v4_register_settings() {
         'custom_ads_txt',
         'display_slot_enabled',
     ];
-
+    
     foreach ($settings as $opt) {
         // Skip custom header/footer code for special handling below
         if ($opt === 'custom_header_code' || $opt === 'custom_footer_code' || $opt === 'custom_ads_txt') {
@@ -50,7 +50,12 @@ function adx_v4_register_settings() {
             'sanitize_callback' => 'adx_v4_sanitize_option'
         ]);
     }
-
+    
+    register_setting('adx_v4_settings', "flying_pages",        ['sanitize_callback' => 'adx_v4_sanitize_option']);
+    register_setting('adx_v4_settings', "flying_insertion",    ['sanitize_callback' => 'sanitize_text_field']);
+    register_setting('adx_v4_settings', "flying_alignment",    ['sanitize_callback' => 'sanitize_text_field']);
+    register_setting('adx_v4_settings', "flying_offset",       ['sanitize_callback' => 'absint']);
+    register_setting('adx_v4_settings',  "flying_devices",     ['sanitize_callback' => 'adx_v4_sanitize_option']);
     // Now register these 2 options with custom/no sanitization
     register_setting('adx_v4_settings', 'custom_header_code', [
         'sanitize_callback' => null // or your custom callback
@@ -75,7 +80,7 @@ function adx_v4_register_settings() {
         register_setting('adx_v4_settings', "display_slot_{$i}_text",         ['sanitize_callback' => 'sanitize_text_field']);
         register_setting('adx_v4_settings', "display_slot_{$i}_offset",       ['sanitize_callback' => 'absint']);
         register_setting('adx_v4_settings',  "display_slot_{$i}_devices",     ['sanitize_callback' => 'adx_v4_sanitize_option']);
-}
+    }
 
     // Set default values for booleans if not already present (first install)
     $booleans = [
