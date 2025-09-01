@@ -17,7 +17,7 @@ function adx_v4_render_header_ads() {
     if ( $script = get_option('global_head_script') ) {
         echo $script; // phpcs:ignore WordPress.Security.EscapeOutput
     }
-    adxbymonetiscope_render_flying_carpet_slot();
+    // adxbymonetiscope_render_flying_carpet_slot();
     adx_render_anchor_slot();
     // only if enabled
     if ( get_option('custom_enabled') === 'true' ) {

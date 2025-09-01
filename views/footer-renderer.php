@@ -12,6 +12,7 @@ require_once __DIR__ . '/slots/interstitial.php';
 require_once __DIR__ . '/slots/coupon-rewarded.php';
 require_once __DIR__ . '/slots/display.php';
 require_once __DIR__ . '/slots/custom.php';
+require_once __DIR__ . '/slots/flying-carpet.php';
 
 /**
  * Fire all footer‐going ad slots
@@ -25,6 +26,7 @@ function adx_v4_render_footer_ads() {
     adx_render_offerwall_onscroll_slot();
     adx_render_interstitial_slot();
    adx_render_coupon_rewarded_slot();
+//    adxbymonetiscope_render_flying_carpet_slot();
 	 if ( get_option('custom_enabled') === 'true' ) {
         adx_render_custom_footer_slot();
     }
