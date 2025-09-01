@@ -140,12 +140,15 @@ function adx_v4_sanitize_option($value) {
 /* 2 – Add Settings Page to WordPress Admin           */
 /* -------------------------------------------------- */
 function adx_v4_add_settings_page() {
-    add_options_page(
-        'AdX Ad Inserter',
-        'AdX Ad Inserter',
-        'manage_options',
-        'adx-ad-inserter',
-        'adx_v4_settings_page' // this function will be called to render the page
+    // Create a TOP-LEVEL admin menu instead of a Settings submenu
+    add_menu_page(
+        'AdX Ad Inserter',              // Page title
+        'AdX Ad Inserter',              // Menu title
+        'manage_options',               // Capability
+        'adx-ad-inserter',              // Menu slug (kept same)
+        'adx_v4_settings_page',         // Callback to render content
+        'dashicons-megaphone',          // Icon (choose what you like)
+        59                               // Position (optional; before Settings)
     );
 }
 add_action('admin_menu', 'adx_v4_add_settings_page');
@@ -154,23 +157,17 @@ add_action('admin_menu', 'adx_v4_add_settings_page');
 /* 3 – Enqueue Admin Scripts/CSS                      */
 /* -------------------------------------------------- */
 add_action('admin_enqueue_scripts', function($hook) {
-    if ($hook !== 'settings_page_adx-ad-inserter') {
+    if ($hook !== 'toplevel_page_adx-ad-inserter') {
         return;
     }
 
     wp_enqueue_style(
         'monetiscope-admin-css',
-        plugin_dir_url( __FILE__ ) . './views/index.css',
+        plugin_dir_url(__FILE__) . './views/index.css',
         [],
         '1.2.0'
     );
-    // Uncomment if you have admin CSS:
-    // wp_enqueue_style(
-    //     'monetiscope-admin-css',
-    //     plugin_dir_url(__FILE__) . './css/index.css',
-    //     [],
-    //     '1.2.0'
-    // );
+
     wp_enqueue_script(
         'monetiscope-admin-js',
         plugin_dir_url(__FILE__) . './js/admin-scripts.js',
@@ -179,6 +176,7 @@ add_action('admin_enqueue_scripts', function($hook) {
         true
     );
 });
+
 
 /* -------------------------------------------------- */
 /* 4 – Load Main Settings Template (UI)               */
