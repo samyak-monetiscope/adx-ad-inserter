@@ -118,6 +118,24 @@ function adx_v4_register_settings() {
         }
     }
 
+        // Defaults for Flying Carpet (single-slot)
+    if (get_option('flying_devices') === false) {
+        update_option('flying_devices', ['desktop', 'mobile']);
+    }
+    if (get_option('flying_insertion') === false) {
+        update_option('flying_insertion', 'after_post'); // safe, always works
+    }
+    if (get_option('flying_alignment') === false) {
+        update_option('flying_alignment', 'center'); // match frontend default
+    }
+    if (get_option('flying_offset') === false) {
+        update_option('flying_offset', 1); // used when insertion targets p/img
+    }
+    if (get_option('flying_pages') === false) {
+        update_option('flying_pages', ['post']); // sensible default scope
+    }
+
+
 }
 add_action('admin_init', 'adx_v4_register_settings');
 

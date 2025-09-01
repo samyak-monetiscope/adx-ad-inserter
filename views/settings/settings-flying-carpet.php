@@ -7,6 +7,7 @@ defined('ABSPATH') || exit;
 // Read saved options (with safe defaults)
 $flying_enabled     = get_option('flying_enabled');
 $flying_network     = get_option('flying_network_code', '');
+
 $flying_insertion   = get_option('flying_insertion', '');
 $flying_offset      = (int) get_option('flying_offset', 1);
 $flying_pages       = (array) get_option('flying_pages', []);
