@@ -164,15 +164,15 @@ function adx_v4_settings_page() {
         <div class="links">
           <h3 class="mb-0" style="margin-bottom: 0;">Connect to Us</h3>
           <div class="social-icons grid grid-cols-3 gap-4">
-            <a href="https://monetiscope.com/adx-ad-inserter-plugin/" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-4 hover:shadow-xl ">
+            <a href="https://monetiscope.com/adx-ad-inserter-plugin/" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
               <img src="https://cdn-icons-png.flaticon.com/512/74/74842.png" alt="Website">
             </a>
 
-            <a href="https://www.linkedin.com/company/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-4 hover:shadow-xl ">
+            <a href="https://www.linkedin.com/company/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
               <img src="https://cdn-icons-png.flaticon.com/512/3128/3128219.png" alt="LinkedIn">
             </a>
 
-            <a href="https://x.com/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-4 hover:shadow-xl ">
+            <a href="https://x.com/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
               <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="Twitter">
             </a>
           </div>
