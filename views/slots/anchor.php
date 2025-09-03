@@ -25,8 +25,8 @@ function adx_render_anchor_slot() {
     googletag.cmd.push(function() {
         var anchorSlot = googletag.defineOutOfPageSlot(
 
-            ' . esc_js($escaped_network) . ',
-            googletag.enums.OutOfPageFormat.' . esc_js($escaped_position) . '
+            ' . $escaped_network . ',
+            googletag.enums.OutOfPageFormat.' . $escaped_position . '
         ).addService(googletag.pubads());
         googletag.pubads().enableSingleRequest();
         googletag.enableServices();
