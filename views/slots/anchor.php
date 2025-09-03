@@ -15,8 +15,8 @@ function adx_render_anchor_slot() {
     }
 
     // 1. Escape for JS
-    $escaped_network  = esc_js( wp_json_encode( $network_code ) );
-    $escaped_position = esc_js( wp_json_encode( $position ) );
+    $escaped_network  =  wp_json_encode( $network_code ) ;
+    $escaped_position =  wp_json_encode( $position ) ;
 
     // 2. Output one <script> block
 
