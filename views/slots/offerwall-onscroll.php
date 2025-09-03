@@ -19,13 +19,13 @@ function adx_render_offerwall_onscroll_slot() {
     }
 
     // ✅ Secure escaping for JS output
-    $js_logo_url     = esc_js( wp_json_encode( $logo_url ) );
-    $js_network_code = esc_js( wp_json_encode( $network_code ) );
+    $js_logo_url     = wp_json_encode( esc_url_raw( $logo_url ) );
+    $js_network_code = wp_json_encode( $network_code );
 
     echo '<script>
     (function() {
-        var logoUrl = ' . esc_js($js_logo_url) . ';
-        var networkCode = ' . esc_js($js_network_code) . ';
+        var logoUrl = ' . $js_logo_url . ';
+        var networkCode = ' . $js_network_code . ';
 
         // 1. Inject CSS
         var style = document.createElement("style");
