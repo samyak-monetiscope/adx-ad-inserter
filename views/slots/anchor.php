@@ -19,11 +19,16 @@ function adx_render_anchor_slot() {
     $escaped_position =  wp_json_encode( $position ) ;
 
     // 2. Output one <script> block
-
+    echo '<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>';
     echo '<script>
+    
     window.googletag = window.googletag || {cmd: []};
     googletag.cmd.push(function() {
         var anchorSlot = googletag.defineOutOfPageSlot(
+
+
+
+
 
             ' . $escaped_network . ',
             googletag.enums.OutOfPageFormat.' . $escaped_position . '
