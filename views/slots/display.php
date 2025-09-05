@@ -118,7 +118,7 @@ function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null) {
     ob_start();
     ?>
     <div id="<?php echo esc_attr($div_id); ?>" class="adxbymonetiscope-display-slot" style="margin:12px 0;">
-        <p style="background-color: yellow;">This is a sample text from Display Ad slot  <?php echo esc_html($slot_index !== null ? (int)$slot_index : '-'); ?></p>
+        <p style="opacity : 50%">Display Advertisement <?php echo esc_html($slot_index !== null ? (int)$slot_index : '-'); ?></p>
         <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
         <script>
         window.googletag = window.googletag || {cmd: []};
