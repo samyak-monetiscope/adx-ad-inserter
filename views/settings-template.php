@@ -175,6 +175,15 @@ function adx_v4_settings_page() {
             <a href="https://x.com/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
               <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="Twitter">
             </a>
+            <a href="mailto:support@monetiscope.com" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
+              <img src="https://cdn-icons-png.flaticon.com/128/646/646094.png" alt="Email">
+            </a>
+            <a href="https://www.youtube.com/@monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
+              <img src="https://cdn-icons-png.flaticon.com/128/1384/1384028.png" alt="YouTube">
+            </a>
+            <a href="https://www.facebook.com/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
+              <img src="https://cdn-icons-png.flaticon.com/128/2175/2175193.png" alt="Facebook">
+            </a>
           </div>
         </div>
       </aside>
