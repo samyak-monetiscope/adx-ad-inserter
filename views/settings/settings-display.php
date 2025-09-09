@@ -219,51 +219,49 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
 
 
+<!-- Page Types -->
+<div class="form-grid border-2 px-6 py-3 rounded-lg border-slate-200">
+  <?php
+    $i = isset($i) ? absint($i) : 0;
 
-          <!-- Page Types -->
-          <div class="form-grid border-2 px-6 py-3 rounded-lg border-slate-200">
-            <?php
-              $types = [
-                'post'     => 'Posts',
-                'homepage' => 'Homepage',
-                'category' => 'Category',
-                'static'   => 'Static',
-                'search'   => 'Search',
-                'tag'      => 'Tag',
-              ];
-              foreach ($types as $val => $label) {
-            ?>
-              <label>
-                <input type="checkbox"
-                  name="display_slot_<?php echo esc_attr($i); ?>_pages[]"
-                  value="<?php echo esc_attr($val); ?>"
-                  <?php checked(in_array($val, (array)$pages), true); ?>>
-                <?php echo esc_html($label); ?>
-              </label>
-            <?php } ?>
-          </div>
-          <div class="form-grid border-2 px-6 py-3 rounded-lg border-slate-200">
+    $types = [
+      'post'     => 'Posts',
+      'homepage' => 'Homepage',
+      'category' => 'Category',
+      'static'   => 'Static',
+      'search'   => 'Search',
+      'tag'      => 'Tag',
+    ];
 
-            <?php
-             $devices = ['desktop' => 'Desktop', 'mobile' => 'Mobile/Tablet'];
-              $selected = get_option("display_slot_{$i}_devices", ['desktop','mobile']);
+    foreach ($types as $val => $label) :
+  ?>
+    <label>
+      <input type="checkbox"
+        name="<?php echo esc_attr( "display_slot_{$i}_pages[]" ); ?>"
+        value="<?php echo esc_attr( $val ); ?>"
+        <?php checked( in_array( $val, (array) $pages, true ) ); ?>>
+      <?php echo esc_html( $label ); ?>
+    </label>
+  <?php endforeach; ?>
+</div>
 
-              foreach ($devices as $key => $label):
-            ?>
-              <label style="margin-right:1em;">
-                <input type="checkbox"
-                       name="display_slot_<?php echo $i; ?>_devices[]"
-                       value="<?php echo $key; ?>"
-                       <?php checked(in_array($key, (array)$selected), true); ?>>
-                <?php echo $label; ?>
-              </label>
-            <?php endforeach; ?>
-          </div>
+<div class="form-grid border-2 px-6 py-3 rounded-lg border-slate-200">
+  <?php
+    $devices  = [ 'desktop' => 'Desktop', 'mobile' => 'Mobile/Tablet' ];
+    $selected = get_option( "display_slot_{$i}_devices", [ 'desktop', 'mobile' ] );
 
+    foreach ( $devices as $key => $label ) :
+  ?>
+    <label style="margin-right:1em;">
+      <input type="checkbox"
+        name="<?php echo esc_attr( "display_slot_{$i}_devices[]" ); ?>"
+        value="<?php echo esc_attr( $key ); ?>"
+        <?php checked( in_array( $key, (array) $selected, true ) ); ?>>
+      <?php echo esc_html( $label ); ?>
+    </label>
+  <?php endforeach; ?>
+</div>
 
-      </div>
-    <?php endfor; ?>
-  </div>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('[id^="display_slot_"][id$="_insertion"]').forEach(select => {
