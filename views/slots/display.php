@@ -37,7 +37,9 @@ function adxbymonetiscope_insert_display_ads($content) {
         $insertion = get_option("display_slot_{$i}_insertion", '');
         $pages     = get_option("display_slot_{$i}_pages", []);
         $devices   = get_option("display_slot_{$i}_devices", []);
-        $offset    = absint(get_option("display_slot_{$i}_offset", 0)); // N for paragraph/image
+        $offset    = absint(get_option("display_slot_{$i}_offset", 0));
+        $alignment = strtolower(trim((string) get_option("display_slot_{$i}_alignment", 'left')));
+ // N for paragraph/image
 
         // Basic checks
         if (!$enabled || !$network || empty($sizes) || empty($pages)) {
@@ -55,7 +57,7 @@ function adxbymonetiscope_insert_display_ads($content) {
         }
 
         // 3) Build dynamic ad HTML (network, sizes, div id, site host)
-        $ad_html = adxbymonetiscope_build_ad_html($network, $sizes, $i);
+        $ad_html = adxbymonetiscope_build_ad_html($network, $sizes, $i, $alignment);
 
         // 4) Apply insertion logic
         switch ($insertion) {
@@ -110,15 +112,34 @@ function adxbymonetiscope_insert_display_ads($content) {
  * - Div ID: last segment of the network code
  * - page_url: current site host
  */
-function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null) {
+function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $alignment = 'left') {
     $div_id       = adxbymonetiscope_extract_div_id($network);
     $js_sizes_str = adxbymonetiscope_sizes_js_array($sizes);
     $site_host    = parse_url(get_site_url(), PHP_URL_HOST);
+        // Normalize alignment
+    $alignment = in_array($alignment, ['left','center','right'], true) ? $alignment : 'left';
+
+    // Compute inline style based on alignment
+    // - left: default flow
+    // - center: shrink-to-content and center
+    // - right: shrink-to-content and push to the right
+    if ($alignment === 'center') {
+        $align_style = 'display:table;margin:12px auto; text-align:center;';
+    } elseif ($alignment === 'right') {
+        $align_style = 'display:table;margin-right:0 !important; width:fit-content; text-align:end;';
+    } else { // left
+        $align_style = 'margin-left: 0 !important;';
+    }
+
 
     ob_start();
     ?>
-    <div id="<?php echo esc_attr($div_id); ?>" class="adxbymonetiscope-display-slot" style="margin:12px 0;">
-        <p style="opacity : 50%">Display Advertisement <?php echo esc_html($slot_index !== null ? (int)$slot_index : '-'); ?></p>
+    <div id="<?php echo esc_attr($div_id); ?>" class="adxbymonetiscope-display-slot" style="<?php echo esc_attr($align_style); ?>">
+
+        <span aria-hidden="true" data-adx-debug="display-slot" style="opacity:0.5;display:block; font-size:10px;">
+            Display Advertisement <?php echo esc_html($slot_index !== null ? (int)$slot_index : '-'); ?>
+        </span>
+
         <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
         <script>
         window.googletag = window.googletag || {cmd: []};
