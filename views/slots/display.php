@@ -113,9 +113,10 @@ function adxbymonetiscope_insert_display_ads($content) {
  * - page_url: current site host
  */
 function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $alignment = 'left') {
-    $div_id       = adxbymonetiscope_extract_div_id($network);
-    $js_sizes_str = adxbymonetiscope_sizes_js_array($sizes);
-    $site_host    = parse_url(get_site_url(), PHP_URL_HOST);
+    $div_id         = adxbymonetiscope_extract_div_id( $network );
+    $js_sizes_value = adxbymonetiscope_sizes_js_value( $sizes ); // PHP value (array / 'fluid')
+    $site_host      = wp_parse_url( get_site_url(), PHP_URL_HOST );
+
         // Normalize alignment
     $alignment = in_array($alignment, ['left','center','right'], true) ? $alignment : 'left';
 
@@ -146,7 +147,7 @@ function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $a
         googletag.cmd.push(function() {
             googletag.defineSlot(
                 '<?php echo esc_js($network); ?>',
-                <?php echo $js_sizes_str; ?>,
+                <?php echo  wp_json_encode( $js_sizes_value ); ?>,
                 '<?php echo esc_js($div_id); ?>'
             ).addService(googletag.pubads());
             googletag.enableServices();
