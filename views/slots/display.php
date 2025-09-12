@@ -1,6 +1,16 @@
 <?php
 defined('ABSPATH') || exit;
 
+if ( ! defined('ADXB_MONETISCOPE_VERSION') ) {
+    define('ADXB_MONETISCOPE_VERSION', '1.0.0');
+}
+/**
+ * Render the Interstitial slot if enabled
+ */
+
+$gpt_ver = ADXB_MONETISCOPE_VERSION;
+
+
 /**
  * Keep existing hooks to avoid breaking, but do nothing here now.
  * We insert via the_content to support all 6 insertion types + offsets.
@@ -141,7 +151,7 @@ function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $a
             Display Advertisement <?php echo esc_html($slot_index !== null ? (int)$slot_index : '-'); ?>
         </span>
 
-        <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+      
         <script>
         window.googletag = window.googletag || {cmd: []};
         googletag.cmd.push(function() {
@@ -156,7 +166,26 @@ function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $a
         });
         </script>
     </div>
+    
     <?php
+    // Register + enqueue GPT script
+    wp_register_script(
+        'gpt',
+        'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
+        [],                // no deps
+        $gpt_ver,           // version (can use plugin constant too)
+        true               // load in footer
+    );
+
+    // Add async to GPT script
+    add_filter('script_loader_tag', function($tag, $handle) {
+        if ($handle === 'gpt' && strpos($tag, 'async') === false) {
+            $tag = str_replace(' src', ' async src', $tag);
+        }
+        return $tag;
+    }, 10, 2);
+
+    wp_enqueue_script('gpt');
     return ob_get_clean();
 }
 
@@ -304,7 +333,7 @@ function adxbymonetiscope_insert_ad_around_nth_tag($content, $tag, $offset, $pos
 
             // Normalize & test emptiness
             $decoded   = html_entity_decode($innerHtml, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-            $normalized = trim(preg_replace('/\x{00A0}/u', ' ', str_replace('&nbsp;', ' ', strip_tags($decoded)))); // replace NBSP + strip tags
+            $normalized = trim(preg_replace('/\x{00A0}/u', ' ', str_replace('&nbsp;', ' ', wp_strip_all_tags($decoded)))); // replace NBSP + strip tags
             if ($normalized === '') {
                 continue; // skip empty paragraph
             }
@@ -354,3 +383,22 @@ function adxbymonetiscope_insert_ad_around_nth_tag($content, $tag, $offset, $pos
     $after_pos = $insert_pos + strlen($tag_html);
     return substr($content, 0, $after_pos) . $ad_html . substr($content, $after_pos);
 }
+
+// Register + enqueue GPT script
+    wp_register_script(
+        'gpt',
+        'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
+        [],                // no deps
+        $gpt_ver,           // version (can use plugin constant too)
+        true               // load in footer
+    );
+
+    // Add async to GPT script
+    add_filter('script_loader_tag', function($tag, $handle) {
+        if ($handle === 'gpt' && strpos($tag, 'async') === false) {
+            $tag = str_replace(' src', ' async src', $tag);
+        }
+        return $tag;
+    }, 10, 2);
+
+    wp_enqueue_script('gpt');

@@ -177,7 +177,7 @@ add_action( 'wp_enqueue_scripts', 'adxbymonetiscope_flying_carpet_assets' );
  */
 function adxbymonetiscope_render_flying_carpet_slot() {
     // Echo the same markup used by content insertion
-    echo adxbymonetiscope_build_flying_carpet_html();
+    echo wp_kses_post(adxbymonetiscope_build_flying_carpet_html());
 }
 
 /**
@@ -383,7 +383,7 @@ function adxbymonetiscope_fcarpet_insert_ad_around_nth_tag( $content, $tag, $off
             $innerHtml = $matches[1][ $idx ][0];
 
             $decoded    = html_entity_decode( $innerHtml, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
-            $normalized = trim( preg_replace( '/\x{00A0}/u', ' ', str_replace( '&nbsp;', ' ', strip_tags( $decoded ) ) ) );
+            $normalized = trim( preg_replace( '/\x{00A0}/u', ' ', str_replace( '&nbsp;', ' ', wp_strip_all_tags( $decoded ) ) ) );
             if ( $normalized === '' ) continue;
 
             $valid[] = [

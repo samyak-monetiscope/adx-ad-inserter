@@ -24,8 +24,8 @@ function adx_render_offerwall_onscroll_slot() {
 
     echo '<script>
     (function() {
-        var logoUrl = ' . $js_logo_url . ';
-        var networkCode = ' . $js_network_code . ';
+        var logoUrl = ' . esc_js($js_logo_url ) . ';
+        var networkCode = ' . esc_js( $js_network_code ) . ';
 
         // 1. Inject CSS
         var style = document.createElement("style");

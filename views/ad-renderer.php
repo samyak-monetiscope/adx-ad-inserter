@@ -1,5 +1,9 @@
 <?php
 defined('ABSPATH') || exit;
+// Define plugin version constant
+if ( ! defined('ADXB_MONETISCOPE_VERSION') ) {
+    define('ADXB_MONETISCOPE_VERSION', '1.0.0');
+}
 
 // Level 2: Header & Footer renderers
 require_once __DIR__ . '/header-renderer.php';

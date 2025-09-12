@@ -1,18 +1,21 @@
-=== AdX Ad Inserter v3 by Monetiscope ===
-Contributors: samyakjain
-Tags: ads, google adsense, ad manager, popup ads, rewarded ads, monetization, custom scripts
+=== AdX Ad Inserter ===
+Contributors: monetiscope, samyakjain
+Donate link: https://monetiscope.com/
+Tags: ads, adsense, ad-manager, popup, monetization
 Requires at least: 5.0
-Tested up to: 6.5
+Tested up to: 6.8
 Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
+Revolutionize your website's monetization with advanced ad formats by Monetiscope. 
+
 == Description ==
 
-AdX Ad Inserter v3 is a modern ad management plugin designed for flexibility and performance. It allows publishers to insert ads such as Google AdSense, popup banners, rewarded video, and custom scripts in precise positions across the site.
+AdX Ad Inserter is a modern ad management plugin designed for flexibility and performance. It allows publishers to insert ads such as Google AdSense, popup banners, rewarded video, and custom scripts in precise positions across the site.
 
-Supports:
+**Supports:**
 - Google AdSense, Ad Manager (DFP)
 - Rewarded ads triggered by button/link click
 - Popup ads on delay, scroll, or condition
@@ -64,4 +67,3 @@ Yes, ads are loaded asynchronously and plugin UI is modular for performance.
 
 = 1.0.0 =
 Initial release of AdX Ad Inserter with all key monetization options.
-

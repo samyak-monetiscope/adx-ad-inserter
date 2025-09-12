@@ -29,13 +29,21 @@ function adxbymonetiscope_render_popup_slot() {
     $popup_option_js = wp_json_encode($popup_option);
 
     // Inline JS only; all CSS lives inside JS
-    wp_register_script('adxbymonetiscope_popup_script', false, [], null, true);
-    wp_enqueue_script('adxbymonetiscope_popup_script');
+    // ✅ Add a version to avoid PHPCS warning & browser cache issues
+    $inline_handle = 'adxbymonetiscope_popup_script';
+    $inline_ver    = defined('ADXB_MONETISCOPE_VERSION')
+        ? ADXB_MONETISCOPE_VERSION
+        : (string) @filemtime(__FILE__); // fallback cache-buster
 
-    $js = <<<JS
+    wp_register_script($inline_handle, false, [], $inline_ver, true);
+    wp_enqueue_script($inline_handle);
+
+    // Build the JS without heredoc (PHPCS compliant)
+    ob_start();
+    ?>
 (function () {
   try {
-    var POPUP_OPTION = {$popup_option_js}; // "ONCE_PER_SESSION" | "ONCE_PER_PAGE"
+    var POPUP_OPTION = <?php echo esc_js($popup_option_js); ?>; // "ONCE_PER_SESSION" | "ONCE_PER_PAGE"
     var SESSION_KEY  = "adxbymonetiscopePopupShown";
     var SHOW_ONCE_PER_SESSION = (POPUP_OPTION === "ONCE_PER_SESSION");
 
@@ -92,46 +100,36 @@ function adxbymonetiscope_render_popup_slot() {
     document.body.appendChild(wrap);
 
     // -----------------------------
-    // GPT load + safe init (FIX)
+    // GPT load + safe init
     // -----------------------------
-    // 1) Always define googletag placeholder BEFORE any use
     window.googletag = window.googletag || { cmd: [] };
-
     var gptLoaded = false, adRequested = false, adSlotRef = null;
 
-    // 2) Load gpt.js
     var gpt = document.createElement("script");
     gpt.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
     gpt.async = true;
     gpt.onload = function () {
       gptLoaded = true;
-
-      // 3) All GPT calls inside cmd.push (safe even if script loads slightly later)
       googletag.cmd.push(function () {
         try {
           adSlotRef = googletag
-            .defineSlot({$network_code_js}, [[300,250],[336,280],[300,280],[250,250],[200,200]], SLOT_ID)
+            .defineSlot(<?php echo esc_js($network_code_js); ?>, [[300,250],[336,280],[300,280],[250,250],[200,200]], SLOT_ID)
             .addService(googletag.pubads());
 
           googletag.pubads().set("page_url", window.location.href);
 
           googletag.pubads().addEventListener("slotRenderEnded", function (evt) {
             if (evt.slot !== adSlotRef) return;
-            // If empty, close overlay; if filled, keep visible
             if (evt.isEmpty) wrap.style.display = "none";
           });
 
           googletag.enableServices();
         } catch (e) {
-          // If GPT throws, keep UI silent
           console && console.warn && console.warn("GPT init error", e);
         }
       });
     };
-    gpt.onerror = function () {
-      // Fail quietly if GPT can’t load (prevents ReferenceErrors)
-      gptLoaded = false;
-    };
+    gpt.onerror = function () { gptLoaded = false; };
     document.head.appendChild(gpt);
 
     // -----------------------------
@@ -152,7 +150,6 @@ function adxbymonetiscope_render_popup_slot() {
       adRequested = true;
       wrap.style.display = "flex";
 
-      // Display via cmd queue (works before/after gpt loaded)
       window.googletag.cmd.push(function () {
         try { googletag.display(SLOT_ID); } catch(_) {}
       });
@@ -164,13 +161,13 @@ function adxbymonetiscope_render_popup_slot() {
     function onScroll() { if (scrolledHalf()) showOnce(); }
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // Close button
     close.addEventListener("click", function () { wrap.style.display = "none"; });
   } catch (err) {
     console && console.warn && console.warn("Monetiscope popup error:", err);
   }
 })();
-JS;
+<?php
+    $js = ob_get_clean();
 
-    wp_add_inline_script('adxbymonetiscope_popup_script', $js);
+    wp_add_inline_script($inline_handle, $js);
 }
