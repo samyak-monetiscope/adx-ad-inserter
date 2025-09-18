@@ -59,7 +59,7 @@ function adxbymonetiscope_render_popup_slot() {
     var inner = document.createElement("div");
     inner.style.cssText = [
       "position:relative","min-width:fit-content","min-height:200px","background:transparent",
-      "border-radius:2px","box-shadow:0 10px 20px rgba(128,128,128,0.65)",
+      "border-radius:2px",
       "display:flex","flex-direction:column","justify-content:center","padding:0"
     ].join(";");
 
