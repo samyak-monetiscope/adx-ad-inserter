@@ -1,5 +1,9 @@
 <?php
 defined('ABSPATH') || exit;
+if ( ! defined('POPUP_GPT_VERSION') ) {
+    define('POPUP_GPT_VERSION', '1.0.0');
+}
+
 
 /**
  * Popup Ad slot
@@ -29,7 +33,7 @@ function adxbymonetiscope_render_popup_slot() {
     $popup_option_js = wp_json_encode($popup_option);
 
     // Register placeholder script (version added for cache busting)
-    wp_register_script('adxbymonetiscope_popup_script', false, [], ADXB_MONETISCOPE_VERSION, true);
+    wp_register_script('adxbymonetiscope_popup_script', false, [], POPUP_GPT_VERSION, true);
     wp_enqueue_script('adxbymonetiscope_popup_script');
 
     // Build inline JS without heredoc
