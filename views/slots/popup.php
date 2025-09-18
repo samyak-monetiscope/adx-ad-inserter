@@ -75,7 +75,7 @@ function adxbymonetiscope_render_popup_slot() {
     close.setAttribute("aria-label","Close ad");
     close.textContent = "×";
     close.style.cssText = [
-      "position:absolute","top:-1.2rem","right:-0.5rem",
+      
       "display:flex","justify-content:center","align-items:center",
       "width:20px","height:20px","background:#000","color:#fff","border:1px solid #000",
       "cursor:pointer","font-weight:700","line-height:20px","padding:0","border-radius:2px"
@@ -86,6 +86,7 @@ function adxbymonetiscope_render_popup_slot() {
     slot.style.cssText = ["width:fit-content","padding:0","border-radius:2px","overflow:hidden"].join(";");
 
     var myUpperDiv = document.createElement("div");
+    myUpperDiv.style.cssText = ["display:flex","justify-content:space-between","align-items:end"].join(";");
     myUpperDiv.appendChild(brand);
     myUpperDiv.appendChild(close);
 
