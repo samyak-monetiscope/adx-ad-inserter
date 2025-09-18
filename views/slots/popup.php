@@ -37,7 +37,7 @@ function adxbymonetiscope_render_popup_slot() {
     ?>
 (function () {
   try {
-    var POPUP_OPTION = <?php echo $popup_option_js; ?>; // "ONCE_PER_SESSION" | "ONCE_PER_PAGE"
+    var POPUP_OPTION = <?php echo esc_js($popup_option_js); ?>; // "ONCE_PER_SESSION" | "ONCE_PER_PAGE"
     var SESSION_KEY  = "adxbymonetiscopePopupShown";
     var SHOW_ONCE_PER_SESSION = (POPUP_OPTION === "ONCE_PER_SESSION");
 
@@ -105,7 +105,7 @@ function adxbymonetiscope_render_popup_slot() {
       googletag.cmd.push(function () {
         try {
           adSlotRef = googletag
-            .defineSlot(<?php echo $network_code_js; ?>, [[300,250],[336,280],[300,280],[250,250],[200,200]], SLOT_ID)
+            .defineSlot(<?php echo esc_js($network_code_js); ?>, [[300,250],[336,280],[300,280],[250,250],[200,200]], SLOT_ID)
             .addService(googletag.pubads());
 
           googletag.pubads().set("page_url", window.location.href);
