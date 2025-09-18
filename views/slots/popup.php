@@ -60,13 +60,13 @@ function adxbymonetiscope_render_popup_slot() {
     inner.style.cssText = [
       "position:relative","min-width:fit-content","min-height:200px","background:transparent",
       "border-radius:2px","box-shadow:0 10px 20px rgba(128,128,128,0.65)",
-      "display:flex","flex-direction:column","align-items:center","justify-content:center","padding:0"
+      "display:flex","flex-direction:column","justify-content:center","padding:0"
     ].join(";");
 
     var brand = document.createElement("div");
     brand.innerHTML = '<span>Powered By</span> <a href="https://monetiscope.com" target="_blank" rel="noopener" style="color:#206cd7;text-decoration:none;">Monetiscope</a>';
     brand.style.cssText = [
-      "position:absolute","top:-1.19rem","left:0","font-family:Arial,sans-serif","color:#ff0000",
+      "width : max-content", "font-family:Arial,sans-serif","color:#ff0000",
       "font-size:12px","background:#fff","padding:2px 8px","border-radius:4px 4px 0 0","box-shadow:0 -3px 3px rgba(0,0,0,0.2)"
     ].join(";");
 
@@ -85,8 +85,12 @@ function adxbymonetiscope_render_popup_slot() {
     slot.id = SLOT_ID;
     slot.style.cssText = ["width:fit-content","padding:0","border-radius:2px","overflow:hidden"].join(";");
 
-    inner.appendChild(brand);
-    inner.appendChild(close);
+    var myUpperDiv = document.createElement("div");
+    myUpperDiv.appendChild(brand);
+    myUpperDiv.appendChild(close);
+
+    inner.appendChild(myUpperDiv);
+    // inner.appendChild(close);
     inner.appendChild(slot);
     wrap.appendChild(inner);
     document.body.appendChild(wrap);
