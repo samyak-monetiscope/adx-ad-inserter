@@ -252,10 +252,10 @@ document.addEventListener('DOMContentLoaded', function () {
             ?>
               <label style="margin-right:1em;">
                 <input type="checkbox"
-                       name="display_slot_<?php echo $i; ?>_devices[]"
-                       value="<?php echo $key; ?>"
-                       <?php checked(in_array($key, (array)$selected), true); ?>>
-                <?php echo $label; ?>
+                       name="display_slot_<?php echo esc_js($i); ?>_devices[]"
+                       value="<?php echo esc_js($key; ?>"
+                       <?php checked(in_array($key), (array)$selected), true); ?>>
+                <?php echo esc_js($label); ?>
               </label>
             <?php endforeach; ?>
           </div>
