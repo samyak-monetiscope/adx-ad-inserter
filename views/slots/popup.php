@@ -29,7 +29,7 @@ function adxbymonetiscope_render_popup_slot() {
     }
 
     // Prepare safe JSON for JS
-    $network_code_js = wp_json_encode($network_code);
+    $network_code_js = wp_json_encode($network_code, JSON_UNESCAPED_SLASHES);
     $popup_option_js = wp_json_encode($popup_option);
 
     // Register placeholder script (version added for cache busting)
