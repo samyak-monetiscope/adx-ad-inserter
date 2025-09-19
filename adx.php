@@ -4,7 +4,7 @@
  * Plugin URI: https://monetiscope.com/adx-ad-inserter-plugin/
  * Description: Revolutionize your website's monetization with advanced ad formats by Monetiscope. Enable rewarded ads, pop-ups, floater ads, sticky ads, and more in one click.
  * Author: Monetiscope
- * Version: 0.2.0
+ * Version: 1.0.0
  * Author URI: http://monetiscope.com
  * Requires at least: 5.0
  * Tested up to: 6.5
