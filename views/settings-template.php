@@ -87,7 +87,8 @@ function adx_v4_settings_page() {
 
         <div class="head banner" style="position: relative; left: -20px;">
           <a href="https://monetiscope.com/contact/" target="_blank" rel="noopener noreferrer">
-            <img src="https://i.postimg.cc/GpsGRqZt/Ad-X-Ad-Insertor-Banner-Ad.jpg" alt="banner" class="rounded-md hover:rounded-none hover:shadow-lg duration-200">
+            
+            <img src="<?php echo esc_url( plugins_url( 'img/banner2.jpg', dirname(__FILE__) ) ); ?>" alt="Website" class="rounded-md hover:rounded-none hover:shadow-lg duration-200">
           </a>
         </div>
 
@@ -171,26 +172,31 @@ function adx_v4_settings_page() {
         <div class="links">
           <h3 class="mb-0" style="margin-bottom: 0;">Connect to Us</h3>
           <div class="social-icons grid grid-cols-3 gap-4">
+
             <a href="https://monetiscope.com/adx-ad-inserter-plugin/" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
-              <img src="https://cdn-icons-png.flaticon.com/512/74/74842.png" alt="Website">
+              <img src="<?php echo esc_url( plugins_url( 'img/website2.png', dirname(__FILE__) ) ); ?>" alt="Website">
             </a>
 
             <a href="https://www.linkedin.com/company/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
-              <img src="https://cdn-icons-png.flaticon.com/512/3128/3128219.png" alt="LinkedIn">
+              <img src="<?php echo esc_url( plugins_url( 'img/linkedin2.png', dirname(__FILE__) ) ); ?>" alt="LinkedIn">
             </a>
 
             <a href="https://x.com/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
-              <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" alt="Twitter">
+              <img src="<?php echo esc_url( plugins_url( 'img/x2.png', dirname(__FILE__) ) ); ?>" alt="Twitter / X">
             </a>
+
             <a href="mailto:support@monetiscope.com" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
-              <img src="https://cdn-icons-png.flaticon.com/128/646/646094.png" alt="Email">
+              <img src="<?php echo esc_url( plugins_url( 'img/email2.png', dirname(__FILE__) ) ); ?>" alt="Email">
             </a>
+
             <a href="https://www.youtube.com/@monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
-              <img src="https://cdn-icons-png.flaticon.com/128/1384/1384028.png" alt="YouTube">
+              <img src="<?php echo esc_url( plugins_url( 'img/youtube2.png', dirname(__FILE__) ) ); ?>" alt="YouTube">
             </a>
+
             <a href="https://www.facebook.com/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
-              <img src="https://cdn-icons-png.flaticon.com/128/2175/2175193.png" alt="Facebook">
+              <img src="<?php echo esc_url( plugins_url( 'img/facebook2.png', dirname(__FILE__) ) ); ?>" alt="Facebook">
             </a>
+
           </div>
         </div>
       </aside>
