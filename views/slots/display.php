@@ -1,6 +1,11 @@
 <?php
 defined('ABSPATH') || exit;
 
+if ( ! defined('DISPLAY_GPT_VERSION') ) {
+    define('DISPLAY_GPT_VERSION', '1.0.0');
+}
+
+
 /**
  * Keep existing hooks to avoid breaking, but do nothing here now.
  * We insert via the_content to support all 6 insertion types + offsets.
@@ -115,7 +120,7 @@ function adxbymonetiscope_insert_display_ads($content) {
 function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $alignment = 'left') {
     $div_id       = adxbymonetiscope_extract_div_id($network);
     $js_sizes_str = adxbymonetiscope_sizes_js_array($sizes);
-    $site_host    = parse_url(get_site_url(), PHP_URL_HOST);
+    $site_host    = wp_parse_url(get_site_url(), PHP_URL_HOST);
         // Normalize alignment
     $alignment = in_array($alignment, ['left','center','right'], true) ? $alignment : 'left';
 
@@ -130,7 +135,14 @@ function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $a
     } else { // left
         $align_style = 'margin-left: 0 !important;';
     }
-
+    wp_register_script(
+        'gpt',
+        'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
+        array(),
+        DISPLAY_GPT_VERSION,   // let Google manage caching
+        true    // footer
+    );
+    wp_enqueue_script('gpt');
 
     ob_start();
     ?>
@@ -140,13 +152,13 @@ function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $a
             Display Advertisement <?php echo esc_html($slot_index !== null ? (int)$slot_index : '-'); ?>
         </span>
 
-        <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+        
         <script>
         window.googletag = window.googletag || {cmd: []};
         googletag.cmd.push(function() {
             googletag.defineSlot(
                 '<?php echo esc_js($network); ?>',
-                <?php echo $js_sizes_str; ?>,
+                <?php echo esc_js($js_sizes_str); ?>,
                 '<?php echo esc_js($div_id); ?>'
             ).addService(googletag.pubads());
             googletag.enableServices();
@@ -303,7 +315,7 @@ function adxbymonetiscope_insert_ad_around_nth_tag($content, $tag, $offset, $pos
 
             // Normalize & test emptiness
             $decoded   = html_entity_decode($innerHtml, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-            $normalized = trim(preg_replace('/\x{00A0}/u', ' ', str_replace('&nbsp;', ' ', strip_tags($decoded)))); // replace NBSP + strip tags
+            $normalized = trim(preg_replace('/\x{00A0}/u', ' ', str_replace('&nbsp;', ' ', wp_strip_all_tags($decoded)))); // replace NBSP + strip tags
             if ($normalized === '') {
                 continue; // skip empty paragraph
             }
