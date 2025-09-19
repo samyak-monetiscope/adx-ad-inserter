@@ -13,6 +13,15 @@ if ( ! defined('DISPLAY_GPT_VERSION') ) {
 add_action('wp_head', 'adxbymonetiscope_render_display_slot_head');
 add_action('wp_footer', 'adxbymonetiscope_render_display_slot_footer');
 
+wp_register_script(
+    'gpt',
+    'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
+    array(),
+    DISPLAY_GPT_VERSION,   // let Google manage caching
+    true    // footer
+);
+wp_enqueue_script('gpt');
+
 function adxbymonetiscope_render_display_slot_head() {
     // Intentionally no-op. Insertion now handled in the_content.
     return;
@@ -135,14 +144,7 @@ function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $a
     } else { // left
         $align_style = 'margin-left: 0 !important;';
     }
-    wp_register_script(
-        'gpt',
-        'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
-        array(),
-        DISPLAY_GPT_VERSION,   // let Google manage caching
-        true    // footer
-    );
-    wp_enqueue_script('gpt');
+    
 
     ob_start();
     ?>
