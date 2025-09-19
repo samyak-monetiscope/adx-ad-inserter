@@ -18,17 +18,12 @@
             return;
         }
 
-        // ✅ Secure escaping for JS output
-        $clean_logo_url  = esc_url_raw( $logo_url );
-        $clean_ad_path   = trim( (string) $network_code );
 
-        $js_logo_url     = wp_json_encode( $clean_logo_url );   // => "https://example.com/logo.png"
-        $js_network_code = wp_json_encode( $clean_ad_path ); 
+        
 
         echo '<script>
         (function() {
-            var logoUrl = ' . $js_logo_url . ';
-            var networkCode = ' . $js_network_code . ';
+            
 
             // 1. Inject CSS
             var style = document.createElement("style");
@@ -107,7 +102,7 @@
             var notificationBar = document.createElement("div");
             notificationBar.id = "notification-bar";
             notificationBar.innerHTML = `
-                <img id="publisher-logo" src="${logoUrl}" alt="Publisher Logo">
+                <img id="publisher-logo" src="${' . wp_json_encode ($logo_url) . '}" alt="Publisher Logo">
                 <h2>Unlock more content</h2>
                 <p>Take action to continue accessing the content on this site</p>
                 <button class="notification-button">
@@ -155,7 +150,7 @@
                 window.googletag = window.googletag || {cmd:[]};
                 googletag.cmd.push(function() {
                     var slot = googletag.defineOutOfPageSlot(
-                        networkCode,
+                        ' .  wp_json_encode( $network_code ) . ',
                         googletag.enums.OutOfPageFormat.REWARDED
                     ).addService(googletag.pubads());
 
