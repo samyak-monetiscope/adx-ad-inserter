@@ -103,13 +103,9 @@ Yes, AdX Ad Inserter is completely free. There are no hidden charges.
 
 == Screenshots ==
 
-1. Plugin dashboard with all ad slots  
+1. Display Ad with multiple sub slots  
 2. Popup ad preview  
-3. Anchor ad option in interface (Top/bottom)  
-4. In-content ad before Nth paragraph  
-5. Header/Footer script editor interface  
-6. Offerwall/Rewarded ad feature in dashboard  
-7. ads.txt editor interface  
+3. Custom Ad slot preview.
 
 == Changelog ==
 
