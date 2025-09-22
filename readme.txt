@@ -1,5 +1,5 @@
 === AdX Ad Inserter ===
-Contributors: monetiscope, samyakjain
+Contributors: monetiscopeadx
 Donate link: https://monetiscope.com/
 Tags: ads, adsense, ad-manager, popup, ads.txt
 Requires at least: 5.0

@@ -11,6 +11,7 @@
  * Requires PHP: 7.4
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Developer : Samyak Jain (samyak.jn2431@gmail.com)
  */
 
 defined( 'ABSPATH' ) || exit;
