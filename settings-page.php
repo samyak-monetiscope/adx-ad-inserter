@@ -58,13 +58,13 @@ function adx_v4_register_settings() {
     register_setting('adx_v4_settings',  "flying_devices",     ['sanitize_callback' => 'adx_v4_sanitize_option']);
     // Now register these 2 options with custom/no sanitization
     register_setting('adx_v4_settings', 'custom_header_code', [
-        'sanitize_callback' => null // or your custom callback
+        'sanitize_callback' => "wp_kses_post" // or your custom callback
     ]);
     register_setting('adx_v4_settings', 'custom_footer_code', [
-        'sanitize_callback' => null // or your custom callback
+        'sanitize_callback' => 'wp_kses_post' // or your custom callback
     ]);
     register_setting('adx_v4_settings', 'custom_ads_txt', [
-        'sanitize_callback' => null // or your custom callback
+        'sanitize_callback' => 'sanitize_textarea_field' // or your custom callback
     ]);
 
 
