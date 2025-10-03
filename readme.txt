@@ -100,6 +100,19 @@ Yes. There is a global enable/disable switch that controls whether ads render at
 
 = Is it free to use? =  
 Yes, AdX Ad Inserter is completely free. There are no hidden charges.
+== External Services ==
+
+This plugin loads the following third-party script:
+
+1) Google Publisher Tag (GPT.js)
+- Service: Google Ad Manager (Google Publisher Tag)
+- Purpose: Requests and renders ad slots configured in the plugin.
+- When it loads: On pages where ad slots are enabled via the plugin’s settings.
+- URL: https://securepubads.g.doubleclick.net/tag/js/gpt.js
+- Data sent/received: The script communicates with Google’s ad servers. It may transmit the page URL, referrer, device/user agent, ad unit identifiers, ad sizes, and any targeting parameters configured in the plugin. Google may set or read cookies/local storage to deliver, measure, and limit ads.
+- Terms: https://policies.google.com/terms
+- Privacy Policy: https://policies.google.com/privacy
+
 
 == Screenshots ==
 
