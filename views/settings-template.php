@@ -42,14 +42,7 @@ function adx_v4_settings_page() {
         'settings-interstitial.php',
         'settings-custom.php',
     ];
-    wp_register_script(
-        'tailwind',
-        'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4',
-        array(),
-        '4.0.0',   // let Google manage caching
-        true    // footer
-    );
-    wp_enqueue_script('tailwind');
+    
 ?>
 <div class="wrap">
   <style>

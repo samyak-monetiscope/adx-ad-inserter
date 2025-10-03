@@ -198,7 +198,36 @@ add_action('admin_enqueue_scripts', function($hook) {
         '1.2.0',
         true
     );
+    wp_enqueue_script(
+        'monetiscope-tailwind-js',
+        plugin_dir_url(__FILE__) . './views/tailwind.css',
+        [],
+        '4.0.0',
+        
+    );
 });
+// add_action('admin_enqueue_scripts', 'adxbymonetiscope_enqueue_admin_assets');
+// function adxbymonetiscope_enqueue_admin_assets( $hook_suffix ) {
+//     // Load only on your plugin settings page (adjust slug if different)
+//     if ( ! ( isset($_GET['page']) && $_GET['page'] === 'adx_v4_settings' ) ) {
+//         return;
+//     }
+
+//     $rel_path = './css/tailwind.css'; // compiled local file
+//     $url = plugins_url( $rel_path, __FILE__ );
+//     $ver = file_exists( plugin_dir_path(__FILE__) . $rel_path )
+//         ? filemtime( plugin_dir_path(__FILE__) . $rel_path )
+//         : false;
+
+//     wp_register_style(
+//         'adxbymonetiscope-tailwind',
+//         $url,
+//         [],
+//         $ver
+//     );
+//     wp_enqueue_style('adxbymonetiscope-tailwind');
+// }
+
 
 
 /* -------------------------------------------------- */

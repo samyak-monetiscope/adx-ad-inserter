@@ -1,0 +1,32 @@
+# === Node / Tailwind build junk ===
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn.lock
+.pnp.*
+.pnp.js
+.cache/
+dist/
+build/
+
+# === OS / Editor files ===
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.log
+
+# === VS Code / IDE ===
+.vscode/
+.idea/
+
+# === WordPress plugin build ===
+# We want to ship only compiled CSS (css/tailwind.css),
+# not source or lock files. But if you want to keep src
+# in repo, remove the ignore rule for /css/src.
+css/src/
+!css/tailwind.css
+
+# === Other ===
+*.bak
+*.tmp
