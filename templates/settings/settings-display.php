@@ -1,91 +1,6 @@
 <!-- settings-display -->
  <?php defined('ABSPATH') || exit; ?>
 
-<style>
-  .display-tabs {
-      display: flex;
-    position: relative;
-    gap: 10px;
-    z-index: 10;
-    justify-content: space-between;
-  }
-
-  .display-tab {
-    border: 1px solid #ccc;
-    padding: 5px 12px;
-    border-radius: 4px 4px 0 0;
-    cursor: pointer;
-    background: #f4f4f4;
-    font-weight: bold;
-    color: #444;
-    font-size: 14px;
-    width: 100%;
-  }
-
-  .display-tab.active {
-    background: #fff;
-    border-bottom: 2px solid white;
-    color: red;
-  }
-
-  .display-tab-contents {
-     border: 1px solid #ccc;
-    position: relative;
-    padding: 0;
-    top: -1px;
-    z-index: 0;
-  }
-
-  .display-content {
-    display: none;
-    padding: 16px;
-    background: #fff;
-  }
-
-  .display-content.active {
-    display: block;
-  }
-
-  .form-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px 20px;
-    margin: 14px 0;
-  }
-
-  .form-inline {
-    display: flex;
-    gap: 40px;
-    margin: 18px 0;
-    align-items: center;
-    justify-content: space-between;
-  }
-  h2 {
-    margin-top : 0;
-  }
-  .sub-slot-block {
-    padding: 5px 0 25px;
-  }
-  .tab-green { color: green !important;  }
-  .tab-red   { color: red !important; }
-  .tab-grey  { color: #595959ff !important; }
-</style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const tabs = document.querySelectorAll('.display-tab');
-  const contents = document.querySelectorAll('.display-content');
-  tabs.forEach((tab, idx) => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      contents.forEach(c => c.classList.remove('active'));
-      tab.classList.add('active');
-      contents[idx].classList.add('active');
-    });
-  });
-  if (tabs.length > 0) { tabs[0].click(); }
-});
-</script>
 
 <div id="tab-display-slot" class="tab-content adx-tab hidden">
   <h2 class="tab-title">Display Slots</h2>
@@ -264,19 +179,5 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
     <?php endfor; ?>
   </div>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('[id^="display_slot_"][id$="_insertion"]').forEach(select => {
-        select.addEventListener('change', e => {
-          const idx = e.target.id.match(/\d+/)[0];
-          const wrapper = document.getElementById(`display_slot_${idx}_offset`).closest('.offset-wrapper');
-          if (['before_paragraph','after_paragraph','before_image','after_image'].includes(e.target.value)) {
-            wrapper.style.display = '';
-          } else {
-            wrapper.style.display = 'none';
-          }
-        });
-      });
-    });
-  </script>
+
 </div>

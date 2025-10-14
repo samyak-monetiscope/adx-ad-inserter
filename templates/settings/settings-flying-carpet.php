@@ -135,21 +135,5 @@ $needs_offset = in_array($flying_insertion, ['before_paragraph','after_paragraph
     <?php endforeach; ?>
   </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const insertion = document.getElementById('flying_insertion');
-      const offsetWrap = document.getElementById('flying-offset-wrapper');
 
-      function toggleOffset() {
-        if (['before_paragraph','after_paragraph','before_image','after_image'].includes(insertion.value)) {
-          offsetWrap.style.display = '';
-        } else {
-          offsetWrap.style.display = 'none';
-        }
-      }
-
-      insertion.addEventListener('change', toggleOffset);
-      toggleOffset(); // initial state
-    });
-  </script>
 </div>

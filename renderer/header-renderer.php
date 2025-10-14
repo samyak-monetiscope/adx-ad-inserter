@@ -2,13 +2,13 @@
 defined( 'ABSPATH' ) || exit;
 
 // Flying Carpet slot
-require_once __DIR__ . '/slots/flying-carpet.php';
+require_once ADXMS_DIR . '/views/slots/flying-carpet.php';
 
 // Anchor slot
-require_once __DIR__ . '/slots/anchor.php';
+require_once ADXMS_DIR . '/views/slots/anchor.php';
 
 // Custom slot (both header & footer functions live here)
-require_once __DIR__ . '/slots/custom.php';
+require_once ADXMS_DIR . '/views/slots/custom.php';
 
 /**
  * Output header‐going ads

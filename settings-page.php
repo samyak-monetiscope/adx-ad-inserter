@@ -186,14 +186,14 @@ add_action('admin_enqueue_scripts', function($hook) {
 
     wp_enqueue_style(
         'monetiscope-admin-css',
-        plugin_dir_url(__FILE__) . './views/index.css',
+        plugin_dir_url(__FILE__) . './templates/template.css',
         [],
         '1.2.0'
     );
 
     wp_enqueue_script(
         'monetiscope-admin-js',
-        plugin_dir_url(__FILE__) . './js/admin-scripts.js',
+        plugin_dir_url(__FILE__) . './templates/template.js',
         [],
         '1.2.0',
         true
@@ -233,4 +233,4 @@ add_action('admin_enqueue_scripts', function($hook) {
 /* -------------------------------------------------- */
 /* 4 – Load Main Settings Template (UI)               */
 /* -------------------------------------------------- */
-require_once plugin_dir_path(__FILE__) . './views/settings-template.php';
+require_once plugin_dir_path(__FILE__) . './templates/settings-template.php';

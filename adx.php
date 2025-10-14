@@ -15,20 +15,17 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+define( 'ADXMS_FILE', __FILE__ );
+define( 'ADXMS_DIR', plugin_dir_path( __FILE__ ) );
+define( 'ADXMS_URL', plugin_dir_url( __FILE__ ) );
 
-// 1. Settings registration & UI
-require_once plugin_dir_path( __FILE__ ) . 'settings-page.php';
-// 2. Settings-template is loaded by settings-page.php
 
-// 3. Renderers (always loaded, but we’ll hook conditionally)
-require_once plugin_dir_path( __FILE__ ) . 'views/header-renderer.php';
-require_once plugin_dir_path( __FILE__ ) . 'views/footer-renderer.php';
+//Settings registration & UI
+require_once ADXMS_DIR . 'settings-page.php';
 
-// 4. Conditional hooks based on global toggle
-if ( get_option('adx_enabled','false') === 'true' ) {
-    add_action( 'wp_head',   'adx_v4_render_header_ads' );
-    add_action( 'wp_footer', 'adx_v4_render_footer_ads' );
-}
+//Renderers (always loaded, but we’ll hook conditionally)
+require_once ADXMS_DIR . '/ad-renderer.php';
+
 
 // 5. Add "Settings" link on the Plugins page
 add_filter(

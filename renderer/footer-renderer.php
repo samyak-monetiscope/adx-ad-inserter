@@ -2,17 +2,18 @@
 defined('ABSPATH') || exit;
 
 // existing footer slots
-require_once __DIR__ . '/slots/popup.php';
-require_once __DIR__ . '/slots/button-rewarded.php';
-require_once __DIR__ . '/slots/bottom-sticky.php';
-require_once __DIR__ . '/slots/side-floater.php';
-require_once __DIR__ . '/slots/reward-on-scroll.php';
-require_once __DIR__ . '/slots/offerwall-onscroll.php';
-require_once __DIR__ . '/slots/interstitial.php';  
-require_once __DIR__ . '/slots/coupon-rewarded.php';
-require_once __DIR__ . '/slots/display.php';
-require_once __DIR__ . '/slots/custom.php';
-require_once __DIR__ . '/slots/flying-carpet.php';
+require_once ADXMS_DIR . '/views/slots/popup.php';
+require_once ADXMS_DIR . '/views/slots/button-rewarded.php';
+require_once ADXMS_DIR . '/views/slots/bottom-sticky.php';
+require_once ADXMS_DIR . '/views/slots/side-floater.php';
+require_once ADXMS_DIR . '/views/slots/reward-on-scroll.php';
+require_once ADXMS_DIR . '/views/slots/offerwall-onscroll.php';
+require_once ADXMS_DIR . '/views/slots/interstitial.php';  
+require_once ADXMS_DIR . '/views/slots/coupon-rewarded.php';
+require_once ADXMS_DIR . '/views/slots/display.php';
+require_once ADXMS_DIR . '/views/slots/custom.php';
+require_once ADXMS_DIR . '/views/slots/flying-carpet.php';
+
 
 /**
  * Fire all footer‐going ad slots
