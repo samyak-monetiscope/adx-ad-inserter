@@ -1,0 +1,48 @@
+.adxms-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+}
+
+.adxms-popup-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 9999;
+}
+
+.adxms-popup-buttons button {
+  margin: 5px;
+  padding: 7px 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.adxms-btn-go {
+  background: #007bff;
+  color: #fff;
+}
+
+.adxms-btn-stop {
+  background: #dc3545;
+  color: #fff;
+}
+
+.adxms-popup-credit {
+  font-size: 12px;
+  color: red;
+  margin-top: 10px;
+}
+
+.adxms-popup-credit a {
+  color: blue;
+  text-decoration: none;
+}

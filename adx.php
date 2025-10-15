@@ -19,6 +19,7 @@ define( 'ADXMS_FILE', __FILE__ );
 define( 'ADXMS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ADXMS_URL', plugin_dir_url( __FILE__ ) );
 define( 'ADXMS_JS_VERSION', '1.0.0' );  // for your plugin files
+define( 'ADXMS_CSS_VERSION', '1.0.0' );  // for your plugin files
 define( 'ADXMS_GPT_VERSION', '1.0.0' );  // for Google GPT script
 
 
