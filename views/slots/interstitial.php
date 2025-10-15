@@ -1,64 +1,51 @@
 <?php
-defined( 'ABSPATH' ) || exit;
-if ( ! defined('INTERSTITIAL_GPT_VERSION') ) {
-    define('INTERSTITIAL_GPT_VERSION', '1.0.0');
-}
+defined('ABSPATH') || exit;
 
-/**
- * Render the Interstitial slot if enabled
- */
+if ( ! function_exists('adx_render_interstitial_slot') ) :
 function adx_render_interstitial_slot() {
-    $enabled      = get_option( 'interstitial_enabled' ) === 'true';
-    $network_code = trim( get_option( 'interstitial_network_code' ) );
+    $enabled      = (get_option('interstitial_enabled') === 'true');
+    $network_code = trim( (string) get_option('interstitial_network_code') );
 
     if ( ! $enabled || ! $network_code ) {
         return;
     }
 
-    // ---- 1) Register & enqueue GPT ----
+    // 1) Enqueue Google GPT (same as your anchor slot)
     wp_register_script(
-        'gpt',
+        'adxbmon-gpt',
         'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
         array(),
-        INTERSTITIAL_GPT_VERSION,   // let Google manage caching
-        true    // footer
+        ADXMS_GPT_VERSION,
+        true
     );
-    wp_enqueue_script('gpt');
+    wp_enqueue_script('adxbmon-gpt');
 
-    // ---- 2) Ensure async ----
-    add_filter(
-        'script_loader_tag',
-        function( $tag, $handle ) {
-            if ( $handle === 'gpt' && strpos( $tag, ' async' ) === false ) {
-                $tag = str_replace( ' src', ' async src', $tag );
-            }
-            return $tag;
-        },
-        10,
-        2
-    );
+    // 1a) Force async loading
+    add_filter('script_loader_tag', function($tag, $handle) {
+        if ($handle === 'adxbmon-gpt' && strpos($tag, ' async') === false) {
+            $tag = str_replace(' src', ' async src', $tag);
+        }
+        return $tag;
+    }, 10, 2);
 
-    // ---- 3) Escape value for JS ----
-    $network_code_js = wp_json_encode( $network_code ); // safe quoted string
+    // 2) Build JS path (like your anchor.php)
+    $interstitial_js_url = trailingslashit(ADXMS_URL) . 'views/js/interstitial.js';
 
-    // ---- 4) Build inline JS ----
-    $js_lines = array(
-        '(function(){',
-        '  window.googletag = window.googletag || {cmd: []};',
-        '  googletag.cmd.push(function() {',
-        '    var slot = googletag.defineOutOfPageSlot(' . $network_code_js . ', googletag.enums.OutOfPageFormat.INTERSTITIAL);',
-        '    if (slot) {',
-        '      slot.addService(googletag.pubads());',
-        '      googletag.pubads().enableSingleRequest();',
-        '      googletag.enableServices();',
-        '      googletag.display(slot);',
-        '    }',
-        '  });',
-        '})();'
+
+    // 3) Register and enqueue interstitial.js (depends on GPT)
+    wp_register_script(
+        'adxbmon-interstitial',
+        $interstitial_js_url,
+        array('adxbmon-gpt'),
+        ADXMS_JS_VERSION,
+        true
     );
 
-    $inline_js = implode( "\n", $js_lines );
+    // 4) Pass safe data to JS
+    wp_localize_script('adxbmon-interstitial', 'ADX_INTERSTITIAL', array(
+        'networkCode' => $network_code,
+    ));
 
-    // ---- 5) Attach inline JS ----
-    wp_add_inline_script( 'gpt', $inline_js, 'after' );
+    wp_enqueue_script('adxbmon-interstitial');
 }
+endif;

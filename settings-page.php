@@ -198,13 +198,7 @@ add_action('admin_enqueue_scripts', function($hook) {
         '1.2.0',
         true
     );
-    wp_enqueue_script(
-        'monetiscope-tailwind-js',
-        plugin_dir_url(__FILE__) . './views/tailwind.css',
-        [],
-        '4.0.0',
-        
-    );
+    
 });
 // add_action('admin_enqueue_scripts', 'adxbymonetiscope_enqueue_admin_assets');
 // function adxbymonetiscope_enqueue_admin_assets( $hook_suffix ) {
