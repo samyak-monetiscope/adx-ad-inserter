@@ -6,13 +6,7 @@
   const NETWORK_CODE = window.ADX_BUTTON_REWARDED.networkCode;
   let adShownCount = 0;
 
-  function loadGPT() {
-    if (window.googletag) return;
-    const s = document.createElement("script");
-    s.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
-    s.async = true;
-    document.head.appendChild(s);
-  }
+
 
   const matchesKeyword = txt => KEYWORDS.includes(txt.trim());
 
@@ -105,5 +99,5 @@
     }
   });
 
-  document.addEventListener("DOMContentLoaded", loadGPT);
+//   document.addEventListener("DOMContentLoaded", loadGPT);
 })();
