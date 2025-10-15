@@ -2,7 +2,7 @@
 defined( 'ABSPATH' ) || exit;
 
 // Flying Carpet slot
-require_once ADXMS_DIR . '/views/slots/flying-carpet.php';
+// require_once ADXMS_DIR . '/views/slots/flying-carpet.php';
 
 // Anchor slot
 require_once ADXMS_DIR . '/views/slots/anchor.php';
@@ -14,9 +14,7 @@ require_once ADXMS_DIR . '/views/slots/custom.php';
  * Output header‐going ads
  */
 function adx_v4_render_header_ads() {
-    if ( $script = get_option('global_head_script') ) {
-        echo $script; // phpcs:ignore WordPress.Security.EscapeOutput
-    }
+    
     // adxbymonetiscope_render_flying_carpet_slot();
     adx_render_anchor_slot();
     // only if enabled

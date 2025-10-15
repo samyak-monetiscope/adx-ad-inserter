@@ -92,20 +92,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-//fling cartpet
-document.addEventListener('DOMContentLoaded', function () {
-    const insertion = document.getElementById('flying_insertion');
-    const offsetWrap = document.getElementById('flying-offset-wrapper');
+//fling cartpet (off becuase not in this version)
+// document.addEventListener('DOMContentLoaded', function () {
+//     const insertion = document.getElementById('flying_insertion');
+//     const offsetWrap = document.getElementById('flying-offset-wrapper');
 
-    function toggleOffset() {
-    if (['before_paragraph','after_paragraph','before_image','after_image'].includes(insertion.value)) {
-        offsetWrap.style.display = '';
-    } else {
-        offsetWrap.style.display = 'none';
-    }
-    }
+//     function toggleOffset() {
+//     if (['before_paragraph','after_paragraph','before_image','after_image'].includes(insertion.value)) {
+//         offsetWrap.style.display = '';
+//     } else {
+//         offsetWrap.style.display = 'none';
+//     }
+//     }
 
-    insertion.addEventListener('change', toggleOffset);
-    toggleOffset(); // initial state
-});
+//     insertion.addEventListener('change', toggleOffset);
+//     toggleOffset(); // initial state
+// });
 
