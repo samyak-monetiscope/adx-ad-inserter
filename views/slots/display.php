@@ -1,10 +1,6 @@
 <?php
 defined('ABSPATH') || exit;
 
-if ( ! defined('DISPLAY_GPT_VERSION') ) {
-    define('DISPLAY_GPT_VERSION', '1.0.0');
-}
-
 
 /**
  * Keep existing hooks to avoid breaking, but do nothing here now.
@@ -17,10 +13,19 @@ wp_register_script(
     'gpt',
     'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
     array(),
-    DISPLAY_GPT_VERSION,   // let Google manage caching
+    ADXMS_GPT_VERSION,   // let Google manage caching
     true    // footer
 );
 wp_enqueue_script('gpt');
+// Enqueue the minimal display slot runner (depends on GPT)
+wp_enqueue_script(
+    'adxbmon-display-slot',
+    trailingslashit(ADXMS_URL) . 'views/js/display-slot.js',
+    array('gpt'),
+    ADXMS_JS_VERSION,
+    true
+);
+
 
 function adxbymonetiscope_render_display_slot_head() {
     // Intentionally no-op. Insertion now handled in the_content.
@@ -148,26 +153,23 @@ function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $a
 
     ob_start();
     ?>
-    <div id="<?php echo esc_attr($div_id); ?>" class="adxbymonetiscope-display-slot" style="<?php echo esc_attr($align_style); ?>">
+    <div
+    id="<?php echo esc_attr($div_id); ?>"
+    class="adxbymonetiscope-display-slot"
+    style="<?php echo esc_attr($align_style); ?>"
+    data-network="<?php echo esc_attr($network); ?>"
+    data-sizes="<?php echo esc_attr($js_sizes_str); ?>"
+    data-div-id="<?php echo esc_attr($div_id); ?>"
+    data-page-url="<?php echo esc_attr($site_host); ?>"
+>
+
 
         <span aria-hidden="true" data-adx-debug="display-slot" style="opacity:0.5;display:block; font-size:10px;">
             Display Advertisement <?php echo esc_html($slot_index !== null ? (int)$slot_index : '-'); ?>
         </span>
 
         
-        <script>
-        window.googletag = window.googletag || {cmd: []};
-        googletag.cmd.push(function() {
-            googletag.defineSlot(
-                '<?php echo esc_js($network); ?>',
-                <?php echo esc_js($js_sizes_str); ?>,
-                '<?php echo esc_js($div_id); ?>'
-            ).addService(googletag.pubads());
-            googletag.enableServices();
-            googletag.pubads().set('page_url', '<?php echo esc_js($site_host); ?>');
-            googletag.display('<?php echo esc_js($div_id); ?>');
-        });
-        </script>
+        
     </div>
     <?php
     return ob_get_clean();
