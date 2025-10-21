@@ -1,6 +1,10 @@
 <?php
 defined('ABSPATH') || exit;
 
+if ( ! defined('DISPLAY_GPT_VERSION') ) {
+    define('DISPLAY_GPT_VERSION', '1.0.0');
+}
+
 
 /**
  * Keep existing hooks to avoid breaking, but do nothing here now.
@@ -9,22 +13,42 @@ defined('ABSPATH') || exit;
 add_action('wp_head', 'adxbymonetiscope_render_display_slot_head');
 add_action('wp_footer', 'adxbymonetiscope_render_display_slot_footer');
 
-wp_register_script(
-    'gpt',
-    'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
-    array(),
-    ADXMS_GPT_VERSION,   // let Google manage caching
-    true    // footer
-);
-wp_enqueue_script('gpt');
-// Enqueue the minimal display slot runner (depends on GPT)
-wp_enqueue_script(
-    'adxbmon-display-slot',
-    trailingslashit(ADXMS_URL) . 'views/js/display-slot.js',
-    array('gpt'),
-    ADXMS_JS_VERSION,
-    true
-);
+
+// Register the script handle for ad slots
+function adxbymonetiscope_register_ad_scripts() {
+    wp_register_script(
+        'gpt',
+        'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
+        array(),
+        DISPLAY_GPT_VERSION,   // let Google manage caching
+        true    // footer
+    );
+    wp_enqueue_script('gpt');
+    wp_register_script(
+        'adxbymonetiscope-ad-script',
+        '', // No external file
+        [],
+        '1.0',
+        true // Load in footer
+    );
+    static $enqueueCounter = 0; // Static variable retains its value between function calls
+    $enqueueCounter++;
+
+    echo '<script>console.log("' . $enqueueCounter . 'wp add enqueue script");</script>';
+    
+    // echo 'wp enquque called adxbymonetiscope-ad-script';
+    
+    wp_enqueue_script('adxbymonetiscope-ad-script');
+    // Initialize googletag once
+    static $googleCounter = 0; // Static variable retains its value between function calls
+    $googleCounter++;
+
+    echo '<script>console.log("' . $googleCounter . 'wp googletag");</script>';
+    // echo 'wp enquque called : window.googletag = window.googletag || {cmd: []};';
+    wp_add_inline_script('adxbymonetiscope-ad-script', 'window.googletag = window.googletag || {cmd: []};', 'before');
+}    
+
+// adxbymonetiscope_register_ad_scripts();
 
 
 function adxbymonetiscope_render_display_slot_head() {
@@ -76,6 +100,10 @@ function adxbymonetiscope_insert_display_ads($content) {
         }
 
         // 3) Build dynamic ad HTML (network, sizes, div id, site host)
+        static $adxByMonetiscopeFuncCounter = 0; // Static variable retains its value between function calls
+        $adxByMonetiscopeFuncCounter++;
+        echo '<script>console.log("' . $adxByMonetiscopeFuncCounter . ' Adx By Monetiscope function");</script>';
+        adxbymonetiscope_register_ad_scripts();
         $ad_html = adxbymonetiscope_build_ad_html($network, $sizes, $i, $alignment);
 
         // 4) Apply insertion logic
@@ -135,45 +163,71 @@ function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $a
     $div_id       = adxbymonetiscope_extract_div_id($network);
     $js_sizes_str = adxbymonetiscope_sizes_js_array($sizes);
     $site_host    = wp_parse_url(get_site_url(), PHP_URL_HOST);
-        // Normalize alignment
-    $alignment = in_array($alignment, ['left','center','right'], true) ? $alignment : 'left';
 
-    // Compute inline style based on alignment
-    // - left: default flow
-    // - center: shrink-to-content and center
-    // - right: shrink-to-content and push to the right
+    // Normalize alignment (unchanged)
+    $alignment = in_array($alignment, ['left', 'center', 'right'], true) ? $alignment : 'left';
     if ($alignment === 'center') {
         $align_style = 'display:table;margin:12px auto; text-align:center;';
     } elseif ($alignment === 'right') {
         $align_style = 'display:table;margin-right:0 !important; width:fit-content; text-align:end;';
-    } else { // left
+    } else {
         $align_style = 'margin-left: 0 !important;';
     }
-    
 
     ob_start();
     ?>
-    <div
-    id="<?php echo esc_attr($div_id); ?>"
-    class="adxbymonetiscope-display-slot"
-    style="<?php echo esc_attr($align_style); ?>"
-    data-network="<?php echo esc_attr($network); ?>"
-    data-sizes="<?php echo esc_attr($js_sizes_str); ?>"
-    data-div-id="<?php echo esc_attr($div_id); ?>"
-    data-page-url="<?php echo esc_attr($site_host); ?>"
->
-
-
+    <div id="<?php echo esc_attr($div_id); ?>" class="adxbymonetiscope-display-slot" style="<?php echo esc_attr($align_style); ?>">
         <span aria-hidden="true" data-adx-debug="display-slot" style="opacity:0.5;display:block; font-size:10px;">
             Display Advertisement <?php echo esc_html($slot_index !== null ? (int)$slot_index : '-'); ?>
         </span>
-
-        
-        
     </div>
     <?php
-    return ob_get_clean();
+    $html = ob_get_clean();
+
+    // JavaScript to create and append the script dynamically
+    $script = sprintf(
+        "
+        (function() {
+            var div = document.getElementById('%s');
+            if (!div) return;
+
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.text = `
+                console.log(12222);
+                googletag.cmd.push(function() {
+                    googletag.defineSlot(
+                        '%s',
+                        %s,
+                        '%s'
+                    ).addService(googletag.pubads());
+                    googletag.enableServices();
+                    googletag.pubads().set('page_url', '%s');
+                    googletag.display('%s');
+                });
+            `;
+
+            div.appendChild(script);
+        })();
+        ",
+        esc_js($div_id),
+        esc_js($network),
+        $js_sizes_str,
+        esc_js($div_id),
+        esc_js($site_host),
+        esc_js($div_id)
+    );
+
+    // Append this script to the footer
+    static $inlineCounter = 0; // Static variable retains its value between function calls
+    $inlineCounter++;
+
+    echo '<script>console.log("' . $inlineCounter . 'wp add inline script inside adxbymonetiscope_build_ad_html");</script>';
+    wp_add_inline_script('gpt', $script);
+
+    return $html;
 }
+
 
 /**
  * Page-type matching against the selected filters for the sub-slot.
