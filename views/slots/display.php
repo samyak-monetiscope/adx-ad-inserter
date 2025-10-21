@@ -34,7 +34,7 @@ function adxbymonetiscope_register_ad_scripts() {
     static $enqueueCounter = 0; // Static variable retains its value between function calls
     $enqueueCounter++;
 
-    echo '<script>console.log("' . $enqueueCounter . 'wp add enqueue script");</script>';
+    // echo '<script>console.log("' . $enqueueCounter . 'wp add enqueue script");</script>';
     
     // echo 'wp enquque called adxbymonetiscope-ad-script';
     
@@ -43,7 +43,7 @@ function adxbymonetiscope_register_ad_scripts() {
     static $googleCounter = 0; // Static variable retains its value between function calls
     $googleCounter++;
 
-    echo '<script>console.log("' . $googleCounter . 'wp googletag");</script>';
+    // echo '<script>console.log("' . $googleCounter . 'wp googletag");</script>';
     // echo 'wp enquque called : window.googletag = window.googletag || {cmd: []};';
     wp_add_inline_script('adxbymonetiscope-ad-script', 'window.googletag = window.googletag || {cmd: []};', 'before');
 }    
@@ -102,7 +102,7 @@ function adxbymonetiscope_insert_display_ads($content) {
         // 3) Build dynamic ad HTML (network, sizes, div id, site host)
         static $adxByMonetiscopeFuncCounter = 0; // Static variable retains its value between function calls
         $adxByMonetiscopeFuncCounter++;
-        echo '<script>console.log("' . $adxByMonetiscopeFuncCounter . ' Adx By Monetiscope function");</script>';
+        // echo '<script>console.log("' . $adxByMonetiscopeFuncCounter . ' Adx By Monetiscope function");</script>';
         adxbymonetiscope_register_ad_scripts();
         $ad_html = adxbymonetiscope_build_ad_html($network, $sizes, $i, $alignment);
 
@@ -222,7 +222,7 @@ function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $a
     static $inlineCounter = 0; // Static variable retains its value between function calls
     $inlineCounter++;
 
-    echo '<script>console.log("' . $inlineCounter . 'wp add inline script inside adxbymonetiscope_build_ad_html");</script>';
+    // echo '<script>console.log("' . $inlineCounter . 'wp add inline script inside adxbymonetiscope_build_ad_html");</script>';
     wp_add_inline_script('gpt', $script);
 
     return $html;
