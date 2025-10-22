@@ -28,7 +28,7 @@ function adx_v4_render_footer_ads() {
     adx_render_interstitial_slot();
 //    adx_render_coupon_rewarded_slot();
 //    adxbymonetiscope_render_flying_carpet_slot();
-	 if ( get_option('custom_enabled') === 'true' ) {
+	if ( get_option('custom_enabled') === 'true' ) {
         adx_render_custom_footer_slot();
     }
 }
