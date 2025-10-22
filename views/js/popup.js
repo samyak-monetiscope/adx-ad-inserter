@@ -1,8 +1,8 @@
-console.log("hi from popup");
+console.log("popup script loaded");
 (function () {
-  console.log("hi i'm before try");
+  console.log("popup function Loaded");
   try {
-    console.log("hi i'm in try")
+    // console.log("hi i'm in try")
     // ---- Read config injected by PHP ----
     var CFG = (window.ADXMS_POPUP_DATA || {});
     var POPUP_OPTION = CFG.popup_option;   // "ONCE_PER_SESSION" | "ONCE_PER_PAGE"
@@ -62,7 +62,7 @@ console.log("hi from popup");
     inner.appendChild(slot);
     wrap.appendChild(inner);
     document.body.appendChild(wrap);
-    console.log("appended myUpperDiv, slot, inner, wrarp")
+    // console.log("appended myUpperDiv, slot, inner, wrarp")
 
     // ---- GPT setup (kept inside JS exactly as before) ----
     window.googletag = window.googletag || { cmd: [] };
@@ -71,6 +71,7 @@ console.log("hi from popup");
     var gpt = document.createElement("script");
     gpt.src = "https://securepubads.g.doubleclick.net/tag/js/gpt.js";
     gpt.async = true;
+    gpt.setAttribute("myData", "from_popupjs");
     gpt.onload = function () {
       gptLoaded = true;
       googletag.cmd.push(function () {
@@ -83,8 +84,9 @@ console.log("hi from popup");
           googletag.pubads().set("page_url", window.location.href);
 
           googletag.pubads().addEventListener("slotRenderEnded", function (evt) {
+            console.log(evt, evt.slot);
+            console.log(adSlotRef);
             if (evt.slot !== adSlotRef) {
-              console.log(evt);
               console.log("evt.slot !=adslotRef");
               return;
               }
@@ -120,11 +122,11 @@ console.log("hi from popup");
       window.removeEventListener("scroll", onScroll, { passive: true });
       window.removeEventListener("scroll", onScroll, { passive: true });
     }
-    console.log("after showonce")
+    // console.log("after showonce")
     
     function onScroll() { if (scrolledHalf()) showOnce(); }
     window.addEventListener("scroll", onScroll, { passive: true });
-    console.log("after onScroll")
+    // console.log("after onScroll")
 
     close.addEventListener("click", function () { wrap.style.display = "none"; });
   } catch (err) { if (console && console.log) console.log("Monetiscope popup error:", err); }
