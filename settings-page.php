@@ -4,6 +4,38 @@ defined('ABSPATH') || exit;
 /* -------------------------------------------------- */
 /* 1 – Register All Plugin Settings                   */
 /* -------------------------------------------------- */
+function adxbymonetiscope_sanitize_raw_code( $value ) {
+    if ( current_user_can( 'unfiltered_html' ) ) {
+        // Keep exactly what admin pasted (scripts allowed)
+        return $value;
+    }
+
+    // Fallback for users without unfiltered_html
+    // (Script tags won't survive; this is expected by WP security model)
+    $allowed = array(
+        'div'      => array(
+            'id'    => true,
+            'class' => true,
+            'style' => true,
+            'data-*'=> true,
+        ),
+        'span'     => array(
+            'id'    => true,
+            'class' => true,
+            'style' => true,
+            'data-*'=> true,
+        ),
+        'ins'      => array(
+            'class' => true,
+            'style' => true,
+            'data-*'=> true,
+        ),
+        'noscript' => array(),
+    );
+
+    return wp_kses( $value, $allowed );
+}
+
 function adx_v4_register_settings() {
     // Main slot/plugin-wide settings
     $settings = [
@@ -58,15 +90,24 @@ function adx_v4_register_settings() {
     // register_setting('adx_v4_settings',  "flying_devices",     ['sanitize_callback' => 'adx_v4_sanitize_option']);
     // Now register these 2 options with custom/no sanitization
     register_setting('adx_v4_settings', 'custom_header_code', [
-        'sanitize_callback' => "wp_kses_post" // or your custom callback
-    ]);
-    register_setting('adx_v4_settings', 'custom_footer_code', [
-        'sanitize_callback' => 'wp_kses_post' // or your custom callback
-    ]);
-    register_setting('adx_v4_settings', 'custom_ads_txt', [
-        'sanitize_callback' => 'sanitize_textarea_field' // or your custom callback
+        'type'              => 'string',
+        'sanitize_callback' => 'adxbymonetiscope_sanitize_raw_code',
+        'show_in_rest'      => false,
     ]);
 
+    register_setting('adx_v4_settings', 'custom_footer_code', [
+        'type'              => 'string',
+        'sanitize_callback' => 'adxbymonetiscope_sanitize_raw_code',
+        'show_in_rest'      => false,
+    ]);
+
+    // ads.txt is plain text — keeping this is fine.
+    // (If you ever need commas/colons/newlines preserved, this still allows them.)
+    register_setting('adx_v4_settings', 'custom_ads_txt', [
+        'type'              => 'string',
+        'sanitize_callback' => 'sanitize_textarea_field',
+        'show_in_rest'      => false,
+    ]);
 
 
     // Subslot (Display Slot) settings — register for all 10 subslots
@@ -221,6 +262,8 @@ add_action('admin_enqueue_scripts', function($hook) {
 //     );
 //     wp_enqueue_style('adxbymonetiscope-tailwind');
 // }
+
+
 
 
 
