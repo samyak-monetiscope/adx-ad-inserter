@@ -12,23 +12,7 @@ function adx_render_anchor_slot() {
         return;
     }
 
-    // 1) Enqueue Google GPT
-    wp_register_script(
-        'adxbmon-gpt',
-        'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
-        array(),
-        ADXMS_GPT_VERSION,           // let Google handle caching
-        true
-    );
-    wp_enqueue_script('adxbmon-gpt');
 
-    // 1a) Force async on GPT tag
-    add_filter('script_loader_tag', function($tag, $handle){
-        if ($handle === 'adxbmon-gpt' && strpos($tag, ' async') === false) {
-            $tag = str_replace(' src', ' async src', $tag);
-        }
-        return $tag;
-    }, 10, 2);
 
     // 2) Build URL to /assets-runtime/frontend/anchor.js WITHOUT needing adx.php constants
     // plugin root path: /wp-content/plugins/<your-plugin>

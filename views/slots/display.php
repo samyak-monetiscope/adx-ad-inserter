@@ -1,9 +1,6 @@
 <?php
 defined('ABSPATH') || exit;
 
-if ( ! defined('DISPLAY_GPT_VERSION') ) {
-    define('DISPLAY_GPT_VERSION', '1.0.0');
-}
 
 
 /**
@@ -16,14 +13,7 @@ add_action('wp_footer', 'adxbymonetiscope_render_display_slot_footer');
 
 // Register the script handle for ad slots
 function adxbymonetiscope_register_ad_scripts() {
-    wp_register_script(
-        'gpt',
-        'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
-        array(),
-        DISPLAY_GPT_VERSION,   // let Google manage caching
-        true    // footer
-    );
-    wp_enqueue_script('gpt');
+    
     wp_register_script(
         'adxbymonetiscope-ad-script',
         '', // No external file
@@ -223,7 +213,7 @@ function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $a
     $inlineCounter++;
 
     // echo '<script>console.log("' . $inlineCounter . 'wp add inline script inside adxbymonetiscope_build_ad_html");</script>';
-    wp_add_inline_script('gpt', $script);
+    wp_add_inline_script('adxbyms-gpt', $script);
 
     return $html;
 }

@@ -12,23 +12,7 @@ function adxbymonetiscope_render_button_rewarded_slot() {
         return;
     }
 
-    // 1️⃣ Enqueue Google GPT
-    wp_register_script(
-        'adxbymonetiscope-gpt',
-        'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
-        array(),
-        ADXMS_GPT_VERSION,
-        true
-    );
-    wp_enqueue_script('adxbymonetiscope-gpt');
 
-    // 1a️⃣ Force async GPT loading
-    add_filter('script_loader_tag', function($tag, $handle) {
-        if ($handle === 'adxbymonetiscope-gpt' && strpos($tag, ' async') === false) {
-            $tag = str_replace(' src', ' async src', $tag);
-        }
-        return $tag;
-    }, 10, 2);
 
     // 2️⃣ Build JS URL using your ADXMS_URL constant
     $rewarded_js_url  = trailingslashit(ADXMS_URL) . 'views/js/button-rewarded.js';

@@ -10,23 +10,7 @@ function adx_render_interstitial_slot() {
         return;
     }
 
-    // 1) Enqueue Google GPT (same as your anchor slot)
-    wp_register_script(
-        'adxbmon-gpt',
-        'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
-        array(),
-        ADXMS_GPT_VERSION,
-        true
-    );
-    wp_enqueue_script('adxbmon-gpt');
 
-    // 1a) Force async loading
-    add_filter('script_loader_tag', function($tag, $handle) {
-        if ($handle === 'adxbmon-gpt' && strpos($tag, ' async') === false) {
-            $tag = str_replace(' src', ' async src', $tag);
-        }
-        return $tag;
-    }, 10, 2);
 
     // 2) Build JS path (like your anchor.php)
     $interstitial_js_url = trailingslashit(ADXMS_URL) . 'views/js/interstitial.js';
@@ -36,7 +20,7 @@ function adx_render_interstitial_slot() {
     wp_register_script(
         'adxbmon-interstitial',
         $interstitial_js_url,
-        array('adxbmon-gpt'),
+        array('adxbyms-gpt'),
         ADXMS_JS_VERSION,
         true
     );
