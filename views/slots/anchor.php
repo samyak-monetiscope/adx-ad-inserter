@@ -14,17 +14,17 @@ function adxbyms_render_anchor_slot() {
 
     // 1) Enqueue Google GPT
     wp_register_script(
-        'adxbmon-gpt',
+        'adxbyms-gpt',
         'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
         array(),
         ADXBYMS_GPT_VERSION,           // let Google handle caching
         true
     );
-    wp_enqueue_script('adxbmon-gpt');
+    wp_enqueue_script('adxbyms-gpt');
 
     // 1a) Force async on GPT tag
     add_filter('script_loader_tag', function($tag, $handle){
-        if ($handle === 'adxbmon-gpt' && strpos($tag, ' async') === false) {
+        if ($handle === 'adxbyms-gpt' && strpos($tag, ' async') === false) {
             $tag = str_replace(' src', ' async src', $tag);
         }
         return $tag;
@@ -37,19 +37,19 @@ function adxbyms_render_anchor_slot() {
 
     // 3) Register + enqueue our anchor.js (depends on GPT)
     wp_register_script(
-        'adxbmon-anchor',
+        'adxbyms-anchor',
         $anchor_js_url,
-        array('adxbmon-gpt'),
+        array('adxbyms-gpt'),
         ADXBYMS_JS_VERSION,
         true
     );
 
     // 4) Pass small payload to JS (safe & standard)
-    wp_localize_script('adxbmon-anchor', 'ADXBYMS_ANCHOR', array(
+    wp_localize_script('adxbyms-anchor', 'ADXBYMS_ANCHOR', array(
         'networkCode' => $network_code,
         'position'    => $position,
     ));
 
-    wp_enqueue_script('adxbmon-anchor');
+    wp_enqueue_script('adxbyms-anchor');
 }
 endif;

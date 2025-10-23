@@ -20,7 +20,7 @@ require_once ADXBYMS_DIR . '/views/slots/custom.php';
  */
 function adxbyms_render_footer_ads() {
     adxbymonetiscope_render_popup_slot();
-    adxbymonetiscope_render_button_rewarded_slot();
+    adxbyms_render_button_rewarded_slot();
     // adx_render_bottom_sticky_slot();
     // adx_render_side_floater_slot();
 	// adx_render_reward_on_scroll_slot();
