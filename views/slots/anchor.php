@@ -17,7 +17,7 @@ function adx_render_anchor_slot() {
         'adxbmon-gpt',
         'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
         array(),
-        ADXMS_GPT_VERSION,           // let Google handle caching
+        ADXBYMS_GPT_VERSION,           // let Google handle caching
         true
     );
     wp_enqueue_script('adxbmon-gpt');
@@ -33,14 +33,14 @@ function adx_render_anchor_slot() {
     // 2) Build URL to /assets-runtime/frontend/anchor.js WITHOUT needing adx.php constants
     // plugin root path: /wp-content/plugins/<your-plugin>
                   // folder name
-    $anchor_js_url    = ADXMS_URL . '/views/js/anchor.js';
+    $anchor_js_url    = ADXBYMS_URL . '/views/js/anchor.js';
 
     // 3) Register + enqueue our anchor.js (depends on GPT)
     wp_register_script(
         'adxbmon-anchor',
         $anchor_js_url,
         array('adxbmon-gpt'),
-        ADXMS_JS_VERSION,
+        ADXBYMS_JS_VERSION,
         true
     );
 

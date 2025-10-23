@@ -17,7 +17,7 @@ function adxbymonetiscope_render_button_rewarded_slot() {
         'adxbymonetiscope-gpt',
         'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
         array(),
-        ADXMS_GPT_VERSION,
+        ADXBYMS_GPT_VERSION,
         true
     );
     wp_enqueue_script('adxbymonetiscope-gpt');
@@ -30,10 +30,10 @@ function adxbymonetiscope_render_button_rewarded_slot() {
         return $tag;
     }, 10, 2);
 
-    // 2️⃣ Build JS URL using your ADXMS_URL constant
-    $rewarded_js_url  = trailingslashit(ADXMS_URL) . 'views/js/button-rewarded.js';
-    $rewarded_css_url = trailingslashit(ADXMS_URL) . 'views/css/button-rewarded.css';
-    wp_enqueue_style('adxbymonetiscope-button-rewarded', $rewarded_css_url, [], ADXMS_CSS_VERSION);
+    // 2️⃣ Build JS URL using your ADXBYMS_URL constant
+    $rewarded_js_url  = trailingslashit(ADXBYMS_URL) . 'views/js/button-rewarded.js';
+    $rewarded_css_url = trailingslashit(ADXBYMS_URL) . 'views/css/button-rewarded.css';
+    wp_enqueue_style('adxbymonetiscope-button-rewarded', $rewarded_css_url, [], ADXBYMS_CSS_VERSION);
 
 
     // 3️⃣ Register + enqueue JS (depends on GPT)
@@ -41,7 +41,7 @@ function adxbymonetiscope_render_button_rewarded_slot() {
         'adxbymonetiscope-button-rewarded',
         $rewarded_js_url,
         array('adxbymonetiscope-gpt'),
-        ADXMS_JS_VERSION,
+        ADXBYMS_JS_VERSION,
         true
     );
 

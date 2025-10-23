@@ -79,7 +79,7 @@ function adx_v4_settings_page() {
         <div class="head banner" style="position: relative; left: -20px;">
           <a href="https://monetiscope.com/contact/" target="_blank" rel="noopener noreferrer">
             
-            <img src="<?php echo esc_url( ADXMS_URL . 'assets/img/banner2.jpg' ); ?>" alt="Website" class="rounded-md hover:rounded-none hover:shadow-lg duration-200">
+            <img src="<?php echo esc_url( ADXBYMS_URL . 'assets/img/banner2.jpg' ); ?>" alt="Website" class="rounded-md hover:rounded-none hover:shadow-lg duration-200">
           </a>
         </div>
 
@@ -167,27 +167,27 @@ function adx_v4_settings_page() {
           <div class="social-icons grid grid-cols-3 gap-4">
 
             <a href="https://monetiscope.com/adx-ad-inserter-plugin/" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
-              <img src="<?php echo esc_url( ADXMS_URL . 'assets/img/website2.png' ); ?>" alt="Website">
+              <img src="<?php echo esc_url( ADXBYMS_URL . 'assets/img/website2.png' ); ?>" alt="Website">
             </a>
 
             <a href="https://www.linkedin.com/company/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
-              <img src="<?php echo esc_url( ADXMS_URL . 'assets/img/linkedin2.png' ); ?>" alt="LinkedIn">
+              <img src="<?php echo esc_url( ADXBYMS_URL . 'assets/img/linkedin2.png' ); ?>" alt="LinkedIn">
             </a>
 
             <a href="https://x.com/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
-              <img src="<?php echo esc_url( ADXMS_URL . 'assets/img/x2.png' ); ?>" alt="Twitter / X">
+              <img src="<?php echo esc_url( ADXBYMS_URL . 'assets/img/x2.png' ); ?>" alt="Twitter / X">
             </a>
 
             <a href="mailto:support@monetiscope.com" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
-              <img src="<?php echo esc_url( ADXMS_URL . 'assets/img/email2.png' ); ?>" alt="Email">
+              <img src="<?php echo esc_url( ADXBYMS_URL . 'assets/img/email2.png' ); ?>" alt="Email">
             </a>
 
             <a href="https://www.youtube.com/@monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
-              <img src="<?php echo esc_url( ADXMS_URL . 'assets/img/youtube2.png' ); ?>" alt="YouTube">
+              <img src="<?php echo esc_url( ADXBYMS_URL . 'assets/img/youtube2.png' ); ?>" alt="YouTube">
             </a>
 
             <a href="https://www.facebook.com/monetiscope" target="_blank" rel="noopener noreferrer" class="shadow-lg transition duration-150 opacity-75 hover:opacity-100 rounded-lg p-3 hover:shadow-xl ">
-              <img src="<?php echo esc_url( ADXMS_URL . 'assets/img/facebook2.png' ); ?>" alt="Facebook">
+              <img src="<?php echo esc_url( ADXBYMS_URL . 'assets/img/facebook2.png' ); ?>" alt="Facebook">
             </a>
 
           </div>

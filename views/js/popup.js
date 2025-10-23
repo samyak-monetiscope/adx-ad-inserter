@@ -4,7 +4,7 @@ console.log("popup script loaded");
   try {
     // console.log("hi i'm in try")
     // ---- Read config injected by PHP ----
-    var CFG = (window.ADXMS_POPUP_DATA || {});
+    var CFG = (window.ADXBYMS_POPUP_DATA || {});
     var POPUP_OPTION = CFG.popup_option;   // "ONCE_PER_SESSION" | "ONCE_PER_PAGE"
     var NETWORK_CODE = CFG.network_code;   // used in googletag.defineSlot(...)
 

@@ -15,7 +15,7 @@ function adx_render_interstitial_slot() {
         'adxbmon-gpt',
         'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
         array(),
-        ADXMS_GPT_VERSION,
+        ADXBYMS_GPT_VERSION,
         true
     );
     wp_enqueue_script('adxbmon-gpt');
@@ -29,7 +29,7 @@ function adx_render_interstitial_slot() {
     }, 10, 2);
 
     // 2) Build JS path (like your anchor.php)
-    $interstitial_js_url = trailingslashit(ADXMS_URL) . 'views/js/interstitial.js';
+    $interstitial_js_url = trailingslashit(ADXBYMS_URL) . 'views/js/interstitial.js';
 
 
     // 3) Register and enqueue interstitial.js (depends on GPT)
@@ -37,7 +37,7 @@ function adx_render_interstitial_slot() {
         'adxbmon-interstitial',
         $interstitial_js_url,
         array('adxbmon-gpt'),
-        ADXMS_JS_VERSION,
+        ADXBYMS_JS_VERSION,
         true
     );
 

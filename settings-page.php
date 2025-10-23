@@ -229,14 +229,14 @@ add_action('admin_enqueue_scripts', function($hook) {
         'monetiscope-admin-css',
         plugin_dir_url(__FILE__) . './templates/template.css',
         [],
-        ADXMS_CSS_VERSION
+        ADXBYMS_CSS_VERSION
     );
 
     wp_enqueue_script(
         'monetiscope-admin-js',
         plugin_dir_url(__FILE__) . './templates/template.js',
         [],
-        ADXMS_JS_VERSION,
+        ADXBYMS_JS_VERSION,
         true
     );
     

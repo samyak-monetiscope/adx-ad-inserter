@@ -33,26 +33,26 @@ function adxbymonetiscope_render_popup_slot() {
     );
 
     // IMPORTANT: encode once; do not escape the JSON itself
-    $config_js = 'window.ADXMS_POPUP_DATA = ' . wp_json_encode($config, JSON_UNESCAPED_SLASHES) . ';';
+    $config_js = 'window.ADXBYMS_POPUP_DATA = ' . wp_json_encode($config, JSON_UNESCAPED_SLASHES) . ';';
 
     wp_register_script(
         'adxbymon-gpt',
         'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
         array(),
-        ADXMS_GPT_VERSION,
+        ADXBYMS_GPT_VERSION,
         true
     );
     wp_enqueue_script('adxbymon-gpt');
 
     // ---- Register + enqueue the external JS file ----
-    // Path provided by you: ADXMS_URL . 'views/js/popup.js'
-    $popup_js_url = trailingslashit(ADXMS_URL) . 'views/js/popup.js';
+    // Path provided by you: ADXBYMS_URL . 'views/js/popup.js'
+    $popup_js_url = trailingslashit(ADXBYMS_URL) . 'views/js/popup.js';
 
     wp_register_script(
         'adxbymonetiscope_popup_script',
         $popup_js_url,
         array(),                // no deps; GPT loader stays inside popup.js
-        ADXMS_JS_VERSION,
+        ADXBYMS_JS_VERSION,
         true                    // load in footer
     );
 

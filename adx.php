@@ -15,20 +15,20 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-define( 'ADXMS_FILE', __FILE__ );
-define( 'ADXMS_DIR', plugin_dir_path( __FILE__ ) );
-define( 'ADXMS_URL', plugin_dir_url( __FILE__ ) );
-define( 'ADXMS_JS_VERSION', '1.0.0' );  // for your plugin files
-define( 'ADXMS_CSS_VERSION', '1.0.0' );  // for your plugin files
-define( 'ADXMS_GPT_VERSION', '1.0.0' );  // for Google GPT script
+define( 'ADXBYMS_FILE', __FILE__ );
+define( 'ADXBYMS_DIR', plugin_dir_path( __FILE__ ) );
+define( 'ADXBYMS_URL', plugin_dir_url( __FILE__ ) );
+define( 'ADXBYMS_JS_VERSION', '1.0.0' );  // for your plugin files
+define( 'ADXBYMS_CSS_VERSION', '1.0.0' );  // for your plugin files
+define( 'ADXBYMS_GPT_VERSION', '1.0.0' );  // for Google GPT script
 
 
 
 //Settings registration & UI
-require_once ADXMS_DIR . 'settings-page.php';
+require_once ADXBYMS_DIR . 'settings-page.php';
 
 //Renderers (always loaded, but we’ll hook conditionally)
-require_once ADXMS_DIR . '/ad-renderer.php';
+require_once ADXBYMS_DIR . '/ad-renderer.php';
 
 
 // 5. Add "Settings" link on the Plugins page

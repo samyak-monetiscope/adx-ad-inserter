@@ -17,12 +17,12 @@ function adx_render_offerwall_onscroll_slot() {
         return;
     }
 
-    // 1) GPT (footer, versioned via ADXMS_GPT_VERSION if defined)
+    // 1) GPT (footer, versioned via ADXBYMS_GPT_VERSION if defined)
     wp_register_script(
         'adxbymonetiscope-gpt',
         'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
         array(),
-        ADXMS_GPT_VERSION,
+        ADXBYMS_GPT_VERSION,
         true
     );
     wp_enqueue_script('adxbymonetiscope-gpt');
@@ -36,16 +36,16 @@ function adx_render_offerwall_onscroll_slot() {
     }, 10, 2);
 
     // 2) URLs (use your constant)
-    $base_url = trailingslashit(ADXMS_URL);
+    $base_url = trailingslashit(ADXBYMS_URL);
     $css_url  = $base_url . 'views/css/offerwall-onscroll.css';
     $js_url   = $base_url . 'views/js/offerwall-onscroll.js';
 
 
     // 4) Enqueue CSS
-    wp_enqueue_style('adxbymonetiscope-offerwall', $css_url, array(), ADXMS_CSS_VERSION);
+    wp_enqueue_style('adxbymonetiscope-offerwall', $css_url, array(), ADXBYMS_CSS_VERSION);
 
     // 5) Enqueue JS (depends on GPT)
-    wp_register_script('adxbymonetiscope-offerwall', $js_url, array('adxbymonetiscope-gpt'), ADXMS_JS_VERSION, true);
+    wp_register_script('adxbymonetiscope-offerwall', $js_url, array('adxbymonetiscope-gpt'), ADXBYMS_JS_VERSION, true);
 
     // 6) Pass data to JS
     wp_localize_script('adxbymonetiscope-offerwall', 'ADX_OFFERWALL', array(
