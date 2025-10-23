@@ -2,8 +2,8 @@
 // /views/slots/anchor.php
 defined('ABSPATH') || exit;
 
-if ( ! function_exists('adx_render_anchor_slot') ) :
-function adx_render_anchor_slot() {
+if ( ! function_exists('adxbyms_render_anchor_slot') ) :
+function adxbyms_render_anchor_slot() {
     $enabled      = (get_option('anchor_enabled') === 'true');
     $position     = get_option('anchor_position');                 // 'TOP_ANCHOR' | 'BOTTOM_ANCHOR'
     $network_code = trim( (string) get_option('anchor_network_code') );
@@ -45,7 +45,7 @@ function adx_render_anchor_slot() {
     );
 
     // 4) Pass small payload to JS (safe & standard)
-    wp_localize_script('adxbmon-anchor', 'ADX_ANCHOR', array(
+    wp_localize_script('adxbmon-anchor', 'ADXBYMS_ANCHOR', array(
         'networkCode' => $network_code,
         'position'    => $position,
     ));

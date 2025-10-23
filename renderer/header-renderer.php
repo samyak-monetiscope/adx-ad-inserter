@@ -13,10 +13,10 @@ require_once ADXBYMS_DIR . '/views/slots/custom.php';
 /**
  * Output header‐going ads
  */
-function adx_v4_render_header_ads() {
+function adxbyms_render_header_ads() {
     
     // adxbymonetiscope_render_flying_carpet_slot();
-    adx_render_anchor_slot();
+    adxbyms_render_anchor_slot();
     // only if enabled
     if ( get_option('custom_enabled') === 'true' ) {
         adx_render_custom_header_slot();

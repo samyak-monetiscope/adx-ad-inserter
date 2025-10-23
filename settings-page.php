@@ -4,7 +4,7 @@ defined('ABSPATH') || exit;
 /* -------------------------------------------------- */
 /* 1 – Register All Plugin Settings                   */
 /* -------------------------------------------------- */
-function adxbymonetiscope_sanitize_raw_code( $value ) {
+function adxbyms_sanitize_raw_code( $value ) {
     if ( current_user_can( 'unfiltered_html' ) ) {
         // Keep exactly what admin pasted (scripts allowed)
         return $value;
@@ -36,7 +36,7 @@ function adxbymonetiscope_sanitize_raw_code( $value ) {
     return wp_kses( $value, $allowed );
 }
 
-function adx_v4_register_settings() {
+function adxbyms_register_settings() {
     // Main slot/plugin-wide settings
     $settings = [
         'adx_enabled',
@@ -78,32 +78,32 @@ function adx_v4_register_settings() {
         if ($opt === 'custom_header_code' || $opt === 'custom_footer_code' || $opt === 'custom_ads_txt') {
             continue;
         }
-        register_setting('adx_v4_settings', $opt, [
+        register_setting('adxbyms_settings', $opt, [
             'sanitize_callback' => 'adx_v4_sanitize_option'
         ]);
     }
     
-    // register_setting('adx_v4_settings', "flying_pages",        ['sanitize_callback' => 'adx_v4_sanitize_option']);
-    // register_setting('adx_v4_settings', "flying_insertion",    ['sanitize_callback' => 'sanitize_text_field']);
-    // register_setting('adx_v4_settings', "flying_alignment",    ['sanitize_callback' => 'sanitize_text_field']);
-    // register_setting('adx_v4_settings', "flying_offset",       ['sanitize_callback' => 'absint']);
-    // register_setting('adx_v4_settings',  "flying_devices",     ['sanitize_callback' => 'adx_v4_sanitize_option']);
+    // register_setting('adxbyms_settings', "flying_pages",        ['sanitize_callback' => 'adx_v4_sanitize_option']);
+    // register_setting('adxbyms_settings', "flying_insertion",    ['sanitize_callback' => 'sanitize_text_field']);
+    // register_setting('adxbyms_settings', "flying_alignment",    ['sanitize_callback' => 'sanitize_text_field']);
+    // register_setting('adxbyms_settings', "flying_offset",       ['sanitize_callback' => 'absint']);
+    // register_setting('adxbyms_settings',  "flying_devices",     ['sanitize_callback' => 'adx_v4_sanitize_option']);
     // Now register these 2 options with custom/no sanitization
-    register_setting('adx_v4_settings', 'custom_header_code', [
+    register_setting('adxbyms_settings', 'custom_header_code', [
         'type'              => 'string',
-        'sanitize_callback' => 'adxbymonetiscope_sanitize_raw_code',
+        'sanitize_callback' => 'adxbyms_sanitize_raw_code',
         'show_in_rest'      => false,
     ]);
 
-    register_setting('adx_v4_settings', 'custom_footer_code', [
+    register_setting('adxbyms_settings', 'custom_footer_code', [
         'type'              => 'string',
-        'sanitize_callback' => 'adxbymonetiscope_sanitize_raw_code',
+        'sanitize_callback' => 'adxbyms_sanitize_raw_code',
         'show_in_rest'      => false,
     ]);
 
     // ads.txt is plain text — keeping this is fine.
     // (If you ever need commas/colons/newlines preserved, this still allows them.)
-    register_setting('adx_v4_settings', 'custom_ads_txt', [
+    register_setting('adxbyms_settings', 'custom_ads_txt', [
         'type'              => 'string',
         'sanitize_callback' => 'sanitize_textarea_field',
         'show_in_rest'      => false,
@@ -112,15 +112,15 @@ function adx_v4_register_settings() {
 
     // Subslot (Display Slot) settings — register for all 10 subslots
     for ($i = 1; $i <= 10; $i++) {
-        register_setting('adx_v4_settings', "display_slot_{$i}_enabled",      ['sanitize_callback' => 'adx_v4_sanitize_option']);
-        register_setting('adx_v4_settings', "display_slot_{$i}_network_code", ['sanitize_callback' => 'sanitize_text_field']);
-        register_setting('adx_v4_settings', "display_slot_{$i}_sizes",        ['sanitize_callback' => 'adx_v4_sanitize_option']);
-        register_setting('adx_v4_settings', "display_slot_{$i}_pages",        ['sanitize_callback' => 'adx_v4_sanitize_option']);
-        register_setting('adx_v4_settings', "display_slot_{$i}_insertion",    ['sanitize_callback' => 'sanitize_text_field']);
-        register_setting('adx_v4_settings', "display_slot_{$i}_alignment",    ['sanitize_callback' => 'sanitize_text_field']);
-        register_setting('adx_v4_settings', "display_slot_{$i}_text",         ['sanitize_callback' => 'sanitize_text_field']);
-        register_setting('adx_v4_settings', "display_slot_{$i}_offset",       ['sanitize_callback' => 'absint']);
-        register_setting('adx_v4_settings',  "display_slot_{$i}_devices",     ['sanitize_callback' => 'adx_v4_sanitize_option']);
+        register_setting('adxbyms_settings', "display_slot_{$i}_enabled",      ['sanitize_callback' => 'adx_v4_sanitize_option']);
+        register_setting('adxbyms_settings', "display_slot_{$i}_network_code", ['sanitize_callback' => 'sanitize_text_field']);
+        register_setting('adxbyms_settings', "display_slot_{$i}_sizes",        ['sanitize_callback' => 'adx_v4_sanitize_option']);
+        register_setting('adxbyms_settings', "display_slot_{$i}_pages",        ['sanitize_callback' => 'adx_v4_sanitize_option']);
+        register_setting('adxbyms_settings', "display_slot_{$i}_insertion",    ['sanitize_callback' => 'sanitize_text_field']);
+        register_setting('adxbyms_settings', "display_slot_{$i}_alignment",    ['sanitize_callback' => 'sanitize_text_field']);
+        register_setting('adxbyms_settings', "display_slot_{$i}_text",         ['sanitize_callback' => 'sanitize_text_field']);
+        register_setting('adxbyms_settings', "display_slot_{$i}_offset",       ['sanitize_callback' => 'absint']);
+        register_setting('adxbyms_settings',  "display_slot_{$i}_devices",     ['sanitize_callback' => 'adx_v4_sanitize_option']);
     }
 
     // Set default values for booleans if not already present (first install)
@@ -178,7 +178,7 @@ function adx_v4_register_settings() {
 
 
 }
-add_action('admin_init', 'adx_v4_register_settings');
+add_action('admin_init', 'adxbyms_register_settings');
 
 /**
  * Sanitizer callback for all plugin options
@@ -203,19 +203,19 @@ function adx_v4_sanitize_option($value) {
 /* -------------------------------------------------- */
 /* 2 – Add Settings Page to WordPress Admin           */
 /* -------------------------------------------------- */
-function adx_v4_add_settings_page() {
+function adxbyms_add_settings_page() {
     // Create a TOP-LEVEL admin menu instead of a Settings submenu
     add_menu_page(
         'AdX Ad Inserter',              // Page title
         'AdX Ad Inserter',              // Menu title
         'manage_options',               // Capability
         'adx-ad-inserter',              // Menu slug (kept same)
-        'adx_v4_settings_page',         // Callback to render content
+        'adxbyms_settings_page',         // Callback to render content
         'dashicons-megaphone',          // Icon (choose what you like)
         59                               // Position (optional; before Settings)
     );
 }
-add_action('admin_menu', 'adx_v4_add_settings_page');
+add_action('admin_menu', 'adxbyms_add_settings_page');
 
 /* -------------------------------------------------- */
 /* 3 – Enqueue Admin Scripts/CSS                      */
@@ -244,7 +244,7 @@ add_action('admin_enqueue_scripts', function($hook) {
 // add_action('admin_enqueue_scripts', 'adxbymonetiscope_enqueue_admin_assets');
 // function adxbymonetiscope_enqueue_admin_assets( $hook_suffix ) {
 //     // Load only on your plugin settings page (adjust slug if different)
-//     if ( ! ( isset($_GET['page']) && $_GET['page'] === 'adx_v4_settings' ) ) {
+//     if ( ! ( isset($_GET['page']) && $_GET['page'] === 'adxbyms_settings' ) ) {
 //         return;
 //     }
 

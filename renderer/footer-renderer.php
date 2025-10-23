@@ -18,7 +18,7 @@ require_once ADXBYMS_DIR . '/views/slots/custom.php';
 /**
  * Fire all footer‐going ad slots
  */
-function adx_v4_render_footer_ads() {
+function adxbyms_render_footer_ads() {
     adxbymonetiscope_render_popup_slot();
     adxbymonetiscope_render_button_rewarded_slot();
     // adx_render_bottom_sticky_slot();
@@ -32,4 +32,4 @@ function adx_v4_render_footer_ads() {
         adx_render_custom_footer_slot();
     }
 }
-// add_action('wp_footer','adx_v4_render_footer_ads');
+// add_action('wp_footer','adxbyms_render_footer_ads');

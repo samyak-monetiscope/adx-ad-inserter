@@ -1,9 +1,9 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-if ( ! function_exists( 'adx_v4_settings_page' ) ) {
+if ( ! function_exists( 'adxbyms_settings_page' ) ) {
 
-function adx_v4_settings_page() {
+function adxbyms_settings_page() {
     $slots = [
       'Display Slot'          => ['enabled'=>'display_slot_enabled','code'=>null],
         'Popup'                 => ['enabled'=>'popup_enabled','code'=>'popup_network_code'],
@@ -51,8 +51,8 @@ function adx_v4_settings_page() {
 
   <form method="post" action="options.php">
     <?php
-      settings_fields('adx_v4_settings');
-      do_settings_sections('adx_v4_settings');
+      settings_fields('adxbyms_settings');
+      do_settings_sections('adxbyms_settings');
     ?>
 
     <div class="form-header">
