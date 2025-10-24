@@ -8,15 +8,15 @@ console.log("popup script loaded");
     var POPUP_OPTION = CFG.popup_option;   // "ONCE_PER_SESSION" | "ONCE_PER_PAGE"
     var NETWORK_CODE = CFG.network_code;   // used in googletag.defineSlot(...)
 
-    var SESSION_KEY  = "adxbymonetiscopePopupShown";
+    var SESSION_KEY  = "adxbymsPopupShown";
     var SHOW_ONCE_PER_SESSION = (POPUP_OPTION === "ONCE_PER_SESSION");
 
     if (SHOW_ONCE_PER_SESSION && window.sessionStorage && sessionStorage.getItem(SESSION_KEY) === "true") {
       return;
     }
 
-    var WRAP_ID = "adxbymonetiscope-popup";
-    var SLOT_ID = "adxbymonetiscope-slot";
+    var WRAP_ID = "adxbyms-popup";
+    var SLOT_ID = "adxbyms-slot";
     if (document.getElementById(WRAP_ID)) return;
 
     var wrap = document.createElement("div");

@@ -1,31 +1,21 @@
 <?php
 defined('ABSPATH') || exit;
 
-if ( ! defined('DISPLAY_GPT_VERSION') ) {
-    define('DISPLAY_GPT_VERSION', '1.0.0');
-}
 
 
 /**
  * Keep existing hooks to avoid breaking, but do nothing here now.
  * We insert via the_content to support all 6 insertion types + offsets.
  */
-add_action('wp_head', 'adxbymonetiscope_render_display_slot_head');
-add_action('wp_footer', 'adxbymonetiscope_render_display_slot_footer');
+add_action('wp_head', 'adxbyms_render_display_slot_head');
+add_action('wp_footer', 'adxbyms_render_display_slot_footer');
 
 
 // Register the script handle for ad slots
-function adxbymonetiscope_register_ad_scripts() {
+function adxbyms_register_ad_scripts() {
+    
     wp_register_script(
-        'gpt',
-        'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
-        array(),
-        DISPLAY_GPT_VERSION,   // let Google manage caching
-        true    // footer
-    );
-    wp_enqueue_script('gpt');
-    wp_register_script(
-        'adxbymonetiscope-ad-script',
+        'adxbyms-ad-script',
         '', // No external file
         [],
         '1.0',
@@ -36,27 +26,27 @@ function adxbymonetiscope_register_ad_scripts() {
 
     // echo '<script>console.log("' . $enqueueCounter . 'wp add enqueue script");</script>';
     
-    // echo 'wp enquque called adxbymonetiscope-ad-script';
+    // echo 'wp enquque called adxbyms-ad-script';
     
-    wp_enqueue_script('adxbymonetiscope-ad-script');
+    wp_enqueue_script('adxbyms-ad-script');
     // Initialize googletag once
     static $googleCounter = 0; // Static variable retains its value between function calls
     $googleCounter++;
 
     // echo '<script>console.log("' . $googleCounter . 'wp googletag");</script>';
     // echo 'wp enquque called : window.googletag = window.googletag || {cmd: []};';
-    wp_add_inline_script('adxbymonetiscope-ad-script', 'window.googletag = window.googletag || {cmd: []};', 'before');
+    wp_add_inline_script('adxbyms-ad-script', 'window.googletag = window.googletag || {cmd: []};', 'before');
 }    
 
-// adxbymonetiscope_register_ad_scripts();
+// adxbyms_register_ad_scripts();
 
 
-function adxbymonetiscope_render_display_slot_head() {
+function adxbyms_render_display_slot_head() {
     // Intentionally no-op. Insertion now handled in the_content.
     return;
 }
 
-function adxbymonetiscope_render_display_slot_footer() {
+function adxbyms_render_display_slot_footer() {
     // Intentionally no-op. Insertion now handled in the_content.
     return;
 }
@@ -65,8 +55,8 @@ function adxbymonetiscope_render_display_slot_footer() {
  * Insert Display slot ads inside post content based on user-selected position & offset.
  * Applies page-type & device filters per sub-slot before inserting.
  */
-add_filter('the_content', 'adxbymonetiscope_insert_display_ads', 9);
-function adxbymonetiscope_insert_display_ads($content) {
+add_filter('the_content', 'adxbyms_insert_display_ads', 9);
+function adxbyms_insert_display_ads($content) {
     if (is_admin()) return $content;
     if (get_option('display_slot_enabled') !== 'true') return $content;
 
@@ -90,12 +80,12 @@ function adxbymonetiscope_insert_display_ads($content) {
         }
 
         // 1) PAGE FILTER
-        if (!adxbymonetiscope_page_type_matches($pages)) {
+        if (!adxbyms_page_type_matches($pages)) {
             continue;
         }
 
         // 2) DEVICE FILTER
-        if (!adxbymonetiscope_device_type_matches($devices)) {
+        if (!adxbyms_device_type_matches($devices)) {
             continue;
         }
 
@@ -103,14 +93,14 @@ function adxbymonetiscope_insert_display_ads($content) {
         static $adxByMonetiscopeFuncCounter = 0; // Static variable retains its value between function calls
         $adxByMonetiscopeFuncCounter++;
         // echo '<script>console.log("' . $adxByMonetiscopeFuncCounter . ' Adx By Monetiscope function");</script>';
-        adxbymonetiscope_register_ad_scripts();
-        $ad_html = adxbymonetiscope_build_ad_html($network, $sizes, $i, $alignment);
+        adxbyms_register_ad_scripts();
+        $ad_html = adxbyms_build_ad_html($network, $sizes, $i, $alignment);
 
         // 4) Apply insertion logic
         switch ($insertion) {
             case 'before_post':
                 
-                $content = adxbymonetiscope_insert_ad_before_first_h1($content, $ad_html);
+                $content = adxbyms_insert_ad_before_first_h1($content, $ad_html);
 
                 // $content = $ad_html . $content;
                 break;
@@ -120,19 +110,19 @@ function adxbymonetiscope_insert_display_ads($content) {
                 break;
 
             case 'before_paragraph':
-                $content = adxbymonetiscope_insert_ad_around_nth_tag($content, 'p', $offset, 'before', $ad_html);
+                $content = adxbyms_insert_ad_around_nth_tag($content, 'p', $offset, 'before', $ad_html);
                 break;
 
             case 'after_paragraph':
-                $content = adxbymonetiscope_insert_ad_around_nth_tag($content, 'p', $offset, 'after', $ad_html);
+                $content = adxbyms_insert_ad_around_nth_tag($content, 'p', $offset, 'after', $ad_html);
                 break;
 
             case 'before_image':
-                $content = adxbymonetiscope_insert_ad_around_nth_tag($content, 'img', $offset, 'before', $ad_html);
+                $content = adxbyms_insert_ad_around_nth_tag($content, 'img', $offset, 'before', $ad_html);
                 break;
 
             case 'after_image':
-                $content = adxbymonetiscope_insert_ad_around_nth_tag($content, 'img', $offset, 'after', $ad_html);
+                $content = adxbyms_insert_ad_around_nth_tag($content, 'img', $offset, 'after', $ad_html);
                 break;
 
             default:
@@ -159,9 +149,9 @@ function adxbymonetiscope_insert_display_ads($content) {
  * - Div ID: last segment of the network code
  * - page_url: current site host
  */
-function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $alignment = 'left') {
-    $div_id       = adxbymonetiscope_extract_div_id($network);
-    $js_sizes_str = adxbymonetiscope_sizes_js_array($sizes);
+function adxbyms_build_ad_html($network, $sizes, $slot_index = null, $alignment = 'left') {
+    $div_id       = adxbyms_extract_div_id($network);
+    $js_sizes_str = adxbyms_sizes_js_array($sizes);
     $site_host    = wp_parse_url(get_site_url(), PHP_URL_HOST);
 
     // Normalize alignment (unchanged)
@@ -222,8 +212,8 @@ function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $a
     static $inlineCounter = 0; // Static variable retains its value between function calls
     $inlineCounter++;
 
-    // echo '<script>console.log("' . $inlineCounter . 'wp add inline script inside adxbymonetiscope_build_ad_html");</script>';
-    wp_add_inline_script('gpt', $script);
+    // echo '<script>console.log("' . $inlineCounter . 'wp add inline script inside adxbyms_build_ad_html");</script>';
+    wp_add_inline_script('adxbyms-gpt', $script);
 
     return $html;
 }
@@ -232,7 +222,7 @@ function adxbymonetiscope_build_ad_html($network, $sizes, $slot_index = null, $a
 /**
  * Page-type matching against the selected filters for the sub-slot.
  */
-function adxbymonetiscope_page_type_matches($pages) {
+function adxbyms_page_type_matches($pages) {
     foreach ($pages as $page_type) {
         switch ($page_type) {
             case 'post':
@@ -264,7 +254,7 @@ function adxbymonetiscope_page_type_matches($pages) {
  * - Only mobile/tablet selected: allow only wp_is_mobile() === true
  * - Only desktop selected: allow only wp_is_mobile() === false
  */
-function adxbymonetiscope_device_type_matches($devices) {
+function adxbyms_device_type_matches($devices) {
     // Normalize incoming array and map 'tablet' to 'mobile' so we have exactly two groups.
     $norm = [];
     foreach ((array)$devices as $d) {
@@ -300,7 +290,7 @@ function adxbymonetiscope_device_type_matches($devices) {
 /**
  * Extract the DIV id from network code: /account/slotid → slotid
  */
-function adxbymonetiscope_extract_div_id($network) {
+function adxbyms_extract_div_id($network) {
     $parts = explode('/', $network);
     return count($parts) >= 3 ? $parts[2] : preg_replace('/[^a-zA-Z0-9_]/', '', end($parts));
 }
@@ -311,7 +301,7 @@ function adxbymonetiscope_extract_div_id($network) {
  * - "fluid"   => 'fluid'
  * Single size returns a single array; multiple sizes return an array of arrays.
  */
-function adxbymonetiscope_sizes_js_array($sizes) {
+function adxbyms_sizes_js_array($sizes) {
     $out = [];
     foreach ($sizes as $sz) {
         $sz = strtolower(trim($sz));
@@ -332,7 +322,7 @@ function adxbymonetiscope_sizes_js_array($sizes) {
  * Insert ad before the first <h1> in content.
  * Fallback (no <h1> found): prepend at the start of content.
  */
-function adxbymonetiscope_insert_ad_before_first_h1($content, $ad_html) {
+function adxbyms_insert_ad_before_first_h1($content, $ad_html) {
     $pattern = '/(<h1\b[^>]l*>)/i';
 
     if (preg_match($pattern, $content, $m, PREG_OFFSET_CAPTURE)) {// preg_match is taking 3 args i.e. preg_match($pattern, $content, $m). pattern is for finding <h1>, $m is for storing the position of <h1>, preg_offset_capture is for storing the position of <h1>
@@ -351,7 +341,7 @@ function adxbymonetiscope_insert_ad_before_first_h1($content, $ad_html) {
  * - fewer than N tags present → append at end
  * - no matching tags → append at end
  */
-function adxbymonetiscope_insert_ad_around_nth_tag($content, $tag, $offset, $position, $ad_html) {
+function adxbyms_insert_ad_around_nth_tag($content, $tag, $offset, $position, $ad_html) {
     if (!in_array($position, ['before', 'after'], true) || $offset < 1) {
         return $content . $ad_html;
     }

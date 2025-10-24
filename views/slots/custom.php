@@ -2,7 +2,7 @@
 defined('ABSPATH') || exit;
 
 /** Print custom header code */
-function adx_render_custom_header_slot() {
+function adxbyms_render_custom_header_slot() {
     $headerCode = get_option('custom_header_code');
     if ( ! empty( $headerCode ) ) {
         echo $headerCode; // phpcs:ignore WordPress.Security.EscapeOutput
@@ -10,7 +10,7 @@ function adx_render_custom_header_slot() {
 }
 
 /** Print custom footer code */
-function adx_render_custom_footer_slot() {
+function adxbyms_render_custom_footer_slot() {
     $footerCode = get_option('custom_footer_code');
     if ( ! empty( $footerCode ) ) {
         echo $footerCode; // phpcs:ignore WordPress.Security.EscapeOutput
@@ -22,9 +22,9 @@ function adx_render_custom_footer_slot() {
  * Whenever the 'custom_ads_txt' option is updated,
  * this will create or update the /ads.txt file in the site root.
  */
-add_action('update_option_custom_ads_txt', 'adxbymonetiscope_update_ads_txt_file', 10, 2);
+add_action('update_option_custom_ads_txt', 'adxbyms_update_ads_txt_file', 10, 2);
 
-function adxbymonetiscope_update_ads_txt_file($old_value, $new_value) {
+function adxbyms_update_ads_txt_file($old_value, $new_value) {
     // Full path to /public_html/ads.txt (ABSPATH points to WP root)
     $ads_txt_path = ABSPATH . 'ads.txt';
 

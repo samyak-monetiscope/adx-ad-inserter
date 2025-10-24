@@ -19,6 +19,6 @@ function adxbyms_render_header_ads() {
     adxbyms_render_anchor_slot();
     // only if enabled
     if ( get_option('custom_enabled') === 'true' ) {
-        adx_render_custom_header_slot();
+        adxbyms_render_custom_header_slot();
     }
 }

@@ -12,7 +12,7 @@ defined('ABSPATH') || exit;
  * - ONCE_PER_SESSION (default)
  * - ONCE_PER_PAGE
  */
-function adxbymonetiscope_render_popup_slot() {
+function adxbyms_render_popup_slot() {
     $enabled      = (get_option('popup_enabled') === 'true');
     $network_code = trim((string) get_option('popup_network_code'));
 
@@ -35,21 +35,14 @@ function adxbymonetiscope_render_popup_slot() {
     // IMPORTANT: encode once; do not escape the JSON itself
     $config_js = 'window.ADXBYMS_POPUP_DATA = ' . wp_json_encode($config, JSON_UNESCAPED_SLASHES) . ';';
 
-    wp_register_script(
-        'adxbymon-gpt',
-        'https://securepubads.g.doubleclick.net/tag/js/gpt.js',
-        array(),
-        ADXBYMS_GPT_VERSION,
-        true
-    );
-    wp_enqueue_script('adxbymon-gpt');
+
 
     // ---- Register + enqueue the external JS file ----
     // Path provided by you: ADXBYMS_URL . 'views/js/popup.js'
     $popup_js_url = trailingslashit(ADXBYMS_URL) . 'views/js/popup.js';
 
     wp_register_script(
-        'adxbymonetiscope_popup_script',
+        'adxbyms_popup_script',
         $popup_js_url,
         array(),                // no deps; GPT loader stays inside popup.js
         ADXBYMS_JS_VERSION,
@@ -57,8 +50,8 @@ function adxbymonetiscope_render_popup_slot() {
     );
 
     // Make sure data is available BEFORE popup.js executes
-    wp_add_inline_script('adxbymonetiscope_popup_script', $config_js, 'before');
+    wp_add_inline_script('adxbyms_popup_script', $config_js, 'before');
 
     // Enqueue the script
-    wp_enqueue_script('adxbymonetiscope_popup_script'); 
+    wp_enqueue_script('adxbyms_popup_script'); 
 }

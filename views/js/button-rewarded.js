@@ -1,9 +1,9 @@
 // /views/js/button-rewarded.js
 (function () {
-  if (!window.ADX_BUTTON_REWARDED || !window.ADX_BUTTON_REWARDED.networkCode) return;
+  if (!window.ADXBYMS_BUTTON_REWARDED || !window.ADXBYMS_BUTTON_REWARDED.networkCode) return;
 
-  const KEYWORDS = window.ADX_BUTTON_REWARDED.keywords || [];
-  const NETWORK_CODE = window.ADX_BUTTON_REWARDED.networkCode;
+  const KEYWORDS = window.ADXBYMS_BUTTON_REWARDED.keywords || [];
+  const NETWORK_CODE = window.ADXBYMS_BUTTON_REWARDED.networkCode;
   let adShownCount = 0;
 
 
@@ -12,18 +12,18 @@
 
   function showPopup(onProceed, onCancel) {
     const ov = document.createElement("div");
-    ov.className = "adxms-popup-overlay";
+    ov.className = "adxbyms-popup-overlay";
 
     const box = document.createElement("div");
-    box.className = "adxms-popup-box";
+    box.className = "adxbyms-popup-box";
 
     box.innerHTML = `
-      <p class="adxms-popup-text">Play an ad to continue.</p>
-      <div class="adxms-popup-buttons">
-        <button id="adxms-go" class="adxms-btn-go">Proceed</button>
-        <button id="adxms-stop" class="adxms-btn-stop">Cancel</button>
+      <p class="adxbyms-popup-text">Play an ad to continue.</p>
+      <div class="adxbyms-popup-buttons">
+        <button id="adxbyms-go" class="adxbyms-btn-go">Proceed</button>
+        <button id="adxbyms-stop" class="adxbyms-btn-stop">Cancel</button>
       </div>
-      <p class="adxms-popup-credit">
+      <p class="adxbyms-popup-credit">
         Ads By <a href="https://monetiscope.com" target="_blank" rel="noopener">Monetiscope</a>
       </p>
     `;
@@ -35,8 +35,8 @@
       ov.remove();
     };
 
-    box.querySelector("#adxms-go").onclick = () => { close(); onProceed(); };
-    box.querySelector("#adxms-stop").onclick = () => { close(); onCancel(); };
+    box.querySelector("#adxbyms-go").onclick = () => { close(); onProceed(); };
+    box.querySelector("#adxbyms-stop").onclick = () => { close(); onCancel(); };
   }
 
   function showRewarded(onGranted, onClosed) {

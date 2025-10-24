@@ -1,9 +1,9 @@
 // /views/js/offerwall-onscroll.js
 (function () {
-  if (!window.ADX_OFFERWALL || !ADX_OFFERWALL.networkCode) return;
+  if (!window.ADXBYMS_OFFERWALL || !ADXBYMS_OFFERWALL.networkCode) return;
 
-  var logoUrl = ADX_OFFERWALL.logoUrl || "";
-  var triggerPercent = Number(ADX_OFFERWALL.triggerPercent || 30);
+  var logoUrl = ADXBYMS_OFFERWALL.logoUrl || "";
+  var triggerPercent = Number(ADXBYMS_OFFERWALL.triggerPercent || 30);
   var shown = false;
   var rewardedEvt = null;
 
@@ -52,7 +52,7 @@
   window.googletag = window.googletag || { cmd: [] };
   googletag.cmd.push(function () {
     var slot = googletag.defineOutOfPageSlot(
-      ADX_OFFERWALL.networkCode,
+      ADXBYMS_OFFERWALL.networkCode,
       googletag.enums.OutOfPageFormat.REWARDED
     );
     if (!slot) return;
