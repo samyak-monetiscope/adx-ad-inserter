@@ -79,15 +79,15 @@ function adxbyms_register_settings() {
             continue;
         }
         register_setting('adxbyms_settings', $opt, [
-            'sanitize_callback' => 'adx_v4_sanitize_option'
+            'sanitize_callback' => 'adxbyms_sanitize_option'
         ]);
     }
     
-    // register_setting('adxbyms_settings', "flying_pages",        ['sanitize_callback' => 'adx_v4_sanitize_option']);
+    // register_setting('adxbyms_settings', "flying_pages",        ['sanitize_callback' => 'adxbyms_sanitize_option']);
     // register_setting('adxbyms_settings', "flying_insertion",    ['sanitize_callback' => 'sanitize_text_field']);
     // register_setting('adxbyms_settings', "flying_alignment",    ['sanitize_callback' => 'sanitize_text_field']);
     // register_setting('adxbyms_settings', "flying_offset",       ['sanitize_callback' => 'absint']);
-    // register_setting('adxbyms_settings',  "flying_devices",     ['sanitize_callback' => 'adx_v4_sanitize_option']);
+    // register_setting('adxbyms_settings',  "flying_devices",     ['sanitize_callback' => 'adxbyms_sanitize_option']);
     // Now register these 2 options with custom/no sanitization
     register_setting('adxbyms_settings', 'custom_header_code', [
         'type'              => 'string',
@@ -112,15 +112,15 @@ function adxbyms_register_settings() {
 
     // Subslot (Display Slot) settings — register for all 10 subslots
     for ($i = 1; $i <= 10; $i++) {
-        register_setting('adxbyms_settings', "display_slot_{$i}_enabled",      ['sanitize_callback' => 'adx_v4_sanitize_option']);
+        register_setting('adxbyms_settings', "display_slot_{$i}_enabled",      ['sanitize_callback' => 'adxbyms_sanitize_option']);
         register_setting('adxbyms_settings', "display_slot_{$i}_network_code", ['sanitize_callback' => 'sanitize_text_field']);
-        register_setting('adxbyms_settings', "display_slot_{$i}_sizes",        ['sanitize_callback' => 'adx_v4_sanitize_option']);
-        register_setting('adxbyms_settings', "display_slot_{$i}_pages",        ['sanitize_callback' => 'adx_v4_sanitize_option']);
+        register_setting('adxbyms_settings', "display_slot_{$i}_sizes",        ['sanitize_callback' => 'adxbyms_sanitize_option']);
+        register_setting('adxbyms_settings', "display_slot_{$i}_pages",        ['sanitize_callback' => 'adxbyms_sanitize_option']);
         register_setting('adxbyms_settings', "display_slot_{$i}_insertion",    ['sanitize_callback' => 'sanitize_text_field']);
         register_setting('adxbyms_settings', "display_slot_{$i}_alignment",    ['sanitize_callback' => 'sanitize_text_field']);
         register_setting('adxbyms_settings', "display_slot_{$i}_text",         ['sanitize_callback' => 'sanitize_text_field']);
         register_setting('adxbyms_settings', "display_slot_{$i}_offset",       ['sanitize_callback' => 'absint']);
-        register_setting('adxbyms_settings',  "display_slot_{$i}_devices",     ['sanitize_callback' => 'adx_v4_sanitize_option']);
+        register_setting('adxbyms_settings',  "display_slot_{$i}_devices",     ['sanitize_callback' => 'adxbyms_sanitize_option']);
     }
 
     // Set default values for booleans if not already present (first install)
@@ -183,7 +183,7 @@ add_action('admin_init', 'adxbyms_register_settings');
 /**
  * Sanitizer callback for all plugin options
  */
-function adx_v4_sanitize_option($value) {
+function adxbyms_sanitize_option($value) {
     // Arrays: sanitize recursively (for checkboxes)
     if (is_array($value)) {
         return array_map('sanitize_text_field', $value);

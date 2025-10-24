@@ -34,9 +34,9 @@ require_once ADXBYMS_DIR . '/ad-renderer.php';
 // 5. Add "Settings" link on the Plugins page
 add_filter(
   'plugin_action_links_' . plugin_basename( __FILE__ ),
-  'adx_add_settings_action_link'
+  'adxbyms_add_settings_action_link'
 );
-function adx_add_settings_action_link( $links ) {
+function adxbyms_add_settings_action_link( $links ) {
     $url   = admin_url( 'options-general.php?page=adx-ad-inserter' );
     $label = __( 'Settings', 'adx-ad-inserter' );
     array_unshift(

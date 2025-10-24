@@ -44,7 +44,7 @@ function adxbyms_render_popup_slot() {
     wp_register_script(
         'adxbyms_popup_script',
         $popup_js_url,
-        array(),                // no deps; GPT loader stays inside popup.js
+        array('adxbyms-gpt'),                // no deps; GPT loader stays inside popup.js
         ADXBYMS_JS_VERSION,
         true                    // load in footer
     );
