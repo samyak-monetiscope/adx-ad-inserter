@@ -17,7 +17,7 @@ function adxbyms_render_button_rewarded_slot() {
     // 2️⃣ Build JS URL using your ADXBYMS_URL constant
     $rewarded_js_url  = trailingslashit(ADXBYMS_URL) . 'views/js/button-rewarded.js';
     $rewarded_css_url = trailingslashit(ADXBYMS_URL) . 'views/css/button-rewarded.css';
-    wp_enqueue_style('adxbyms-button-rewarded', $rewarded_css_url, [], ADXBYMS_CSS_VERSION);
+    wp_enqueue_style('adxbyms-button-rewarded', $rewarded_css_url, array(), ADXBYMS_CSS_VERSION);
 
 
     // 3️⃣ Register + enqueue JS (depends on GPT)

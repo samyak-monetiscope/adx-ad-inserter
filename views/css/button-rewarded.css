@@ -1,11 +1,11 @@
-.adxms-popup-overlay {
+.adxbyms-popup-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   z-index: 9998;
 }
 
-.adxms-popup-box {
+.adxbyms-popup-box {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -18,7 +18,7 @@
   z-index: 9999;
 }
 
-.adxms-popup-buttons button {
+.adxbyms-popup-buttons button {
   margin: 5px;
   padding: 7px 14px;
   border-radius: 4px;
@@ -26,23 +26,23 @@
   cursor: pointer;
 }
 
-.adxms-btn-go {
+.adxbyms-btn-go {
   background: #007bff;
   color: #fff;
 }
 
-.adxms-btn-stop {
+.adxbyms-btn-stop {
   background: #dc3545;
   color: #fff;
 }
 
-.adxms-popup-credit {
+.adxbyms-popup-credit {
   font-size: 12px;
   color: red;
   margin-top: 10px;
 }
 
-.adxms-popup-credit a {
+.adxbyms-popup-credit a {
   color: blue;
   text-decoration: none;
 }
