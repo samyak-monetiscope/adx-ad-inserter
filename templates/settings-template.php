@@ -76,7 +76,7 @@ function adxbyms_settings_page() {
           </label>
         </div>
 
-        <div class="head banner" style="position: relative; left: -20px;">
+        <div class="head-banner" style="">
           <a href="https://monetiscope.com/contact/" target="_blank" rel="noopener noreferrer">
             
             <img src="<?php echo esc_url( ADXBYMS_URL . 'assets/img/banner2.jpg' ); ?>" alt="Website" class="rounded-md hover:rounded-none hover:shadow-lg duration-200">
