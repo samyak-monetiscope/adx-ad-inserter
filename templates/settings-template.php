@@ -5,6 +5,7 @@ if ( ! function_exists( 'adxbyms_settings_page' ) ) {
 
 function adxbyms_settings_page() {
     $slots = [
+      'Ads.Txt'                => ['enabled'=>'ads_txt_enabled','code'=>null],
       'Display Slot'          => ['enabled'=>'display_slot_enabled','code'=>null],
         'Popup'                 => ['enabled'=>'popup_enabled','code'=>'popup_network_code'],
         'Button Rewarded'       => ['enabled'=>'ad2_enabled','code'=>'ad2_network_code'],
@@ -18,6 +19,7 @@ function adxbyms_settings_page() {
     ];
 
     $tabs = [
+      'tab-ads-txt'            => 'Ads.Txt',
       'tab-display-slot'       => 'Display Ad Slot',
         'tab-popup'              => 'Popup Ad',
         'tab-button-rewarded'    => 'Button Rewarded Ad',
@@ -31,6 +33,8 @@ function adxbyms_settings_page() {
     ];
 
     $panels = [
+      'settings-custom.php',
+      'settings-ads-txt.php',
       'settings-display.php',
         'settings-popup.php',
         'settings-button-rewarded.php',
@@ -40,7 +44,6 @@ function adxbyms_settings_page() {
         'settings-offerwall-onscroll.php',
         // 'settings-coupon-rewarded.php',
         'settings-interstitial.php',
-        'settings-custom.php',
     ];
     
 ?>
@@ -109,7 +112,7 @@ function adxbyms_settings_page() {
 
         <div class="settings-main">
           <?php foreach ( $panels as $panel ) {
-              require __DIR__ . '/settings/' . $panel;
+              require ADXBYMS_DIR . '/templates/settings/' . $panel;
           } ?>
         </div>
       </div>

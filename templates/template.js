@@ -1,7 +1,5 @@
 // admin-scripts.js
 // Tab‐switching logic for Monetiscope Ad Inserter settings
-console.log("from template.js")
-console.warn("from template.js")
 
 document.addEventListener('DOMContentLoaded', function() {
     const tabs = document.querySelectorAll('.nav-tab');
@@ -58,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function(){
         const tab = btn.getAttribute("data-tab");
         document.getElementById("custom-code-header").style.display = tab === "header" ? "block" : "none";
         document.getElementById("custom-code-footer").style.display = tab === "footer" ? "block" : "none";
-        document.getElementById("custom-ads-txt").style.display = tab === "ads-txt" ? "block" : "none";
+        // document.getElementById("custom-ads-txt").style.display = tab === "ads-txt" ? "block" : "none";
     });
 });
 

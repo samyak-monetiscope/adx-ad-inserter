@@ -69,13 +69,14 @@ function adxbyms_register_settings() {
         'custom_enabled',
         'custom_header_code',
         'custom_footer_code',
-        'custom_ads_txt',
+        'ads_txt_enabled',
+        'ads_txt_code',
         'display_slot_enabled',
     ];
     
     foreach ($settings as $opt) {
         // Skip custom header/footer code for special handling below
-        if ($opt === 'custom_header_code' || $opt === 'custom_footer_code' || $opt === 'custom_ads_txt') {
+        if ($opt === 'custom_header_code' || $opt === 'custom_footer_code' || $opt === 'ads_txt_code') {
             continue;
         }
         register_setting('adxbyms_settings', $opt, [
@@ -103,7 +104,7 @@ function adxbyms_register_settings() {
 
     // ads.txt is plain text — keeping this is fine.
     // (If you ever need commas/colons/newlines preserved, this still allows them.)
-    register_setting('adxbyms_settings', 'custom_ads_txt', [
+    register_setting('adxbyms_settings', 'ads_txt_code', [
         'type'              => 'string',
         'sanitize_callback' => 'sanitize_textarea_field',
         'show_in_rest'      => false,
@@ -126,6 +127,8 @@ function adxbyms_register_settings() {
     // Set default values for booleans if not already present (first install)
     $booleans = [
         'adx_enabled',
+        'ads_txt_enabled',
+        'display_slot_enabled',
         'popup_enabled',
         'ad2_enabled',
         // 'flying_enabled',
@@ -137,7 +140,6 @@ function adxbyms_register_settings() {
         // 'coupon_rewarded_enabled',
         'interstitial_enabled',
         'custom_enabled',
-        'display_slot_enabled',
     ];
     foreach ($booleans as $b) {
         if (get_option($b) === false) {
