@@ -62,7 +62,9 @@ add_action('template_redirect', function () {
     header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
     header('Pragma: no-cache');
     header('Expires: 0');
-    echo rtrim($code, "\r\n") . "\n";
+    // ads.txt is a plain text file. Escaping is not required and would break the format.
+    echo rtrim($code, "\r\n") . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
     exit;
 }, 0);
 
