@@ -2,7 +2,7 @@
 defined('ABSPATH') || exit;
 ?>
 <div id="tab-button-rewarded" class="adx-tab" style="display:none">
-    <h3>Button Rewarded Ad</h3>
+    <h3 class="tab-title">Button Rewarded Ad</h3>
 
 <!--     <p>
         <input type="hidden" name="ad2_enabled" value="false" />

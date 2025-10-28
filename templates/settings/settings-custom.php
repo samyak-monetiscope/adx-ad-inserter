@@ -7,7 +7,7 @@ $footer_code = get_option('custom_footer_code', '');
 ?>
 
 <div id="tab-custom" class="adx-tab" style="display:none;">
-    <h3>Custom Code</h3>
+    <h class="tab-title">Custom Code</h>
 
     <!-- Enable Toggle -->
     <p>

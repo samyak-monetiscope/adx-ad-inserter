@@ -874,3 +874,10 @@ video {
 
 
 /* flying carpet */
+
+
+.tab-title{
+    /* font-size: inherit; */
+    font-weight: 600;
+    font-size: large;
+}

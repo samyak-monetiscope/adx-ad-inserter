@@ -2,7 +2,7 @@
 defined('ABSPATH') || exit;
 ?>
 <div id="tab-anchor" class="adx-tab" style="display:none">
-    <h3>Anchor Ad</h3>
+    <h3 class="tab-title">Anchor Ad</h3>
 
     <p>
         <input type="hidden" name="anchor_enabled" value="false" />

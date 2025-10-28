@@ -5,7 +5,7 @@ $enabled = get_option('interstitial_enabled','false');
 $netcode = get_option('interstitial_network_code','');
 ?>
 <div id="tab-interstitial" class="adx-tab" style="display:none;">
-  <h3>Interstitial Ad</h3>
+  <h3 class="tab-title">Interstitial Ad</h3>
 
   <p>
     <label>

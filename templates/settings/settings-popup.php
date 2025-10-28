@@ -2,7 +2,7 @@
 defined('ABSPATH') || exit;
 ?>
 <div id="tab-popup" class="adx-tab" style="display:none">
-    <h3>Popup Ad</h3>
+    <h3 class="tab-title">Popup Ad</h3>
 
     <p>
         <input type="hidden" name="popup_enabled" value="false" />

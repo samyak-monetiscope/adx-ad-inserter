@@ -2,7 +2,7 @@
 defined('ABSPATH') || exit;
 ?>
 <div id="tab-offerwall-onscroll" class="adx-tab" style="display:none">
-    <h3>Offerwall (on Scroll) Ad</h3>
+    <h3 class="tab-title">Offerwall (on Scroll) Ad</h3>
 
     <p>
         <input type="hidden" name="offerwall_onscroll_enabled" value="false" />
