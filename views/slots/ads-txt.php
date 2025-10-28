@@ -26,34 +26,43 @@ if ( ! function_exists('adxbyms_truthy') ) {
     }
 }
 
-/** Serve ads.txt virtually for both /ads.txt and /index.php/ads.txt */
 add_action('template_redirect', function () {
+    
     if (is_admin()) return;
 
+    // 1. Redirect /index.php/ads.txt to /ads.txt
+    $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+    $path = strtolower(strtok($request_uri, '?'));
+    if ($path === '/index.php/ads.txt') {
+        wp_redirect(home_url('/ads.txt'), 301);
+        exit;
+    }
+
+    // 2. Redirect /ads.txt/ to /ads.txt
+    if ($path === '/ads.txt/') {
+        wp_redirect(home_url('/ads.txt'), 301);
+        exit;
+    }
+
+    // Original logic for serving ads.txt
     $is_ads_rewrite = get_query_var('adxbyms_ads_txt');
-
-    $request_uri   = $_SERVER['REQUEST_URI'] ?? '';
-    $path          = strtolower(strtok($request_uri, '?'));
-    $is_index_ads  = ($path === '/index.php/ads.txt');
-
+    $is_index_ads = ($path === '/index.php/ads.txt');
     if (!$is_ads_rewrite && !$is_index_ads) return;
 
     $enabled = get_option('ads_txt_enabled', '');
-    $code    = (string) get_option('ads_txt_code', '');
-
+    $code = (string) get_option('ads_txt_code', '');
     if (!adxbyms_truthy($enabled) || trim($code) === '') return;
 
     if (function_exists('ob_get_level')) {
         while (ob_get_level() > 0) { @ob_end_clean(); }
     }
-
     nocache_headers();
     status_header(200);
     header('Content-Type: text/plain; charset=utf-8');
     header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
     header('Pragma: no-cache');
     header('Expires: 0');
-
     echo rtrim($code, "\r\n") . "\n";
     exit;
 }, 0);
+

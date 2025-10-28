@@ -212,14 +212,6 @@ function adxbyms_settings_page() {
   </form>
 </div>
 
-<script async type="module"
-  src="https://interfaces.zapier.com/assets/web-components/zapier-interfaces/zapier-interfaces.esm.js">
-</script>
-
-<zapier-interfaces-chatbot-embed
-  is-popup="true"
-  chatbot-id="cmc8tco1i00178eenqd9m351r">
-</zapier-interfaces-chatbot-embed>
 
 
 
