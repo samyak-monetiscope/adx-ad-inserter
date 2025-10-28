@@ -108,6 +108,7 @@ function adxbyms_settings_page() {
                   href="#"
                   class="nav-tab<?php echo $id === 'tab-popup' ? ' nav-tab-active' : ''; ?>"
                   data-target="<?php echo esc_attr( $id ); ?>"
+                  id = "<?php echo esc_attr( $id ); ?>"
                 >
                   <?php echo esc_html( $label ); ?>
                 </a>
