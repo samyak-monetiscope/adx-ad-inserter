@@ -45,3 +45,15 @@ function adxbyms_add_settings_action_link( $links ) {
     );
     return $links;
 }
+
+
+// ... your existing plugin header and bootstrapping
+
+// Include the ads.txt slot so the function exists
+require_once plugin_dir_path(__FILE__) . 'views/slots/ads-txt.php';
+
+register_activation_hook(__FILE__, 'adxbyms_activate');
+function adxbyms_activate() {
+    adxbyms_register_ads_txt_rewrite();
+    flush_rewrite_rules();
+}

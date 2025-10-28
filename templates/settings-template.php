@@ -90,7 +90,13 @@ function adxbyms_settings_page() {
       </div>
     </div>
 
-    <div class="settings-container">
+    <?php
+    $is_enabled = get_option('adx_enabled', 'false') === 'true';
+    $style = $is_enabled ? '' : 'opacity:0.5; pointer-events:none; cursor:not-allowed;';
+    ?>
+    <div class="settings-container" style="<?php echo esc_attr($style); ?>">
+
+
 
       
       <div class="settings-left">

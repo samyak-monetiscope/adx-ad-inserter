@@ -12,6 +12,7 @@ require_once ADXBYMS_DIR . '/views/slots/interstitial.php';
 // require_once ADXBYMS_DIR . '/views/slots/coupon-rewarded.php';
 require_once ADXBYMS_DIR . '/views/slots/display.php';
 require_once ADXBYMS_DIR . '/views/slots/custom.php';
+require_once ADXBYMS_DIR . '/views/slots/ads-txt.php';
 // require_once ADXBYMS_DIR . '/views/slots/flying-carpet.php';
 
 
