@@ -11,7 +11,7 @@ function adxbyms_render_offerwall_onscroll_slot() {
     $logo_url     = trim( (string) get_option('offerwall_onscroll_logo_url') );
 
     if (!$logo_url) {
-        $logo_url = 'https://monetiscope.com/wp-content/uploads/2025/05/cropped-e-2.png';
+        $logo_url = ADXBYMS_URL . 'assets/img/company_logo.png';
     }
     if (!$enabled || !$network_code) {
         return;
