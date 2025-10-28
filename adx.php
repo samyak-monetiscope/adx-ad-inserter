@@ -57,3 +57,8 @@ function adxbyms_activate() {
     adxbyms_register_ads_txt_rewrite();
     flush_rewrite_rules();
 }
+
+register_deactivation_hook(__FILE__, 'adxbyms_deactivate');
+function adxbyms_deactivate() {
+    flush_rewrite_rules();
+}

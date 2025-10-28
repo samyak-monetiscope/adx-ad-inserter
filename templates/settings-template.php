@@ -5,7 +5,7 @@ if ( ! function_exists( 'adxbyms_settings_page' ) ) {
 
 function adxbyms_settings_page() {
     $slots = [
-      'Ads.Txt'                => ['enabled'=>'ads_txt_enabled','code'=>null],
+      'Ads.Txt'                => ['enabled'=>'ads_txt_enabled','code'=>'ads_txt_code'],
       'Display Slot'          => ['enabled'=>'display_slot_enabled','code'=>null],
         'Popup'                 => ['enabled'=>'popup_enabled','code'=>'popup_network_code'],
         'Button Rewarded'       => ['enabled'=>'ad2_enabled','code'=>'ad2_network_code'],
@@ -156,6 +156,12 @@ function adxbyms_settings_page() {
                 $has_code = $hdr !== '' || $ftr !== '';
                 $cls = ! $has_code ? 'status-empty'
                      : ( ! $enabled ? 'status-filled' : 'status-active' );
+            }
+            elseif ( 'ads.txt' === $label ) {
+                $enabled = get_option( $keys['enabled'] ) === 'true';
+                $code    = trim( get_option( $keys['code'] ) );
+                $cls = ! $code ? 'status-empty'
+                    : ( ! $enabled ? 'status-filled' : 'status-active' );
             }
             else {
                 $enabled = get_option( $keys['enabled'] ) === 'true';
