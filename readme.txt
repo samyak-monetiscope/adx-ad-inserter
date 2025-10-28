@@ -116,9 +116,10 @@ This plugin loads the following third-party script:
 
 == Screenshots ==
 
-1. Display Ad with multiple sub slots  
-2. Popup ad preview  
-3. Custom Ad slot preview.
+1. Ads.txt input box  
+2. Display Ad with multiple sub slots  
+3. Popup Ad preview
+4. Custom Ad slot preview.
 
 == Changelog ==
 
